@@ -1,0 +1,34 @@
+<h2 *ngIf="mode == 'search'" mat-dialog-title>User info</h2>
+<h2 *ngIf="mode == 'create'" mat-dialog-title>Create new info</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <section *ngIf="mode == 'search'">
+    <div>Name : {{userInfo.name}}</div>
+    <div>Phone: {{userInfo.phone}}</div>
+  </section>
+
+  <section *ngIf="mode == 'create'">
+    <ol>
+
+      <li>
+        <mat-form-field>
+          <mat-label>What's your name?</mat-label>
+          <input matInput [(ngModel)]="newUser.name" default>
+        </mat-form-field>
+      </li>
+
+      <li>
+        <mat-form-field>
+          <mat-label>What's your phone number?</mat-label>
+          <input matInput [(ngModel)]="newUser.phone">
+        </mat-form-field>
+      </li>
+    </ol>
+  </section>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onToggleCloseModal()" >Close</button>
+  <button *ngIf="mode == 'create'" mat-button (click)="onToggleNewUser()">Submit</button>
+</mat-dialog-actions>
