@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfigService } from './config/config.service';
 import { User } from './interface/user.interface';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,8 @@ import { User } from './interface/user.interface';
 export class AppComponent {
   
   constructor(
-    public dialog: MatDialog,
-    public configService: ConfigService) {}
+    public matdialog: MatDialog,
+    public configService: ConfigService,) {}
 
   mode = '';
   title = 'client';
@@ -29,36 +30,28 @@ export class AppComponent {
     .subscribe((res) => {
       this.userInfo.name = res.name;
       this.userInfo.phone = res.phone;
+      const config = { 
+        data: {
+          mode: 'search',
+          userInfo: this.userInfo 
+        }
+      }
+      this.matdialog.open(DialogComponent, config)
     })
   }
 
   openDialog(mode) {
     if( mode == 'search') {
       this.getUserInfo();
+      
     }
-    this.openModal = true;
-    this.mode = mode;
+    else if( mode == 'create') {
+      const config = { 
+        data: { 
+          mode: 'create'
+        }
+      }
+      this.matdialog.open(DialogComponent, config)
+    }
   }
-
-  closeDialog() {
-    this.openModal = false;
-  }
-
-  createUser(e) {
-    this.newUser = {
-      name: e.name,
-      phone: e.phone
-    };
-
-    const payloay: User = this.newUser;
-    this.configService.newUser(payloay)
-    .subscribe((res) => {
-        console.log("create success")
-    })
-
-
-  }
-
-
-
 }

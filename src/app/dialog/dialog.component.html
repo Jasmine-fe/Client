@@ -4,13 +4,12 @@
 <mat-dialog-content class="mat-typography">
 
   <section *ngIf="mode == 'search'">
-    <div>Name : {{userInfo.name}}</div>
-    <div>Phone: {{userInfo.phone}}</div>
+    <div >Name : {{userInfo.name}}</div>
+    <div >Phone: {{userInfo.phone}}</div>
   </section>
 
   <section *ngIf="mode == 'create'">
     <ol>
-
       <li>
         <mat-form-field>
           <mat-label>What's your name?</mat-label>
@@ -27,8 +26,12 @@
     </ol>
   </section>
 
+  <section *ngIf="mode == 'success'">
+    Welcome <b>{{ newUser.name }}</b>
+  </section>
+
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onToggleCloseModal()" >Close</button>
+  <button *ngIf="mode" mat-button (click)="onToggleCloseModal()" >Close</button>
   <button *ngIf="mode == 'create'" mat-button (click)="onToggleNewUser()">Submit</button>
 </mat-dialog-actions>

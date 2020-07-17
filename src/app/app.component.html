@@ -6,14 +6,7 @@
         <button mat-flat-button color="primary" class="btn" (click)="openDialog('create')">create</button>
       </div>
     </section>
-    <dialog-modal 
-      *ngIf="openModal"
-      [mode]="mode"
-      [userInfo]="userInfo"
-      (toggleClose)="closeDialog()"
-      (createUser)="createUser($event)">
-
-    </dialog-modal>
+    <dialog-modal></dialog-modal>
   </div>
 </div>
 <router-outlet></router-outlet>
