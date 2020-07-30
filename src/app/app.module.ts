@@ -2,17 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './MaterialModule.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './MaterialModule.module';
-import { DialogComponent } from './dialog/dialog.component';
+
 import { ConfigService } from './config/config.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialogComponent
+    // LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -22,10 +22,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     HttpClientModule
   ],
   providers: [
-    ConfigService,
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {}}],
+    ConfigService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
+  // entryComponents: []
 })
 export class AppModule { }

@@ -1,0 +1,53 @@
+<div class="full-page">
+  <mat-card>
+    <mat-card-title  *ngIf="mode === 'login'">Login<br/></mat-card-title>
+    <mat-card-title  *ngIf="mode === 'register'">Register<br/></mat-card-title>
+    <mat-card-content><br/>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+
+            <p>
+                <mat-form-field>
+                  <input type="text" matInput placeholder="Username" formControlName="username">
+                </mat-form-field>
+              </p>
+
+              <p *ngIf="mode === 'register'">
+                <mat-form-field>
+                  <input type="email" matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+              </p>
+
+              <p>
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+              </p>
+
+              <p *ngIf="mode === 'register'">
+                <mat-form-field>
+                  <input type="password" matInput placeholder="Double click Password" formControlName="password">
+                </mat-form-field>
+              </p>
+
+            <!-- <p class="error">
+                something error
+            </p> -->
+
+        <div class="button">
+          <button  *ngIf="mode === 'login'" mat-stroked-button type="submit" >Login</button>
+          <button  *ngIf="mode === 'register'" mat-stroked-button type="submit" >Create</button>
+        </div>
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <div *ngIf="mode === 'login'" id="register" (click)="changeMode()"> 
+        Don't have account ? 
+      </div> 
+      <div *ngIf="mode === 'register'" id="register" (click)="changeMode()"> 
+        Already have account?
+      </div> 
+    </mat-card-footer>
+  </mat-card>
+</div>
