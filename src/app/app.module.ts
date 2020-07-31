@@ -5,21 +5,19 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './MaterialModule.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
 import { ConfigService } from './config/config.service';
-import { LoginComponent } from './modules/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [
     ConfigService],
