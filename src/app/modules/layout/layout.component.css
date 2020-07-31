@@ -44,3 +44,8 @@
     position: absolute;
     right: 20px;
   }
+  .main {
+    padding-top: 80px;
+    padding-left:  80px;
+    height: 100%;
+  }

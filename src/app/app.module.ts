@@ -22,6 +22,5 @@ import { ConfigService } from './config/config.service';
   providers: [
     ConfigService],
   bootstrap: [AppComponent],
-  // entryComponents: []
 })
 export class AppModule { }

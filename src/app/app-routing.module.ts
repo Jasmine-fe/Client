@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './modules/login/login.component'
+// module must import here to load properly
 import { LoginModule } from './modules/login/login.module'
-import { DashboardModule } from './modules/dashboard/dashboard.module'
-
+import { HomeAppModule } from './modules/homeApp/homeApp.module'
 
 const routes: Routes = [
   { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
-  { path: 'dashboard', loadChildren: './modules/dashboard/dashboard.module#DashboardModule' },
+  { path: 'home', loadChildren: './modules/homeApp/homeApp.module#HomeAppModule' },
 ];
 
 @NgModule({

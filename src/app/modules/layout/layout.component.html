@@ -1,28 +1,36 @@
 <ng-container>
+  <!-- header -->
   <mat-toolbar class="header">Cloud Gaming</mat-toolbar>
-
   <mat-sidenav-container class="container">
-    <mat-sidenav #sidenav mode="side" opened >
-      <section class="sideBarSection">
-        <h2>Game Type</h2>
-        <span>
+    <!-- sidebar -->
+    <mat-sidenav #sidenav mode="side" opened>
+      
+        <section class="sideBarSection">
+          <h2>Game Type</h2>
+          <span>
             <div *ngFor="let gameType of category">
               <mat-checkbox>
-                {{gameType}}
+                {{gameType}}aaaa
               </mat-checkbox>
             </div>
-        </span>
-      </section>
+          </span>
+        </section>
     </mat-sidenav>
 
-    <mat-sidenav-content>
-      <!-- dashboard -->
+    <mat-sidenav-content class="main">
+      <ng-content></ng-content>
     </mat-sidenav-content>
+
   </mat-sidenav-container>
 
-  <mat-toolbar class="footer"> 
+
+
+    <!-- footer -->
+  <mat-toolbar class="footer">
     <div class="footerText">
-      <h3>仁寶電腦 Compal</h3> 
+      <h3>仁寶電腦 Compal</h3>
     </div>
   </mat-toolbar>
+
 </ng-container>
+
