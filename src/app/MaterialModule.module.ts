@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -39,7 +36,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule( {
     imports: [
         CommonModule,
-        BrowserAnimationsModule,
         MatCheckboxModule,
         MatCheckboxModule,
         MatButtonModule,
@@ -72,28 +68,41 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        FormsModule
-
     ],
     exports: [
-        MatDialogModule,
+        CommonModule,
+        MatCheckboxModule,
+        MatCheckboxModule,
         MatButtonModule,
-        MatToolbarModule,
-        MatIconModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatMenuModule,
         MatSidenavModule,
         MatBadgeModule,
+        MatToolbarModule,
         MatListModule,
         MatGridListModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatRadioModule,
-        MatDatepickerModule,
+        MatCardModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatExpansionModule,
+        MatButtonToggleModule,
         MatChipsModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
+        MatDialogModule,
         MatTooltipModule,
+        MatSnackBarModule,
         MatTableModule,
+        MatSortModule,
         MatPaginatorModule,
-        FormsModule
     ],
     providers: [
         MatDatepickerModule,
