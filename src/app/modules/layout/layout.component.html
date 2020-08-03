@@ -1,10 +1,22 @@
 <ng-container>
   <!-- header -->
-  <mat-toolbar class="header">Cloud Gaming</mat-toolbar>
+  
+  <mat-toolbar class="header">
+      <mat-icon
+      (click)="sidenav.toggle()" 
+      class="mat-icon-rtl-mirror sideBarIcon" 
+      >list</mat-icon>&nbsp;
+    Cloud Gaming
+  </mat-toolbar>
   <mat-sidenav-container class="container">
+
     <!-- sidebar -->
-    <mat-sidenav #sidenav mode="side" opened>
-      
+    <mat-sidenav 
+      #sidenav 
+      mode="side" 
+      [(opened)]="opened"
+      (opened)="events.push('open!')"
+      (closed)="events.push('close!')">
         <section class="sideBarSection">
           <h2>Game Type</h2>
           <span>

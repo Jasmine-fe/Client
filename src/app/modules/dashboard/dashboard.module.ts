@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../MaterialModule.module';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,10 @@ import { DashboardComponent } from './dashboard.component';
   ],
   imports: [
     DashboardRoutingModule,
-    MaterialModule
+    MaterialModule,
+    MatCheckboxModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [  
   ],

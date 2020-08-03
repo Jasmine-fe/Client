@@ -33,11 +33,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 @NgModule( {
     imports: [
         CommonModule,
-        MatCheckboxModule,
         MatCheckboxModule,
         MatButtonModule,
         MatInputModule,
@@ -73,7 +71,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ],
     exports: [
         CommonModule,
-        MatCheckboxModule,
         MatCheckboxModule,
         MatButtonModule,
         MatInputModule,

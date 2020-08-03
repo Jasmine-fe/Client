@@ -1,0 +1,15 @@
+@media (max-width:600px) {
+    mat-card, .gameCover  {
+        width: 90vw;
+    }
+}
+mat-card {
+    margin: 10px 10px;
+    background-color: grey;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }

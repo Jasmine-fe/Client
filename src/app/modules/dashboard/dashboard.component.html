@@ -1,5 +1,17 @@
-<!-- show game list -->
-<div 
-fxLayout="row" >
-    
+<div fxLayout="row" fxLayoutGap="5px"  fxLayout.xs="column" fxLayout.sm="column" class="flex-container">
+    <div *ngFor="let game of gameList">
+        <mat-card class="example-card" >
+            <mat-card-header>
+              <mat-card-title>{{game.name}}</mat-card-title>
+            </mat-card-header>
+            <picture>
+              <img class="gameCover" src="../../assets/gameCoverImage/gameCover1.png">
+            </picture>
+            <mat-card-content>
+              <p>
+                {{game.description}}
+              </p>
+            </mat-card-content>
+          </mat-card>
+    </div>
 </div>

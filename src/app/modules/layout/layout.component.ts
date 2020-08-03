@@ -1,4 +1,5 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { mobileWidth } from '../../shared/common'
 
 @Component({
   selector: 'app-layout',
@@ -7,10 +8,6 @@ import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   constructor() {}
-
-  ngOnInit() {
-    console.log("LayoutComponent ")
-  }
   category = [
     "Shooters",
     "Action",
@@ -21,5 +18,17 @@ export class LayoutComponent implements OnInit {
     "Strategy"
   ]
 
+  events: string[] = [];
+  opened: boolean = true;
+
+  ngOnInit() {
+    var screenWidth = screen.width;
+    console.log("screenWidth:", screenWidth)
+    if(screenWidth < mobileWidth) {
+      this.opened = false;
+    }
+  }
+  
+  
 
 }
