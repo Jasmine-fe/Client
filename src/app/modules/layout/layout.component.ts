@@ -20,12 +20,17 @@ export class LayoutComponent implements OnInit {
 
   events: string[] = [];
   opened: boolean = true;
+  mode="side"
 
   ngOnInit() {
     var screenWidth = screen.width;
     console.log("screenWidth:", screenWidth)
     if(screenWidth < mobileWidth) {
       this.opened = false;
+      this.mode = "push"
+    } else {
+      this.opened = true;
+      this.mode = "side"
     }
   }
   

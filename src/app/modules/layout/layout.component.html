@@ -13,7 +13,7 @@
     <!-- sidebar -->
     <mat-sidenav 
       #sidenav 
-      mode="side" 
+      [(mode)]="mode" 
       [(opened)]="opened"
       (opened)="events.push('open!')"
       (closed)="events.push('close!')">
