@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HttpService } from '../../services/http.service'
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule
   ],
   providers: [  
+    HttpService
   ],
   exports: [
   ],

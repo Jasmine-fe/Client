@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './MaterialModule.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ConfigService } from './config/config.service';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { ConfigService } from './config/config.service';
     
   ],
   providers: [
-    ConfigService],
+    HttpService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
