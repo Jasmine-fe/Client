@@ -1,5 +1,6 @@
-import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-dashboard',
@@ -7,8 +8,10 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService,
+    private router: Router) {}
   gameList = []
+
   ngOnInit() {
     this.httpService.getGameList()
     .subscribe((res) => {
@@ -16,38 +19,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  // gameList = [
-  //   {
-  //     name: 'apple',
-  //     image: 'src/assets/gameCoverImage/gameCover1.png',
-  //     description: 'I am a anew game'
-  //   }, 
-  //   {
-  //     name: 'banana',
-  //     image: 'src/assets/gameCoverImage/gameCover2.png',
-  //     description: 'I am a anew game'
-  //   },
-  //   {
-  //     name: 'catcar',
-  //     image: 'src/assets/gameCoverImage/gameCover3.png',
-  //     description: 'I am a anew game'
-  //   },
-  //   {
-  //     name: 'apple',
-  //     image: 'src/assets/gameCoverImage/gameCover1.png',
-  //     description: 'I am a anew game'
-  //   }, 
-  //   {
-  //     name: 'banana',
-  //     image: 'src/assets/gameCoverImage/gameCover2.png',
-  //     description: 'I am a anew game'
-  //   },
-  //   {
-  //     name: 'catcar',
-  //     image: 'src/assets/gameCoverImage/gameCover3.png',
-  //     description: 'I am a anew game'
-  //   }
-  // ]
+  
+  goContent() {
+  }
 
   
 

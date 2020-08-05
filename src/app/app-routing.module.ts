@@ -5,6 +5,7 @@ import { LoginModule } from './modules/login/login.module'
 import { HomeAppModule } from './modules/homeApp/homeApp.module'
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
   { path: 'home', loadChildren: './modules/homeApp/homeApp.module#HomeAppModule' },
 ];

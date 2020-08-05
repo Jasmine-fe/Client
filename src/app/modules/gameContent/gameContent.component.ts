@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
- 
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-gameContent',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gameContent.component.css']
 })
 export class GameContentComponent implements OnInit {
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
   breakpoint: number;
 
   currentProvider = {
@@ -35,6 +36,12 @@ export class GameContentComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    // get routerLink parameter
+    this.route.params.subscribe(params => {
+      const id = Number.parseInt(params['id']);
+      
+   })
   }
 
 }

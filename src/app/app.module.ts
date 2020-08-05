@@ -6,6 +6,7 @@ import { MaterialModule } from './MaterialModule.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/http.service';
+import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { HttpService } from './services/http.service';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    
+    RouterModule
   ],
   providers: [
     HttpService

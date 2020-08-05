@@ -1,44 +1,48 @@
 <div class="full-page">
   <mat-card>
-    <mat-card-title  *ngIf="mode === 'login'">Login</mat-card-title>
-    <mat-card-title  *ngIf="mode === 'register'">Register</mat-card-title>
-    <mat-card-content><br/>
-        <form [formGroup]="form" (ngSubmit)="submit()">
-          <br/>
-            <p>
-                <mat-form-field>
-                  <input type="text" matInput placeholder="Username" formControlName="username">
-                </mat-form-field>
-              </p>
+    <mat-card-title *ngIf="mode === 'login'">Login</mat-card-title>
+    <mat-card-title *ngIf="mode === 'register'">Register</mat-card-title>
+    <mat-card-content><br />
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <br />
+        <p>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </p>
 
-              <p *ngIf="mode === 'register'">
-                <mat-form-field>
-                  <input type="email" matInput placeholder="Email" formControlName="email">
-                </mat-form-field>
-              </p>
+        <p *ngIf="mode === 'register'">
+          <mat-form-field>
+            <input type="email" matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+        </p>
 
-              <p>
-                <mat-form-field>
-                  <input type="password" matInput placeholder="Password" formControlName="password">
-                </mat-form-field>
-              </p>
+        <p>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </p>
 
-              <p *ngIf="mode === 'register'">
-                <mat-form-field>
-                  <input type="password" matInput placeholder="Double click Password" formControlName="passwordCheck">
-                </mat-form-field>
-              </p>
-
-            <!-- <p class="error">
-                something error
-            </p> -->
-
+        <p *ngIf="mode === 'register'">
+          <mat-form-field>
+            <input type="password" matInput placeholder="Double click Password" formControlName="passwordCheck">
+          </mat-form-field>
+        </p>
         <div class="button">
-          <button  *ngIf="mode === 'login'" mat-stroked-button type="submit" >Login</button>
-          <button  *ngIf="mode === 'register'" mat-stroked-button type="submit" >Create</button>
+          <button *ngIf="mode === 'login'" mat-stroked-button type="submit">
+            <a routerLink="/home">
+              Login
+            </a>
+          </button>
+
+          <button *ngIf="mode === 'register'" mat-stroked-button type="submit">
+            <a routerLink="/home">
+              Create
+            </a>
+          </button>
         </div>
 
-        </form>
+      </form>
     </mat-card-content>
 
     <mat-card-footer>
