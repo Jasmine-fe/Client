@@ -2,17 +2,7 @@
 :host {
     display: flex;
     justify-content: center;
-    margin: 100px 50px;
-
-  }
-  .mat-card {
-    padding: 50px;
-    background-color: lightgrey;
-  }
-
-  .mat-form-field {
-    width: 100%;
-    min-width: 300px;
+    margin-top: 10rem;
   }
 
   mat-card-title,
@@ -24,13 +14,11 @@
     justify-content: center;
   }
 
-  .error {
-    padding: 16px;
-    width: 300px;
-    color: white;
-    background-color: red;
+  .mat-card {
+    padding: 3em;
+    background-color: lightgrey;
   }
 
-  #register{
+  .link{
     text-decoration: underline;
   }

@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule( {
     imports: [
@@ -67,7 +68,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        LayoutModule
     ],
     exports: [
         CommonModule,
@@ -102,7 +104,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        LayoutModule
     ],
     providers: [
         MatDatepickerModule,

@@ -1,1 +1,1 @@
-export const mobileWidth= 600
+export const mobileWidth= 400

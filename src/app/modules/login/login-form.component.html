@@ -46,10 +46,10 @@
     </mat-card-content>
 
     <mat-card-footer>
-      <div *ngIf="mode === 'login'" id="register" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}" > 
+      <div *ngIf="mode === 'login'" class="link" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}" > 
         Don't have account ? 
       </div> 
-      <div *ngIf="mode === 'register'" id="register" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}"> 
+      <div *ngIf="mode === 'register'" class="link" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}"> 
         Already have account?
       </div> 
     </mat-card-footer>

@@ -1,5 +1,7 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { mobileWidth } from '../../shared/common'
 
 @Component({
   selector: 'app-login-form',
@@ -7,10 +9,11 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  constructor() {}
+  constructor(public breakpointObserver: BreakpointObserver) {}
   mode = 'login' // state: login, register
 
   ngOnInit() {
+
   }
 
   form: FormGroup = new FormGroup({
