@@ -1,15 +1,24 @@
-mat-card, mat-card-title{
-    padding: 30px;
-    background-color: #E0E0E0;
+a,
+mat-card, 
+mat-card-title, 
+mat-card-subtitle{
+    background-color: #003060;
+    color: white;
 }
 
-mat-card-content, .descp {
-    margin: 30px;
-}
+
 img {
-    text-align: center;
+    width: 90%;
+    margin: auto;
 }
 .title {
-    color: 	#003060;
     font-size: 2rem;    
+}
+
+img,
+mat-card-title,
+mat-card-subtitle,
+mat-card-content, 
+.descp {
+    margin-bottom: 30px;
 }

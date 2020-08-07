@@ -1,12 +1,13 @@
 <mat-card>
-    <mat-card-subtitle>All Games > Adventure Games > Grounded</mat-card-subtitle>
-    <mat-card-title >
+    <mat-card-subtitle><a routerLink="/home/dashboard" >All Games > Action Game > {{ currentGame.name }}</a></mat-card-subtitle>
+    <mat-card-title>
         <div class="title">{{ currentGame.name }}</div>
         <!-- <div class="actionBtn"><button mat-raised-button color="primary">Primary</button></div> -->
     </mat-card-title>
+    <img mat-card-image src="../../../assets/gameContent/game1Img.jpg" alt="Photo of a Shiba Inu">
+    
+    
     <mat-card-content>
-        <img mat-card-image src="../../../assets/gameContent/game1Img.jpg" alt="Photo of a Shiba Inu">
-        
         <div class="descp">
             <h1>遊戲詳細說明</h1>
             <div>{{ currentGame.descp}}</div>
@@ -17,7 +18,7 @@
             <div>{{ currentGame.lastUpdateTime}}</div>
         </div>
 
-        <div  class="descp">
+        <div class="descp">
             <h1>開發者資訊</h1>
             <div>公司名稱：{{ currentProvider.companyName }}</div>
             <div>公司電話：{{ currentProvider.companyPhone }}</div>
@@ -25,10 +26,10 @@
         </div>
 
 
-        <div  class="descp">
+        <div class="descp">
             <h1>玩家評論</h1>
             <!-- <div><img [ngStyle]="{width: '50%'}" src="../../../assets/review.png" ></div> -->
         </div>
 
-      </mat-card-content>
+    </mat-card-content>
 </mat-card>
