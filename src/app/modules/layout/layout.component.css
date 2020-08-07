@@ -1,7 +1,7 @@
 .container {
     position: absolute;
-    top: 60px;
-    bottom: 60px;
+    top: 55px;
+    bottom: 55px;
     left: 0;
     right: 0;
   }
@@ -46,6 +46,7 @@
   }
   .main {
     height: 100%;
+    background-color: #003060;
   }
   .sideBarIcon {
     color: white;

@@ -1,21 +1,17 @@
-<div>
-  <div fxLayout="row" fxLayoutGap="5px" fxLayout.xs="column" fxLayout.sm="column" class="flex-container">
-    <div *ngFor="let game of gameList">
-      <a [routerLink]="['/home/content',{id: game.id}]">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title>{{game.name}}</mat-card-title>
-          </mat-card-header>
-          <picture>
-            <img class="gameCover" [src]="game.imageURL">
-          </picture>
-          <mat-card-content>
-            <p>
-              {{game.descp}}
-            </p>
-          </mat-card-content>
-        </mat-card>
-      </a>
-    </div>
+<div class="container">
+  <div *ngFor="let game of gameList">
+    <a [routerLink]="['/home/content',{id: game.id}]">
+      <mat-card class="gameCard">
+        <mat-card-header>
+          <mat-card-title>{{game.name}}</mat-card-title>
+        </mat-card-header>          
+          <img class="gameCover" [src]="game.imageURL">
+        <mat-card-content>
+          <!-- <p>
+            {{game.descp}}
+          </p> -->
+        </mat-card-content>
+      </mat-card>
+    </a>
   </div>
 </div>

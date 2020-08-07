@@ -1,15 +1,29 @@
-@media (max-width:600px) {
-    mat-card, .gameCover  {
-        width: 90vw;
-    }
+:host{
+    min-height: 100%;
 }
 mat-card {
     margin: 10px 10px;
     background-color: grey;
 }
 
-.flex-container {
+img {
+    width: inherit;
+}
+
+.container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-items: center;
+}
+
+.gameCard {
+    background-color: #f1f1f1;
+    width: 400px;
+    margin: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .gameCard {
+        width: 85vw;
+    }
   }
