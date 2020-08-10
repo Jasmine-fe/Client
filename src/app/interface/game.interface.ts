@@ -1,6 +1,6 @@
 export interface GameList {
     id: string,
     name: string,
-    imageURL: string,
+    imageUrl: string,
     descp: string,
 }
