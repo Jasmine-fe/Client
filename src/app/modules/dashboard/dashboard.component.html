@@ -1,9 +1,9 @@
 <div class="container">
   <div *ngFor="let game of gameList">
-    <a [routerLink]="['/home/content',{id: game.id}]">
+    <a [routerLink]="['/home/content',{gameId: game.id, providerId: game.providerId}]">
       <mat-card class="gameCard">
         <mat-card-header>
-          <mat-card-title>{{game.name}}</mat-card-title>
+          <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
         </mat-card-header>          
           <img class="gameCover" [src]="game.imageUrl">
         <mat-card-content>

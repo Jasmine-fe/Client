@@ -5,7 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { GameContentComponent } from '../gameContent/gameContent.component'; 
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { HttpService } from '../../services/http.service'
+import { GameService } from '../../services/game.service'
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   providers: [  
-    HttpService
+    GameService
   ],
   exports: [
   ],

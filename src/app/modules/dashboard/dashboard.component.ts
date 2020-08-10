@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { GameService } from '../../services/game.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -8,12 +8,12 @@ import { Router } from '@angular/router'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private httpService: HttpService,
+  constructor(private GameService: GameService,
     private router: Router) {}
   gameList = []
 
   ngOnInit() {
-    this.httpService.getGameList()
+    this.GameService.getGameList()
     .subscribe((res) => {
       this.gameList = res.data
     })

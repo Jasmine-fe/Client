@@ -1,10 +1,10 @@
 <mat-card>
     <mat-card-subtitle><a routerLink="/home/dashboard" >All Games > Action Game > {{ currentGame.name }}</a></mat-card-subtitle>
     <mat-card-title>
-        <div class="title">{{ currentGame.name }}</div>
+        <div class="title">{{ currentGame.id }}. {{ currentGame.name }}</div>
         <!-- <div class="actionBtn"><button mat-raised-button color="primary">Primary</button></div> -->
     </mat-card-title>
-    <img mat-card-image src="../../../assets/gameContent/game1Img.jpg" alt="Photo of a Shiba Inu">
+    <img mat-card-image [src]="currentGame.imageUrl" alt="Photo of a game">
     
     
     <mat-card-content>
@@ -21,8 +21,8 @@
         <div class="descp">
             <h1>開發者資訊</h1>
             <div>公司名稱：{{ currentProvider.companyName }}</div>
-            <div>公司電話：{{ currentProvider.companyPhone }}</div>
-            <div>公司名稱：{{ currentProvider.companyAddress }}</div>
+            <div>公司電話：{{ currentProvider.companyTel }}</div>
+            <div>公司名稱：{{ currentProvider.companyLoc }}</div>
         </div>
 
 

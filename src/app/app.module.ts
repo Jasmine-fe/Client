@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './MaterialModule.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './services/http.service';
+import { GameService } from './services/game.service';
 import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { Routes, RouterModule } from '@angular/router';
     RouterModule
   ],
   providers: [
-    HttpService
+    GameService
   ],
   bootstrap: [AppComponent],
 })
