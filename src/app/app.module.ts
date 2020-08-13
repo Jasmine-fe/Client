@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
+import { GameServerService } from './services/gameServer.service';
 import { Routes, RouterModule } from '@angular/router';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { Routes, RouterModule } from '@angular/router';
   ],
   providers: [
     GameService,
-    UserService
+    UserService,
+    GameServerService
   ],
   bootstrap: [AppComponent],
 })

@@ -4,7 +4,8 @@ export interface GameList {
     imageUrl: string,
     descp: string,
     providerId: number,
-    lastUpdateTime: Date
+    lastUpdateTime: Date,
+    gameId: string
 }
 
 export interface GameProvider { 
@@ -12,4 +13,10 @@ export interface GameProvider {
     companyName: string,
     companyTel: string,
     companyLoc: string,
+    providerId: string
+}
+
+export interface GameServer {
+    ip: string,
+    gameStatue: string // true or false
 }

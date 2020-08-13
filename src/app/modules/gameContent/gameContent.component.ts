@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
-import { GameList, GameProvider } from '../../interface/game.interface'
 import { UserService } from '../../services/user.service';
+import { GameServerService } from '../../services/gameServer.service';
+
+import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
+import { User } from '../../interface/user.interface'
 
 @Component({
   selector: 'app-gameContent',
@@ -13,7 +16,8 @@ export class GameContentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private GameService: GameService,
-    private userService: UserService) {}
+    private userService: UserService,
+    private gameServerService: GameServerService) {}
 
   currentProvider: GameProvider;
   currentGame: GameList;
@@ -29,9 +33,21 @@ export class GameContentComponent implements OnInit {
         this.currentProvider = res.data.provider
       })
    })
+  }
 
-   const user = this.userService.getUserInfo();
-   console.log("user", user)
+  connectToGameServer() {
+    const user: User= this.userService.getUserInfo();
+    const payload = {
+      username: user.username,
+      password: user.password,
+      gameId: this.currentGame.gameId,
+      providerId: this.currentGame.providerId,
+      lastUpdateTime: this.currentGame.lastUpdateTime,
+    }
+    this.GameService.connectToGameServer(payload)
+    .subscribe((res: any) => {
+      this.gameServerService.setServerInfo(res.data)
+    })
 
   }
 

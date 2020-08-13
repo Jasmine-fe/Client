@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { GameList } from '../interface/game.interface';
 
 @Injectable()
@@ -13,7 +13,13 @@ export class GameService {
   }
 
   getGameContent(payload) {
-    return this.http.get<any>(`${this.gameUrl}/content?providerId=${payload.providerId}&gameId=${payload.gameId}`, );
+    return this.http.get<any>(`${this.gameUrl}/content?providerId=${payload.providerId}&gameId=${payload.gameId}`);
+  }
+
+  connectToGameServer(payload) {
+    const params = new HttpParams(payload);
+    // modify server url
+    return this.http.request('GET', this.gameUrl , {responseType:'json', params});
   }
 
 }
