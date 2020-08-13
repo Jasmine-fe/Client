@@ -8,6 +8,12 @@
     
     
     <mat-card-content>
+        <div class="startButton" (click)="connectServer()">
+            <button class="descp" mat-raised-button color="warn"> 
+                開始遊戲
+            </button>
+        </div>
+
         <div class="descp">
             <h1>遊戲詳細說明</h1>
             <div>{{ currentGame.descp}}</div>

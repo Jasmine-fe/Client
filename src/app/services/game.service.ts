@@ -17,6 +17,7 @@ export class GameService {
   }
 
   connectToGameServer(payload) {
+    console.log("payload", payload)
     const params = new HttpParams(payload);
     // modify server url
     return this.http.request('GET', this.gameUrl , {responseType:'json', params});

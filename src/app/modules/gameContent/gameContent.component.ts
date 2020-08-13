@@ -24,8 +24,8 @@ export class GameContentComponent implements OnInit {
 
   ngOnInit() {
       this.route.params.subscribe(params => {
-      const gameId = Number.parseInt(params['gameId']);
-      const providerId = Number.parseInt(params['providerId']);
+      const gameId = params['gameId']
+      const providerId = params['providerId']
       const payload = { gameId, providerId }
       this.GameService.getGameContent(payload)
       .subscribe((res: any) => {
@@ -35,7 +35,7 @@ export class GameContentComponent implements OnInit {
    })
   }
 
-  connectToGameServer() {
+  connectServer() {
     const user: User= this.userService.getUserInfo();
     const payload = {
       username: user.username,

@@ -22,3 +22,8 @@ mat-card-content,
 .descp {
     margin-bottom: 30px;
 }
+
+.startButton {
+    text-align: right;
+    margin-right: 20px;
+}

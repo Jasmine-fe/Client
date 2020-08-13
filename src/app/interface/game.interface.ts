@@ -3,7 +3,7 @@ export interface GameList {
     name: string,
     imageUrl: string,
     descp: string,
-    providerId: number,
+    providerId: string,
     lastUpdateTime: Date,
     gameId: string
 }
