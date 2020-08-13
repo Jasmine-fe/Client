@@ -1,6 +1,7 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { UserService } from '../../services/user.service'
 import { mobileWidth } from '../../shared/common'
 
 @Component({
@@ -9,7 +10,8 @@ import { mobileWidth } from '../../shared/common'
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  constructor(public breakpointObserver: BreakpointObserver) {}
+  constructor(public breakpointObserver: BreakpointObserver,
+    public userService: UserService) {}
   mode = 'login' // state: login, register
 
   ngOnInit() {
@@ -31,6 +33,13 @@ export class LoginFormComponent implements OnInit {
   
   changeMode() {
     this.mode = (this.mode === "login") ? "register" : "login";
+  }
+
+  setInfo() {
+    const username = this.form.get('username').value
+    const password = this.form.get('password').value
+    console.log("username", username, "password", password)
+    this.userService.setUserInfo(username, password);
   }
   
   @Input() error: string | null;

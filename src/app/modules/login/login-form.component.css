@@ -22,3 +22,8 @@
   .link{
     text-decoration: underline;
   }
+
+  #loginButton {
+    text-decoration: blink;
+    color: black;
+}

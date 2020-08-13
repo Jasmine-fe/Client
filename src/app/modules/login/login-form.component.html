@@ -29,8 +29,8 @@
           </mat-form-field>
         </p>
         <div class="button">
-          <button *ngIf="mode === 'login'" mat-stroked-button type="submit">
-            <a routerLink="/home">
+          <button *ngIf="mode === 'login'" mat-stroked-button type="submit" (click)="setInfo()">
+            <a id="loginButton" routerLink="/home">
               Login
             </a>
           </button>

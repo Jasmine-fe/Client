@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 // module must import here to load properly
 import { LoginModule } from './modules/login/login.module'
 import { HomeAppModule } from './modules/homeApp/homeApp.module'
+import { AppModule } from './app.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { GameList, GameProvider } from '../../interface/game.interface'
+import { UserService } from '../../services/user.service';
+
 @Component({
   selector: 'app-gameContent',
   templateUrl: './gameContent.component.html',
@@ -10,7 +12,8 @@ import { GameList, GameProvider } from '../../interface/game.interface'
 export class GameContentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private GameService: GameService) {}
+    private GameService: GameService,
+    private userService: UserService) {}
 
   currentProvider: GameProvider;
   currentGame: GameList;
@@ -25,8 +28,11 @@ export class GameContentComponent implements OnInit {
         this.currentGame = res.data.game
         this.currentProvider = res.data.provider
       })
-
    })
+
+   const user = this.userService.getUserInfo();
+   console.log("user", user)
+
   }
 
 }

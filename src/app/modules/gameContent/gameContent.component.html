@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-subtitle><a routerLink="/home/dashboard" >All Games > Action Game > {{ currentGame.name }}</a></mat-card-subtitle>
     <mat-card-title>
-        <div class="title">{{ currentGame.id }}. {{ currentGame.name }}</div>
+        <div class="title">{{ currentGame.name }}</div>
         <!-- <div class="actionBtn"><button mat-raised-button color="primary">Primary</button></div> -->
     </mat-card-title>
     <img mat-card-image [src]="currentGame.imageUrl" alt="Photo of a game">
