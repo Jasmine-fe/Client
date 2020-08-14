@@ -38,15 +38,24 @@ export class GameContentComponent implements OnInit {
   connectServer() {
     const user: User= this.userService.getUserInfo();
     const payload = {
-      username: user.username,
-      password: user.password,
+      // username: user.username,
+      // password: user.password,
       gameId: this.currentGame.gameId,
       providerId: this.currentGame.providerId,
-      lastUpdateTime: this.currentGame.lastUpdateTime,
+      configFileName: "server.neverball.conf"
+      // lastUpdateTime: this.currentGame.lastUpdateTime,
     }
     this.GameService.connectToGameServer(payload)
     .subscribe((res: any) => {
       this.gameServerService.setServerInfo(res.data)
+
+      // if game status: true => update DB gameServerIp table
+      if(res.data.gameStatus) {
+        this.GameService.updateGameServer(payload) 
+        .subscribe((res: any) => {
+          console.log("update success")
+        })
+      }
     })
 
   }

@@ -23,4 +23,8 @@ export class GameService {
     return this.http.request('GET', this.gameUrl , {responseType:'json', params});
   }
 
+  updateGameServer(payload) {
+    return this.http.get<any>(`${this.gameUrl}/gameServer?gameServerIp=${payload.gameServerIp}&status=${payload.status}`);
+  }
+
 }
