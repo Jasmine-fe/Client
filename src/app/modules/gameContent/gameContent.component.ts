@@ -48,9 +48,10 @@ export class GameContentComponent implements OnInit {
     this.GameService.connectToGameServer(payload)
     .subscribe((res: any) => {
       this.gameServerService.setServerInfo(res)
+      
 
       // if game status: true => update DB gameServerIp table
-      if(res.gamestatus) {
+      if(res.gamestatus == "TRUE") {
         this.GameService.updateGameServer(payload) 
         .subscribe((res: any) => {
           console.log("update success")

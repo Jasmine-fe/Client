@@ -5,7 +5,10 @@ import { from } from 'rxjs';
     providedIn: 'root',
   })
 export class GameServerService {
-    serverInfo: GameServer;
+    serverInfo: GameServer = {
+        gamestatus: "",
+        gameIP: ""
+    };
 
     setServerInfo (payload: any) {
         this.serverInfo.gamestatus = payload.gamestatus;
