@@ -17,6 +17,6 @@ export interface GameProvider {
 }
 
 export interface GameServer {
-    ip: string,
-    gameStatue: string // true or false
+    gameIP: string,
+    gamestatus: string // true or false
 }

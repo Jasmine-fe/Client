@@ -4,11 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginModule } from './modules/login/login.module'
 import { HomeAppModule } from './modules/homeApp/homeApp.module'
 import { AppModule } from './app.module';
+import { ProviderHomeModule } from './gameProvider/providerHome/providerHome.module'
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
   { path: 'home', loadChildren: './modules/homeApp/homeApp.module#HomeAppModule' },
+  { path: 'provider', loadChildren: './gameProvider/providerHome/providerHome.module#ProviderHomeModule'},
+  
 ];
 
 @NgModule({

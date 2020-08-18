@@ -8,8 +8,8 @@ export class GameServerService {
     serverInfo: GameServer;
 
     setServerInfo (payload: any) {
-        this.serverInfo.gameStatue = payload.gameStatue;
-        this.serverInfo.ip = payload.ip;
+        this.serverInfo.gamestatus = payload.gamestatus;
+        this.serverInfo.gameIP = payload.gameIP;
     }
 
     getServerInfo () {

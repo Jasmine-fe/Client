@@ -6,7 +6,8 @@ import { GameList } from '../interface/game.interface';
 export class GameService {
   constructor(private http: HttpClient) { }
 
-  gameUrl='http://localhost:3000/game';
+  // aws EC2 instance public DNS
+  gameUrl='http://54.146.78.28:3000/game';
 
   getGameList() {
     return this.http.get<any>(`${this.gameUrl}`);
@@ -18,9 +19,9 @@ export class GameService {
 
   connectToGameServer(payload) {
     console.log("payload", payload)
-    const params = new HttpParams(payload);
+
     // modify server url
-    return this.http.request('GET', this.gameUrl , {responseType:'json', params});
+    return this.http.get<any>(`http://192.168.137.3:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
   }
 
   updateGameServer(payload) {
