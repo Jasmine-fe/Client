@@ -3,9 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { UserService } from '../../services/user.service';
 import { GameServerService } from '../../services/gameServer.service';
-
+// import { AndroidInterface } from '../../interface/android.interface'
 import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
 import { User } from '../../interface/user.interface'
+
+interface AndroidInterface {
+  opengame(ip: string) : any;
+}
+declare var android: AndroidInterface;
 
 @Component({
   selector: 'app-gameContent',
@@ -47,11 +52,15 @@ export class GameContentComponent implements OnInit {
     }
     this.GameService.connectToGameServer(payload)
     .subscribe((res: any) => {
+      console.log("ip: ", res.ip);
       this.gameServerService.setServerInfo(res)
       
+      
+      android.opengame(res.ip);
 
       // if game status: true => update DB gameServerIp table
       if(res.gamestatus == "TRUE") {
+
         this.GameService.updateGameServer(payload) 
         .subscribe((res: any) => {
           console.log("update success")
