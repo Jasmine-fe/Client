@@ -10,7 +10,7 @@ import { User } from '../../interface/user.interface'
 interface AndroidInterface {
   opengame(ip: string) : any;
 }
-declare var android: AndroidInterface;
+declare var Android: AndroidInterface;
 
 @Component({
   selector: 'app-gameContent',
@@ -52,11 +52,10 @@ export class GameContentComponent implements OnInit {
     }
     this.GameService.connectToGameServer(payload)
     .subscribe((res: any) => {
-      console.log("ip: ", res.ip);
+      console.log("res", res);
+      console.log("ip: ", res.gameIP);
       this.gameServerService.setServerInfo(res)
-      
-      
-      android.opengame(res.ip);
+      Android.opengame(res.gameIP);
 
       // if game status: true => update DB gameServerIp table
       if(res.gamestatus == "TRUE") {
