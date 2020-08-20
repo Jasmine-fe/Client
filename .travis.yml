@@ -1,11 +1,11 @@
 language: node_js
 
-# deploy:
-#   provider: s3
-#   access_key_id: "AKIAITB2XGIDLTEHT2GA"
-#   secret_access_key: "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"
-#   bucket: "clientbucket123"
-#   skip_cleanup: true
-#   region: "US East (N. Virginia)"
-#   acl: public_read
+deploy:
+  provider: s3
+  access_key_id: "AKIASPALUVXPBJVY7SY3"
+  secret_access_key: "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"
+  bucket: "clientbucket123"
+  skip_cleanup: true
+  region: "US East (N. Virginia)"
+  acl: public_read
  
