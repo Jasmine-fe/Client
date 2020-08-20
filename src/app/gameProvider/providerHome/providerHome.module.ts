@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { providerHomeRoutingModule } from './providerHome-routing.module';
 import { ProviderHomeComponent } from './providerHome.component';
 import { ConfigPageComponent } from '../configPage/configPage.component';
+import { CreatePageComponent } from '../createPage/createPage.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../../MaterialModule.module';
 import { RouterModule } from '@angular/router';
@@ -10,7 +11,8 @@ import { RouterModule } from '@angular/router';
 @NgModule({
     declarations: [
       ProviderHomeComponent,
-      ConfigPageComponent
+      ConfigPageComponent,
+      CreatePageComponent
     ],
     imports: [
       providerHomeRoutingModule,
