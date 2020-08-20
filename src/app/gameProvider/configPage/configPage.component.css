@@ -44,5 +44,9 @@
     background-color: #19a881
   }
   
+  a{
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+  }
 
   

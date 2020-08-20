@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+  }
+  .mainPage {
+    transform: scale(1.2);
+  }
+  .title {
+    text-align: center;
+  }
+  .btnArea {
+      text-align: center;
+  }
+  button {
+      margin: 20px;
+  }

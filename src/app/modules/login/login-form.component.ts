@@ -12,7 +12,7 @@ import { mobileWidth } from '../../shared/common'
 export class LoginFormComponent implements OnInit {
   constructor(public breakpointObserver: BreakpointObserver,
     public userService: UserService) {}
-  mode = 'login' // state: login, register
+  mode = 'userLogin' // state: userLogin, providerLogin, register, 
 
   ngOnInit() {
 
@@ -31,14 +31,13 @@ export class LoginFormComponent implements OnInit {
     }
   }
   
-  changeMode() {
-    this.mode = (this.mode === "login") ? "register" : "login";
+  changeMode( newMode: string ) {
+    this.mode = newMode;
   }
 
   setInfo() {
     const username = this.form.get('username').value
     const password = this.form.get('password').value
-    console.log("username", username, "password", password)
     this.userService.setUserInfo(username, password);
   }
   

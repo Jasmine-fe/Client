@@ -23,7 +23,16 @@
     text-decoration: underline;
   }
 
+  .topNav {
+    text-align: center;
+  }
+
+  .navItem {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   #loginButton {
     text-decoration: blink;
     color: black;
-}
+  }

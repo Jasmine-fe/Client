@@ -1,6 +1,16 @@
 <div class="full-page">
+  <div class="topNav">
+    <span class="navItem" (click)="changeMode('providerLogin')">
+        Provider
+    </span>
+    <span class="navItem"  (click)="changeMode('userLogin')">
+        User
+    </span>
+  </div>
   <mat-card>
-    <mat-card-title *ngIf="mode === 'login'">Login</mat-card-title>
+    
+    <mat-card-title *ngIf="mode === 'userLogin'">User Login</mat-card-title>
+    <mat-card-title *ngIf="mode === 'providerLogin'">Provider Login</mat-card-title>
     <mat-card-title *ngIf="mode === 'register'">Register</mat-card-title>
     <mat-card-content><br />
       <form [formGroup]="form" (ngSubmit)="submit()">
@@ -29,9 +39,16 @@
           </mat-form-field>
         </p>
         <div class="button">
-          <button *ngIf="mode === 'login'" mat-stroked-button type="submit" (click)="setInfo()">
+          <button *ngIf="mode === 'userLogin'" mat-stroked-button type="submit" (click)="setInfo()">
             <a id="loginButton" routerLink="/home">
-              Login
+               login
+            </a>
+          </button>
+
+          <!-- provider login for condiguration -->
+          <button *ngIf="mode === 'providerLogin'" mat-stroked-button type="submit" >
+            <a id="loginButton" routerLink="/provider">
+               Login
             </a>
           </button>
 
@@ -46,10 +63,10 @@
     </mat-card-content>
 
     <mat-card-footer>
-      <div *ngIf="mode === 'login'" class="link" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}" > 
+      <div *ngIf="mode !== 'register'" class="link" (click)="changeMode('register')" [ngStyle]="{cursor: 'pointer'}" > 
         Don't have account ? 
       </div> 
-      <div *ngIf="mode === 'register'" class="link" (click)="changeMode()" [ngStyle]="{cursor: 'pointer'}"> 
+      <div *ngIf="mode === 'register'" class="link" (click)="changeMode('userLogin')" [ngStyle]="{cursor: 'pointer'}"> 
         Already have account?
       </div> 
     </mat-card-footer>
