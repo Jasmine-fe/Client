@@ -1,11 +1,17 @@
-language: node_js
+language: js
 
+
+before_deploy:
+  - ng build
 deploy:
   provider: s3
-  access_key_id: "AKIASPALUVXPBJVY7SY3"
-  secret_access_key: "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"
+  access_key_id: ""
+  secret_access_key: ""
   bucket: "clientbucket123"
   skip_cleanup: true
   region: "US East (N. Virginia)"
   acl: public_read
+  local_dir: dist
+  on:
+      branch: master
  

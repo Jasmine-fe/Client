@@ -1,0 +1,48 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin-top: 10rem;
+  }
+
+  mat-card {
+    padding: 3em;
+    background-color:#24323d;
+  }
+
+  mat-label{
+    color: #dff1f5;
+  }
+
+  mat-card-actions {
+    text-align: end;
+  }
+
+  mat-card-header,
+  .button{
+    justify-content: center;
+    
+  }
+
+  mat-card-title {
+    font-size:40px !important;
+  }
+
+  mat-card-content {
+    font-size:25px !important;
+  }
+
+  mat-form-field {
+    width: 500px;
+  }
+
+  .configCard{
+    color: #dff1f5;
+    width: 800px;
+  }
+
+  .button{
+    background-color: #19a881
+  }
+  
+
+  

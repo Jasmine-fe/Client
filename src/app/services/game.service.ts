@@ -21,7 +21,7 @@ export class GameService {
     console.log("payload", payload)
 
     // modify server url
-    return this.http.get<any>(`http://192.168.137.183:5000/TEST?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
+    return this.http.get<any>(`http://192.168.137.183:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
   }
 
   updateGameServer(payload) {

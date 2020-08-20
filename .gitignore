@@ -47,3 +47,4 @@ testem.log
 Thumbs.db
 
 # deploy
+.travis.yml

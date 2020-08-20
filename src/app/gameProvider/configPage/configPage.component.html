@@ -1,1 +1,23 @@
-<div>123hello config page</div>
+<div>
+    <mat-card class="configCard">
+        <form [formGroup]="form" (ngSubmit)="submit()"><br />
+            <mat-card-header>
+                <mat-card-title> Configuration </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngFor="let column of dataKeys">
+                    <div>
+                        <mat-label>{{ column }}：</mat-label>
+                        <mat-form-field>
+                            <input type="text" matInput [formControlName]="column">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button type="cancel" class="button">Cancel</button>
+                <button mat-stroked-button type="submit" class="button">Modify</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

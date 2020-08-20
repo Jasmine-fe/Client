@@ -4,13 +4,8 @@ import { ProviderHomeComponent } from './providerHome.component';
 import { ConfigPageComponent } from '../configPage/configPage.component'
 
 const routes: Routes = [
-  {
-    path: '', component: ProviderHomeComponent,
-    children: [
-    //   { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'config', component: ConfigPageComponent }
-    ]
-  }
+  { path: '', component: ConfigPageComponent },
+  { path: 'config', component: ConfigPageComponent }
 ];
 
 @NgModule({
