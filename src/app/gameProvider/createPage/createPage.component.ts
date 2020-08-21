@@ -1,7 +1,7 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { ProviderService } from '../../services/provider.service';
 
 @Component({
   selector: 'app-create-page',
@@ -9,35 +9,89 @@ import { Router } from '@angular/router';
   styleUrls: ['./createPage.component.css']
 })
 export class CreatePageComponent implements OnInit {
+
+  constructor(public fb: FormBuilder,
+    public providerService: ProviderService) {}
+
+  gameForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl(''),
+
+  });
+
+  configForm: FormGroup = new FormGroup({
+    core: new FormControl(''),
+    resolution: new FormControl('')
+  });
+
+  mode = "create"; // create, setting
   
-
-  data = {
-    Name: "Pokamon Go",
-    Image: "Image",
-    Description: "The game's official launch began on July 6, 2016, with releases in Australia, New Zealand, and the United States. Due to server strain from high demand upon release, Niantic CEO John Hanke stated that the release in other regions was to be ",
-    uploadFile: ""
-  };
-
-  dataKeys = Object.keys(this.data);
-
-  form: FormGroup;
-
-  constructor(public fb: FormBuilder) {}
-
   ngOnInit() {
-      this.form = this.createFormGroup();
+    
   }
 
-  createFormGroup() {
-    const fgroup = this.fb.group({})
-    this.dataKeys.forEach(column => {
-      fgroup.addControl(column, this.fb.control(this.data[column]));
-    });
-    return fgroup;
-  }
-  
+
   submit() {
-    console.log("this.form ", this.form.value)
+    console.log("gameForm ", this.gameForm.value)
+    console.log("configForm ", this.configForm.value)
+  }
+
+  uploadFileToServer(event) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      let formData: FormData = new FormData();
+      formData.append('uploadFile', file, 'gameZipFile');
+      formData.append('fileType', 'zip');
+      this.providerService.uploadFile(formData)
+      .subscribe((res) => {
+        console.log("successful uplaod File ")
+      })
+    }
+  }
+
+  goNextStep() {
+    this.mode = "setting"
+  }
+
+  displayImage(img, file) {
+    return new Promise((resolve, rejfect) => {
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);
+        resolve(img);
+      };
+    });
+  }
+
+  getFileBase64Encode(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  uploadImage(event) {
+    let imgDOM = document.getElementById('upload-img');
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      console.log("file", file)
+      this.displayImage(imgDOM, file).then(img => {
+        console.log("display image successful")
+      });
+      this.getFileBase64Encode(file).then(b64 => {
+        
+        // base
+        console.log("image encode in base64", b64)
+        this.providerService.uploadFile(b64)
+          .subscribe((res) => {
+            console.log("successful uplaod File ")
+          })
+      });
+    }
   }
 
 }

@@ -7,6 +7,7 @@ import { CreatePageComponent } from '../createPage/createPage.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../../MaterialModule.module';
 import { RouterModule } from '@angular/router';
+import { ProviderService } from '../../services/provider.service';
 
 @NgModule({
     declarations: [
@@ -20,9 +21,11 @@ import { RouterModule } from '@angular/router';
       ReactiveFormsModule,
       MatNativeDateModule,
       MaterialModule,
-      RouterModule
+      RouterModule,
     ],
-    providers: [],
+    providers: [
+      ProviderService
+    ],
     exports: [
     ]
   })

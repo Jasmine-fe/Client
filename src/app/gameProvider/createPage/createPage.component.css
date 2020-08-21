@@ -1,7 +1,7 @@
 :host {
     display: flex;
     justify-content: center;
-    margin-top: 10rem;
+    margin: 5rem;
   }
 
   mat-card {
@@ -29,10 +29,6 @@
 
   mat-card-content {
     font-size:25px !important;
-  }
-
-  mat-form-field {
-    width: 500px;
   }
 
   .configCard{

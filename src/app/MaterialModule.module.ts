@@ -69,7 +69,7 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSortModule,
         MatPaginatorModule,
         FlexLayoutModule,
-        LayoutModule
+        LayoutModule,
     ],
     exports: [
         CommonModule,
@@ -105,7 +105,7 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatSortModule,
         MatPaginatorModule,
         FlexLayoutModule,
-        LayoutModule
+        LayoutModule,
     ],
     providers: [
         MatDatepickerModule,
