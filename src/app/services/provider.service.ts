@@ -11,9 +11,7 @@ export class ProviderService {
 
   uploadFile(payload) {
     let headers = new HttpHeaders();
-    headers.append('Accept', 'application/octet-stream');
-    let options = { headers };
-    return this.http.post(`http://1.2.2.2:5000/`, payload, options);
+    return this.http.post(`http://localhost:3000/provider`, payload);
   }
 
 

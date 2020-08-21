@@ -78,19 +78,20 @@ export class CreatePageComponent implements OnInit {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       let file: File = fileList[0];
-      console.log("file", file)
+
       this.displayImage(imgDOM, file).then(img => {
         console.log("display image successful")
       });
-      this.getFileBase64Encode(file).then(b64 => {
-        
-        // base
-        console.log("image encode in base64", b64)
-        this.providerService.uploadFile(b64)
-          .subscribe((res) => {
-            console.log("successful uplaod File ")
-          })
-      });
+
+
+      var fd = new FormData();
+      fd.append('image', file, 'test.png');
+      this.providerService.uploadFile(fd)
+        .subscribe((res) => {
+          console.log("successful uplaod File ")
+        })
+
+
     }
   }
 
