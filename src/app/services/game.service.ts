@@ -10,7 +10,7 @@ export class GameService {
   gameUrl='http://54.146.78.28:3000/game';
 
   getGameList() {
-    return this.http.get<any>(`${this.gameUrl}`);
+    return this.http.get<any>(`${this.gameUrl}/list`);
   }
 
   getGameContent(payload) {
