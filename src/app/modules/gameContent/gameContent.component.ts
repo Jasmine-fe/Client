@@ -55,6 +55,7 @@ export class GameContentComponent implements OnInit {
 
         this.GameService.connectToGameServer(payload)
           .subscribe((res: any) => {
+
             this.gameServerService.setServerInfo(res)
 
             const payloadIP = {
@@ -65,7 +66,7 @@ export class GameContentComponent implements OnInit {
             this.GameService.updateGameServer(payloadIP)
               .subscribe((res: any) => {
                 console.log("update success")
-                Android.opengame(res.gameIP);
+                Android.opengame(payloadIP.gameServerIp);
               })
 
           })
