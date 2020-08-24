@@ -5,7 +5,8 @@ export interface GameList {
     descp: string,
     providerId: string,
     lastUpdateTime: Date,
-    gameId: string
+    gameId: string,
+    configFile: string
 }
 
 export interface GameProvider { 

@@ -43,11 +43,9 @@ export class GameContentComponent implements OnInit {
   connectServer() {
     const user: User = this.userService.getUserInfo();
     const payload = {
-      // username: user.username,
-      // password: user.password,
       gameId: this.currentGame.gameId,
       providerId: this.currentGame.providerId,
-      configfile: "server.neverball.conf" //modify
+      configfile: this.currentGame.configFile,
       // lastUpdateTime: this.currentGame.lastUpdateTime,
     }
 
