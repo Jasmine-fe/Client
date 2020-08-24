@@ -8,7 +8,7 @@ import { GameList, GameProvider, GameServer } from '../../interface/game.interfa
 import { User } from '../../interface/user.interface'
 
 interface AndroidInterface {
-  opengame(ip: string) : any;
+  opengame(ip: string): any;
 }
 declare var Android: AndroidInterface;
 
@@ -22,26 +22,26 @@ export class GameContentComponent implements OnInit {
     private route: ActivatedRoute,
     private GameService: GameService,
     private userService: UserService,
-    private gameServerService: GameServerService) {}
+    private gameServerService: GameServerService) { }
 
   currentProvider: GameProvider;
   currentGame: GameList;
 
   ngOnInit() {
-      this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       const gameId = params['gameId']
       const providerId = params['providerId']
       const payload = { gameId, providerId }
       this.GameService.getGameContent(payload)
-      .subscribe((res: any) => {
-        this.currentGame = res.data.game
-        this.currentProvider = res.data.provider
-      })
-   })
+        .subscribe((res: any) => {
+          this.currentGame = res.data.game
+          this.currentProvider = res.data.provider
+        })
+    })
   }
 
   connectServer() {
-    const user: User= this.userService.getUserInfo();
+    const user: User = this.userService.getUserInfo();
     const payload = {
       // username: user.username,
       // password: user.password,
@@ -50,23 +50,28 @@ export class GameContentComponent implements OnInit {
       configfile: "server.neverball.conf" //modify
       // lastUpdateTime: this.currentGame.lastUpdateTime,
     }
-    this.GameService.connectToGameServer(payload)
-    .subscribe((res: any) => {
-      console.log("res", res);
-      console.log("ip: ", res.gameIP);
-      this.gameServerService.setServerInfo(res)
-      Android.opengame(res.gameIP);
 
-      // if game status: true => update DB gameServerIp table
-      if(res.gamestatus == "TRUE") {
+    this.GameService.updateGameServer(payload)
+      .subscribe((res: any) => {
+        console.log("update success")
 
-        this.GameService.updateGameServer(payload) 
-        .subscribe((res: any) => {
-          console.log("update success")
-        })
-      }
-    })
+        this.GameService.connectToGameServer(payload)
+          .subscribe((res: any) => {
+            this.gameServerService.setServerInfo(res)
 
+            const payloadIP = {
+              gameServerIp: res.gameIP,
+              status: res.gamestatus
+            };
+
+            this.GameService.updateGameServer(payloadIP)
+              .subscribe((res: any) => {
+                console.log("update success")
+                Android.opengame(res.gameIP);
+              })
+
+          })
+      })
   }
 
 }

@@ -18,14 +18,12 @@ export class GameService {
   }
 
   connectToGameServer(payload) {
-    console.log("payload", payload)
-
-    // modify server url
     return this.http.get<any>(`http://192.168.137.183:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
   }
 
+  // record ip into DB
   updateGameServer(payload) {
-    return this.http.get<any>(`${this.gameUrl}/gameServer?gameServerIp=${payload.gameServerIp}&status=${payload.status}`);
+    return this.http.post<any>(`http://localhost:3000/gameServer`, payload);
   }
 
 }
