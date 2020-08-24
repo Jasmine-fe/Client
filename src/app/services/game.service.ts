@@ -23,7 +23,7 @@ export class GameService {
 
   // record ip into DB
   updateGameServer(payload) {
-    return this.http.post<any>(`http://localhost:3000/gameServer`, payload);
+    return this.http.post<any>(`${this.gameUrl}/gameServer`, payload);
   }
 
 }
