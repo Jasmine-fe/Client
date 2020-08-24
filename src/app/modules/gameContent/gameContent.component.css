@@ -27,3 +27,10 @@ mat-card-content,
     text-align: right;
     margin-right: 20px;
 }
+
+@media screen and (max-width: 680px) {
+    img {
+        width: 50%;
+        height: 50%;
+    }
+}
