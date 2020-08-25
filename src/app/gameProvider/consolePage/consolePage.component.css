@@ -42,6 +42,10 @@
   .button{
     background-color: #19a881
   }
+
+  .contentRow{
+    margin: 10px 0px;
+  }
   
   a{
     color: inherit; /* blue colors for links too */
