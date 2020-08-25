@@ -27,3 +27,9 @@ img {
         width: 220px;
     }
 }
+
+@media screen and (orientation:landscape) and (max-width: 900px){
+    .gameCard {
+        width: 220px;
+    }
+}

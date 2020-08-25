@@ -46,30 +46,25 @@ export class GameContentComponent implements OnInit {
       gameId: this.currentGame.gameId,
       providerId: this.currentGame.providerId,
       configfile: this.currentGame.configFile,
-      // lastUpdateTime: this.currentGame.lastUpdateTime,
     }
 
-    this.GameService.updateGameServer(payload)
+    console.log("payload", payload)
+    this.GameService.connectToGameServer(payload)
       .subscribe((res: any) => {
-        console.log("update success")
 
-        this.GameService.connectToGameServer(payload)
+        this.gameServerService.setServerInfo(res)
+
+        const payloadIP = {
+          gameServerIp: res.gameIP,
+          status: res.gamestatus
+        };
+
+        this.GameService.updateGameServer(payloadIP)
           .subscribe((res: any) => {
-
-            this.gameServerService.setServerInfo(res)
-
-            const payloadIP = {
-              gameServerIp: res.gameIP,
-              status: res.gamestatus
-            };
-
-            this.GameService.updateGameServer(payloadIP)
-              .subscribe((res: any) => {
-                console.log("update success")
-                Android.opengame(payloadIP.gameServerIp);
-              })
-
+            console.log("update success")
+            Android.opengame(payloadIP.gameServerIp);
           })
+
       })
   }
 

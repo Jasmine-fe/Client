@@ -34,3 +34,10 @@ mat-card-content,
         height: 50%;
     }
 }
+
+@media screen and (orientation:landscape) and (max-width: 900px) {
+    img {
+        width: 50%;
+        height: 50%;
+    }
+}
