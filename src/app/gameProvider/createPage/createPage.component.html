@@ -9,17 +9,14 @@
                 <div>
                     <mat-label>Name：</mat-label>
                     <mat-form-field>
-                        <input type="text" matInput formControlName="name">
+                        <input type="text" matInput formControlName="gameName">
                     </mat-form-field>
                 </div>
 
                 <div>
                     <mat-label>Image：</mat-label>
-                    <!-- <mat-form-field> -->
-                        <input type="file" accept="image/*" (change)="uploadImage($event)" >
-                    <!-- </mat-form-field> -->
                     <div class="img">
-                        <img id="upload-img" />
+                        <img id="upload-img" [src]=""/>
                     </div>
                 </div>
 

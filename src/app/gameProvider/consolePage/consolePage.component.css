@@ -10,7 +10,9 @@
   }
 
   mat-label,
-  mat-tab{
+  mat-tab-label,
+  mat-tab-label-content,
+  .tabWord{
     color: #dff1f5;
   }
 

@@ -1,26 +1,36 @@
 <div>
     <mat-card class="configCard">
-        
-            <mat-card-header>
-                <mat-card-title> Console </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-            
-                <mat-tab-group>
-            
-                    <form [formGroup]="currentForm" (ngSubmit)="submit()"><br />
-                        <mat-tab label="Current">
-                            <!-- current game info -->
-                            <!-- close game button -->
-                            <div *ngFor="let column of currentKeys">
-                                <div>
-                                    <mat-label>{{ column }}：</mat-label>
-                                    <mat-form-field>
-                                        <input type="text" matInput [formControlName]="column">
-                                    </mat-form-field>
-                                </div>
+
+        <mat-card-header>
+            <mat-card-title> Console </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+            <mat-tab-group>
+
+                <form [formGroup]="currentForm" (ngSubmit)="submit()"><br />
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <div class="tabWord">Current</div>
+                        </ng-template>
+
+                        <div>
+                            <mat-label>Name：</mat-label>
+                            <mat-form-field>
+                                <input type="text" matInput formControlName="name">
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-label>Image：</mat-label>
+                            <!-- <mat-form-field> -->
+                            <input type="file" accept="image/*" (change)="uploadImage($event)">
+                            <!-- </mat-form-field> -->
+                            <div class="img">
+                                <img id="upload-img" />
                             </div>
-                        </mat-tab>
+                        </div>
+                        <button mat-flat-button color="warn">強制關閉</button>  </mat-tab>
                     </form>
 
                     <!-- <form [formGroup]="playerForm" (ngSubmit)="submit()"><br />
