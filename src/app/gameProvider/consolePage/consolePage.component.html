@@ -1,0 +1,53 @@
+<div>
+    <mat-card class="configCard">
+        
+            <mat-card-header>
+                <mat-card-title> Console </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+            
+                <mat-tab-group>
+            
+                    <form [formGroup]="currentForm" (ngSubmit)="submit()"><br />
+                        <mat-tab label="Current">
+                            <!-- current game info -->
+                            <!-- close game button -->
+                            <div *ngFor="let column of currentKeys">
+                                <div>
+                                    <mat-label>{{ column }}：</mat-label>
+                                    <mat-form-field>
+                                        <input type="text" matInput [formControlName]="column">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </form>
+
+                    <!-- <form [formGroup]="playerForm" (ngSubmit)="submit()"><br />
+                        <mat-tab label="Player Analytics">
+                            <div *ngFor="let column of currentKeys">
+                                <div>
+                                    <mat-label>{{ column }}：</mat-label>
+                                    <mat-form-field>
+                                        <input type="text" matInput [formControlName]="column">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </form>
+            
+                    <mat-tab label="Chart">
+                        Content 3
+                    </mat-tab> -->
+            
+                </mat-tab-group>
+            
+            </mat-card-content>
+            <mat-card-actions>
+                <a routerLink="/provider">
+                    <button mat-stroked-button type="cancel" class="button">Back</button>
+                </a>
+            </mat-card-actions>
+       
+    </mat-card>
+</div>
