@@ -7,7 +7,7 @@ export class ProviderService {
   constructor(private http: HttpClient) { }
 
   // aws EC2 instance public DNS
-  gameUrl='http://54.146.78.28:3000/game';
+  gameUrl='http://localhost:3000/game';
 
   uploadFile(payload) {
     let headers = new HttpHeaders();

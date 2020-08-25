@@ -7,7 +7,7 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   // aws EC2 instance public DNS
-  gameUrl='http://54.146.78.28:3000/game';
+  gameUrl='http://localhost:3000/game';
 
   getGameList() {
     return this.http.get<any>(`${this.gameUrl}/list`);
