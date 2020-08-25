@@ -55,6 +55,10 @@ export class ConsolePageComponent implements OnInit {
     })
   }
 
+  showImg(event) {
+
+  }
+
   createFormGroup(type) {
     const fgroup = this.fb.group({})
 
