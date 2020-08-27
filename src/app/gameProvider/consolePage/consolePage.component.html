@@ -35,17 +35,22 @@
                     </ng-template>
 
                     <div class="contentRow">
-                        <mat-label>Daily Amount：</mat-label>
+                        <mat-label>日前在線人數：</mat-label>
+                        {{ data.player.currentPlayer }}
+                    </div>
+
+                    <div class="contentRow">
+                        <mat-label>當日上線人數：</mat-label>
                         {{ data.player.dailyPlayer }}
                     </div>
 
                     <div class="contentRow">
-                        <mat-label>Weekly Amount：</mat-label>
+                        <mat-label>本週上限人數：</mat-label>
                         {{ data.player.weeklyPlayer }}
                     </div>
 
                     <div class="contentRow">
-                        <mat-label>Monthly Amount：</mat-label>
+                        <mat-label>本月上限人數：</mat-label>
                         {{ data.player.monthlyPlayer }}
                     </div>
                 </mat-tab>

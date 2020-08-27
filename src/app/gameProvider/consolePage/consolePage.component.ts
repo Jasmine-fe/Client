@@ -16,9 +16,10 @@ export class ConsolePageComponent implements OnInit {
       imageURL: "https://img.onl/6fFHHu"
     },
     player: {
+      currentPlayer: 3,
       dailyPlayer: 5,
       weeklyPlayer: 100,
-      monthlyPlayer: 30,
+      monthlyPlayer: 392,
 
     }
   };
