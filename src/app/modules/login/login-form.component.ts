@@ -1,8 +1,9 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { UserService } from '../../services/user.service'
 import { mobileWidth } from '../../shared/common'
+import { LoginService } from  '../../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -10,8 +11,10 @@ import { mobileWidth } from '../../shared/common'
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  constructor(public breakpointObserver: BreakpointObserver,
-    public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    public loginService: LoginService,
+    public router: Router) {}
   mode = 'userLogin' // state: userLogin, providerLogin, register, 
 
   ngOnInit() {
@@ -40,6 +43,23 @@ export class LoginFormComponent implements OnInit {
     const password = this.form.get('password').value
     this.userService.setUserInfo(username, password);
   }
+
+  login() {
+    this.setInfo();
+    const payload = {
+      name: this.form.get('username').value
+    }
+    console.log(" this.form.value",  payload)
+    this.loginService.checkLogin(payload)
+    .subscribe(res => {
+      if(res["success"] === "true") {
+        this.router.navigate(['home'])
+      }      
+    })  
+    
+   
+  }
+
   
   @Input() error: string | null;
 

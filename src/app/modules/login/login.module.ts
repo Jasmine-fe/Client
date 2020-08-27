@@ -7,6 +7,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../../MaterialModule.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { RouterModule } from '@angular/router';
+import { LoginService } from '../../services/login.service'
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   providers: [
+    LoginService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' }}
   ],
   exports: [
