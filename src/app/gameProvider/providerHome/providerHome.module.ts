@@ -10,6 +10,7 @@ import { MaterialModule } from '../../MaterialModule.module';
 import { RouterModule } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
 import { GameServerService } from '../../services/gameServer.service';
+import { ConnectService } from '../../services/connect.service';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { GameServerService } from '../../services/gameServer.service';
     ],
     providers: [
       ProviderService,
-      GameServerService
+      GameServerService,
+      ConnectService
     ],
     exports: [
     ]

@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
 import { GameServerService } from './services/gameServer.service';
+import { ConnectService } from './services/connect.service';
+
 import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
@@ -26,7 +28,8 @@ import { Routes, RouterModule } from '@angular/router';
   providers: [
     GameService,
     UserService,
-    GameServerService
+    GameServerService,
+    ConnectService
   ],
   bootstrap: [AppComponent],
 })
