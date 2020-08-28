@@ -15,7 +15,7 @@ export class LoginFormComponent implements OnInit {
     public userService: UserService,
     public loginService: LoginService,
     public router: Router) {}
-  mode = 'userLogin' // state: userLogin, providerLogin, register, 
+  // mode = 'userLogin' // state: userLogin, providerLogin, register, 
 
   ngOnInit() {
 
@@ -62,6 +62,7 @@ export class LoginFormComponent implements OnInit {
 
   
   @Input() error: string | null;
+  @Input() mode: string | null;
 
   @Output() submitEM = new EventEmitter();
 

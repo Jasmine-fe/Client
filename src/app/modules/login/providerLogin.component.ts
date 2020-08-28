@@ -4,15 +4,15 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-providerLogin',
+  templateUrl: './providerLogin.component.html',
+  styleUrls: ['./providerLogin.component.css']
 })
-export class LoginComponent implements OnInit {
+export class ProviderLoginComponent implements OnInit {
   constructor(private router: Router) {}
 
-  loginMode = 'userLogin'
-
+  loginMode = 'providerLogin'
+  
   ngOnInit() {
   }
 

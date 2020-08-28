@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
-import { LoginFormComponent } from './login-form.component'
+import { LoginFormComponent } from './login-form.component';
+import { ProviderLoginComponent } from './providerLogin.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../../MaterialModule.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -13,7 +14,8 @@ import { LoginService } from '../../services/login.service'
 @NgModule({
   declarations: [
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    ProviderLoginComponent
   ],
   imports: [
     LoginRoutingModule,
