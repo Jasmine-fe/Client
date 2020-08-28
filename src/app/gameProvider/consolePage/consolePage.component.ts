@@ -38,14 +38,13 @@ export class ConsolePageComponent implements OnInit {
 
   ngOnInit() {
     const serverInfo: GameServer = this.gameServerService.getServerInfo();
-    this.data.current.ip = serverInfo ?  serverInfo.gameIP: "";
+    this.data.current.ip = serverInfo ?  serverInfo.gameIP: "192.168.137.183";
   }
 
   endGame() {
-    console.log("結束遊戲")
     const payload = {
       configfile: this.data.current.configFile,
-      ip: this.data.current.ip
+      ip: "192.168.137.183"
     }
     console.log("end game payload", payload)
     this.connectService.endGame(payload)
