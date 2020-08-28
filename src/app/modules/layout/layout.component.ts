@@ -1,6 +1,11 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { mobileWidth } from '../../shared/common'
 
+interface AndroidInterface {
+  setting(): any;
+}
+declare var Android: AndroidInterface;
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -32,6 +37,11 @@ export class LayoutComponent implements OnInit {
     //   this.opened = true;
     //   this.mode = "side" push
     // }
+  }
+
+  setConfig() {
+    console.log("click Android")
+    Android.setting();
   }
   
   

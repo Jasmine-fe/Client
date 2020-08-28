@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { UserService } from '../../services/user.service';
 import { GameServerService } from '../../services/gameServer.service';
-// import { AndroidInterface } from '../../interface/android.interface'
 import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
 import { User } from '../../interface/user.interface'
 
