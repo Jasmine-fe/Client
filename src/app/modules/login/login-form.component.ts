@@ -51,9 +51,10 @@ export class LoginFormComponent implements OnInit {
     }
     console.log(" this.form.value",  payload)
     this.loginService.checkLogin(payload)
-    .subscribe(res => {
-      if(res["success"] === "true") {
-        this.router.navigate(['home'])
+    .subscribe((res: any) => {
+      if(res && res.data) {
+        // ?! check navigate url
+        this.router.navigate(['/home'])
       }      
     })  
     
