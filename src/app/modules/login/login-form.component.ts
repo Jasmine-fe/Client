@@ -47,7 +47,7 @@ export class LoginFormComponent implements OnInit {
   login() {
     this.setInfo();
     const payload = {
-      name: this.form.get('username').value,
+      username: this.form.get('username').value,
       password: this.form.get('password').value
     }
     console.log(" this.form.value",  payload)
