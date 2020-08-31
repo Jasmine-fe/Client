@@ -52,9 +52,10 @@ export class LoginFormComponent implements OnInit {
     }
     console.log(" this.form.value",  payload)
     this.loginService.checkLogin(payload)
-    .subscribe((res: any) => {
-      if(res && res.data) {
-        // ?! check navigate url
+    .subscribe((response: any) => {
+      console.log("response.status", response.status);
+      
+      if(response && response.status == 200) {
         this.router.navigate(['/home'])
       }      
     })  
