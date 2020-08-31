@@ -25,7 +25,7 @@ export class GameService {
   }
 
   // record ip into DB
-  updateGameServer(payload) {
+  recordGameServerIp(payload) {
     return this.http.post<any>(`${this.gameUrl}/gameServer`, payload);
   }
 

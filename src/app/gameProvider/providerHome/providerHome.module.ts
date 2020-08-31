@@ -9,7 +9,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from '../../MaterialModule.module';
 import { RouterModule } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
-import { GameServerService } from '../../services/gameServer.service';
 import { ConnectService } from '../../services/connect.service';
 
 
@@ -30,7 +29,6 @@ import { ConnectService } from '../../services/connect.service';
     ],
     providers: [
       ProviderService,
-      GameServerService,
       ConnectService
     ],
     exports: [

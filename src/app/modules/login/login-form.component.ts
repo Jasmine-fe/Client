@@ -50,11 +50,8 @@ export class LoginFormComponent implements OnInit {
       username: this.form.get('username').value,
       password: this.form.get('password').value
     }
-    console.log(" this.form.value",  payload)
     this.loginService.checkLogin(payload)
-    .subscribe((response: any) => {
-      console.log("response.status", response.status);
-      
+    .subscribe((response: any) => {      
       if(response && response.status == 200) {
         this.router.navigate(['/home'])
       }      
