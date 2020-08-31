@@ -10,6 +10,10 @@ export class GameServerService {
         gameIP: ""
     };
 
+    userInfo = {
+        username: ""
+    }
+
     setServerInfo (payload: any) {
         this.serverInfo.gamestatus = payload.gamestatus;
         this.serverInfo.gameIP = payload.gameIP;
@@ -18,5 +22,15 @@ export class GameServerService {
     getServerInfo () {
         return  this.serverInfo;
     }
+
+    setUserInfo (payload: any) {
+        this.userInfo.username = payload.username;
+    }
+
+    getUserInfo () {
+        return  this.userInfo;
+    }
+
+
 
 }

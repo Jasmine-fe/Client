@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service'
 import { mobileWidth } from '../../shared/common'
 import { LoginService } from  '../../services/login.service';
+import { GameServerService } from  '../../services/gameServer.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginFormComponent implements OnInit {
   constructor(
     public userService: UserService,
     public loginService: LoginService,
-    public router: Router) {}
+    public router: Router,
+    public gameServerService: GameServerService) {}
   // mode = 'userLogin' // state: userLogin, providerLogin, register, 
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class LoginFormComponent implements OnInit {
     this.loginService.checkLogin(payload)
     .subscribe((response: any) => {      
       if(response && response.status == 200) {
+        this.gameServerService.setUserInfo(payload);
         this.router.navigate(['/home'])
       }      
     })  

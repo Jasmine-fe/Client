@@ -39,9 +39,12 @@ export class ConsolePageComponent implements OnInit {
   ngOnInit() {
     const serverInfo: GameServer = this.gameServerService.getServerInfo();
     this.data.current.ip = serverInfo ?  serverInfo.gameIP: "192.168.137.183";
+    console.log("this.data.current.ip", this.data.current.ip)
   }
 
   endGame() {
+
+    // !? check this.data.current.ip & change below 
     const payload = {
       configfile: this.data.current.configFile,
       ip: "192.168.137.183"
