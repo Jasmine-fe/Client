@@ -24,9 +24,4 @@ export class GameService {
     return this.http.get<any>(`http://192.168.137.183:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
   }
 
-  // record ip into DB
-  recordGameServerIp(payload) {
-    return this.http.post<any>(`${this.gameUrl}/gameServer`, payload);
-  }
-
 }

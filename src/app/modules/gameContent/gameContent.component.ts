@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from '../../services/game.service';
 import { UserService } from '../../services/user.service';
+import { ConnectService } from '../../services/connect.service';
 import { GameServerService } from '../../services/gameServer.service';
 import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
 import { User } from '../../interface/user.interface'
@@ -21,6 +22,7 @@ export class GameContentComponent implements OnInit {
     private route: ActivatedRoute,
     private GameService: GameService,
     private userService: UserService,
+    private connectService: ConnectService,
     private gameServerService: GameServerService) { }
 
   currentProvider: GameProvider;
@@ -43,12 +45,13 @@ export class GameContentComponent implements OnInit {
     const user: User = this.userService.getUserInfo();
     const payload = {
       gameId: this.currentGame.gameId,
-      providerId: this.currentGame.providerId,
+      excuteMode: this.currentGame.excuteMode,
       configfile: this.currentGame.configFile,
-    }
+      action:"" //action: start, continue, end
+    };
 
     const userInfo = this.gameServerService.getUserInfo();
-    console.log(" connectServer userInfo", userInfo)
+    console.log("connectServer userInfo", userInfo)
     let payloadIP = {
       username: userInfo.username,
       gamename: this.currentGame.name,
@@ -56,19 +59,27 @@ export class GameContentComponent implements OnInit {
       status: "",
     };
 
-    console.log(" connectServer payloadIP", payloadIP)
-    this.GameService.connectToGameServer(payload)
-      .subscribe((res: any) => {
-        payloadIP.ip = res.gameIP;
-        payloadIP.status = res.gamestatus;
-        this.gameServerService.setServerInfo(res)
+    const serverInfo: GameServer = this.gameServerService.getServerInfo();
+    if (serverInfo && serverInfo.gameIP) {
+      Android.opengame(serverInfo.gameIP);
+    } else {
+      payload.action = "start";
+      console.log(" connectServer payload", payload)
+      this.GameService.connectToGameServer(payload)
+        .subscribe((res: any) => {
+          payloadIP.ip = res.gameIP;
+          payloadIP.status = res.gamestatus;
+          this.gameServerService.setServerInfo(res)
+          console.log("connectServer payloadIP", payloadIP)
 
-        this.GameService.recordGameServerIp(payloadIP)
-          .subscribe((res: any) => {
-            Android.opengame(payloadIP.ip);
-          })
-
-      })
+          this.connectService.recordGameServerIp(payloadIP)
+            .subscribe((res: any) => {
+              Android.opengame(payloadIP.ip);
+            })
+        })
+    }
   }
+
+  
 
 }
