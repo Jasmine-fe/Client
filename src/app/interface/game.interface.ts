@@ -7,7 +7,8 @@ export interface GameList {
     lastUpdateTime: Date,
     gameId: string,
     configFile: string,
-    excuteMode: string
+    excuteMode: string,
+    filename: string
 }
 
 export interface GameProvider { 

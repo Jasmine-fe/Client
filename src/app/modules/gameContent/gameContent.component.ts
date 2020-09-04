@@ -51,7 +51,7 @@ export class GameContentComponent implements OnInit {
       gameId: this.currentGame.gameId,
       excuteMode: this.currentGame.excuteMode,
       configfile: this.currentGame.configFile,
-      action:"start" //action: start, continue, end
+      action:"start",  //action: start, continue, end,
     };
 
     let payloadIP = {
@@ -86,9 +86,9 @@ export class GameContentComponent implements OnInit {
   endGame(ip: string) {
     const payload = {
       configfile: "server.FPS_Game.config",
-      ip: ip || "192.168.43.196"
+      ip: ip || "192.168.43.196",
+      filename: ""
     }
-    // console.log("end game payload", payload)
     this.connectService.endGame(payload)
     .subscribe(res => {
       console.log("endGame", res);

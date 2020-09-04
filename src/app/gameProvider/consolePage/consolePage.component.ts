@@ -22,8 +22,8 @@ export class ConsolePageComponent implements OnInit {
       imageURL: "https://img.onl/6fFHHu",
       id: "",
       ip: "",
-      configFile: "server.FPS_Game.config"
-
+      configFile: "server.FPS_Game.config",
+      filename: ""
     },
     player: {
       currentPlayer: 3,
@@ -38,17 +38,16 @@ export class ConsolePageComponent implements OnInit {
 
   ngOnInit() {
     const serverInfo: GameServer = this.gameServerService.getServerInfo();
-    this.data.current.ip = serverInfo ?  serverInfo.gameIP: "192.168.137.183";
+    this.data.current.ip = serverInfo ?  serverInfo.gameIP: "192.168.43.196";
     console.log("this.data.current.ip", this.data.current.ip)
   }
 
   endGame() {
-    // !? check this.data.current.ip & change below 
     const payload = {
       configfile: this.data.current.configFile,
-      ip: this.data.current.ip || "192.168.137.183"
+      ip: this.data.current.ip || "192.168.43.196",
+      filename: ""
     }
-    console.log("end game payload", payload)
     this.connectService.endGame(payload)
     .subscribe(res => {
       console.log("endGame", res);
