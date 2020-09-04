@@ -12,11 +12,11 @@ export class ConnectService {
 
   // record ip into DB
   recordGameServerIp(payload) {
-    return this.http.post<any>(`${this.connectUrl}/connect/recordIp`, payload);
+    return this.http.post<any>(`${this.connectUrl}/ip/recordip`, payload);
   }
 
   endGame(payload) {
-    return this.http.get(`http://192.168.137.183:5000/End?configfile=${payload.configfile}&ip=${payload.ip}`);
+    return this.http.get(`http://192.168.43.196:5000/End?configfile=${payload.configfile}&ip=${payload.ip}`);
   }
 
 

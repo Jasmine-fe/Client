@@ -51,7 +51,7 @@ export class GameContentComponent implements OnInit {
       gameId: this.currentGame.gameId,
       excuteMode: this.currentGame.excuteMode,
       configfile: this.currentGame.configFile,
-      action:"" //action: start, continue, end
+      action:"start" //action: start, continue, end
     };
 
     let payloadIP = {
@@ -59,9 +59,9 @@ export class GameContentComponent implements OnInit {
       gamename: this.currentGame.name,
       ip: "",
       status: "",
+      // pid: "",
     };
 
-    
     if (serverInfo && serverInfo.gameIP) {
       Android.opengame(serverInfo.gameIP);
     } 
@@ -72,9 +72,8 @@ export class GameContentComponent implements OnInit {
         .subscribe((res: any) => {
           payloadIP.ip = res.gameIP;
           payloadIP.status = res.gamestatus;
+          // payloadIP.pid = res.pid || '';
           this.gameServerService.setServerInfo(res)
-          console.log("connectServer payloadIP", payloadIP)
-
           this.connectService.recordGameServerIp(payloadIP)
             .subscribe((res: any) => {
               Android.opengame(payloadIP.ip);
@@ -83,11 +82,11 @@ export class GameContentComponent implements OnInit {
     }
   }
 
-  // myWebView.loadUrl("javascript:endGame('192.168.137.183')");
+  // myWebView.loadUrl("javascript:endGame('192.168.43.196')");
   endGame(ip: string) {
     const payload = {
       configfile: "server.FPS_Game.config",
-      ip: ip || "192.168.137.183"
+      ip: ip || "192.168.43.196"
     }
     // console.log("end game payload", payload)
     this.connectService.endGame(payload)

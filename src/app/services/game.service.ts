@@ -21,7 +21,7 @@ export class GameService {
 
   // send request to broker server
   connectToGameServer(payload) {
-    return this.http.get<any>(`http://192.168.137.183:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}`);
+    return this.http.get<any>(`http://192.168.43.196:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}&excuteMode=${payload.excuteMode}`);
   }
 
 }
