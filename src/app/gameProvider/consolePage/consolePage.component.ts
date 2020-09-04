@@ -43,11 +43,10 @@ export class ConsolePageComponent implements OnInit {
   }
 
   endGame() {
-
     // !? check this.data.current.ip & change below 
     const payload = {
       configfile: this.data.current.configFile,
-      ip: "192.168.137.183"
+      ip: this.data.current.ip || "192.168.137.183"
     }
     console.log("end game payload", payload)
     this.connectService.endGame(payload)

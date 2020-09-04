@@ -9,6 +9,7 @@ import { User } from '../../interface/user.interface'
 
 interface AndroidInterface {
   opengame(ip: string): any;
+  endGame(ip: string): any;
 }
 declare var Android: AndroidInterface;
 
@@ -42,7 +43,10 @@ export class GameContentComponent implements OnInit {
   }
 
   connectServer() {
-    const user: User = this.userService.getUserInfo();
+    const userInfo: User = this.userService.getUserInfo();
+    const serverInfo: GameServer = this.gameServerService.getServerInfo();
+    console.log("connectServer user", userInfo)
+    console.log("connectServer serverInfo", serverInfo)
     const payload = {
       gameId: this.currentGame.gameId,
       excuteMode: this.currentGame.excuteMode,
@@ -50,8 +54,6 @@ export class GameContentComponent implements OnInit {
       action:"" //action: start, continue, end
     };
 
-    const userInfo = this.gameServerService.getUserInfo();
-    console.log("connectServer userInfo", userInfo)
     let payloadIP = {
       username: userInfo.username,
       gamename: this.currentGame.name,
@@ -59,10 +61,11 @@ export class GameContentComponent implements OnInit {
       status: "",
     };
 
-    const serverInfo: GameServer = this.gameServerService.getServerInfo();
+    
     if (serverInfo && serverInfo.gameIP) {
       Android.opengame(serverInfo.gameIP);
-    } else {
+    } 
+    else {
       payload.action = "start";
       console.log(" connectServer payload", payload)
       this.GameService.connectToGameServer(payload)
@@ -80,6 +83,17 @@ export class GameContentComponent implements OnInit {
     }
   }
 
-  
+  // myWebView.loadUrl("javascript:endGame('192.168.137.183')");
+  endGame(ip: string) {
+    const payload = {
+      configfile: "server.FPS_Game.config",
+      ip: ip || "192.168.137.183"
+    }
+    // console.log("end game payload", payload)
+    this.connectService.endGame(payload)
+    .subscribe(res => {
+      console.log("endGame", res);
+    })
+  }
 
 }
