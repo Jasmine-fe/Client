@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { GameList } from '../interface/game.interface';
 import { webServerURL } from '../shared/common';
 
+// remove after check auth service
 
 @Injectable()
 export class LoginService {
