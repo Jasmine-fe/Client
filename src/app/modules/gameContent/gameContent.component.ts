@@ -59,7 +59,7 @@ export class GameContentComponent implements OnInit {
       gamename: this.currentGame.name,
       ip: "",
       status: "",
-      // pid: "",
+      pid: "",
     };
 
     if (serverInfo && serverInfo.gameIP) {
@@ -72,7 +72,7 @@ export class GameContentComponent implements OnInit {
         .subscribe((res: any) => {
           payloadIP.ip = res.gameIP;
           payloadIP.status = res.gamestatus;
-          // payloadIP.pid = res.pid || '';
+          payloadIP.pid = res.pid || '';
           this.gameServerService.setServerInfo(res)
           this.connectService.recordGameServerIp(payloadIP)
             .subscribe((res: any) => {
