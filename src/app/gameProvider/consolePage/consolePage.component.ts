@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
 import { ConnectService } from '../../services/connect.service';
 import { GameService } from '../../services/game.service';
+import { parseJwt } from '../../shared/common'
 
 @Component({
   selector: 'app-console-page',
@@ -56,7 +57,11 @@ export class ConsolePageComponent implements OnInit {
 
 
   ngOnInit() {
-    const payload = { username: "Pig" };
+    // get username from jwtToken
+    const jwtToken = localStorage.getItem('currentUser')
+    const parseInfo =  parseJwt(jwtToken);
+
+    const payload = { username: parseInfo.username };
     this.gameService.getProcessingGameInfo(payload)
     .subscribe((res) => {
       if(res && res.data && res.data) {
