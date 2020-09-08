@@ -8,19 +8,19 @@ import { Router } from '@angular/router'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private GameService: GameService,
+  constructor(private gameService: GameService,
     private router: Router) { }
   gameList = []
   progressingGameList = [];
 
   ngOnInit() {
-    this.GameService.getGameList()
+    this.gameService.getGameList()
     .subscribe((res) => {
       this.gameList = res.data
       
     })
 
-    this.GameService.getProcessingGames()
+    this.gameService.getProcessingGames()
     .subscribe((res) => {
       if(res && res.data && res.data.processingGames) {
         this.progressingGameList = res.data.processingGames

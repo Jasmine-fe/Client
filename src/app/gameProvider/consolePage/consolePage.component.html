@@ -15,16 +15,16 @@
 
                     <div class="contentRow">
                         <mat-label>Name：</mat-label>
-                        {{ data.current.name }}
+                        {{ data.current.gameInfo.name }}
                     </div>
                     <div class="contentRow">
                         <mat-label>Image：</mat-label>
                         <div class="img" class="contentRow">
-                            <img id="upload-img" [src]="data.current.imageURL" />
+                            <img id="upload-img" [src]="data.current.gameInfo.imageUrl" />
                         </div>
                     </div>
                     <div>
-                        <button mat-flat-button color="warn" (click)="endGame()">遊戲強制關閉</button>
+                        <button *ngIf="endPayload.ip" mat-flat-button color="warn" (click)="endGame()">遊戲強制關閉</button>
                     </div>
                 </mat-tab>
 

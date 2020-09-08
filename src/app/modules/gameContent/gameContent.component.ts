@@ -49,8 +49,6 @@ export class GameContentComponent implements OnInit {
   connectServer() {
     const userInfo: User = this.userService.getUserInfo();
     const serverInfo: GameServer = this.gameServerService.getServerInfo();
-    console.log("connectServer user", userInfo)
-    console.log("connectServer serverInfo", serverInfo)
     const payload = {
       gameId: this.currentGame.gameId,
       excuteMode: this.currentGame.excuteMode,
@@ -77,7 +75,7 @@ export class GameContentComponent implements OnInit {
         .subscribe((res: any) => {
           payloadIP.ip = res.gameIP;
           payloadIP.status = res.gamestatus;
-          payloadIP.pid = res.pid || '';
+          payloadIP.pid = res.PID || '';
           this.gameServerService.setServerInfo(res)
           this.connectService.recordGameServerIp(payloadIP)
             .subscribe((res: any) => {
@@ -89,7 +87,7 @@ export class GameContentComponent implements OnInit {
 
   viewGame() {
     const payload = { gameId: this.currentGame.gameId }
-    this.GameService.getProcessingIp(payload)
+    this.GameService.getProcessingGameIp(payload)
       .subscribe((res: any) => {
         if (res && res.data.processingGame) {
           const ip: string = res.data.processingGame.serverIp;

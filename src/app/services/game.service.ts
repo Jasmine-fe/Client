@@ -28,8 +28,12 @@ export class GameService {
     return this.http.get<any>(`${this.gameUrl}/progress/list`);
   }
 
-  getProcessingIp(payload) {
+  getProcessingGameIp(payload) {
     return this.http.get<any>(`${this.gameUrl}/progress/ip?gameId=${payload.gameId}`);
+  }
+
+  getProcessingGameInfo(payload) {
+    return this.http.get<any>(`${this.gameUrl}/end?username=${payload.username}`);
   }
 
 }

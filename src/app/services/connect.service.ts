@@ -16,7 +16,8 @@ export class ConnectService {
   }
 
   endGame(payload) {
-    return this.http.get(`http://192.168.43.196:5000/End?configfile=${payload.configfile}&ip=${payload.ip}`);
+    console.log("payload",payload)
+    return this.http.get(`http://192.168.43.196:5000/End?ip=${payload.ip}&excuteMode=${payload.excuteMode}&pid=${payload.pid}`);
   }
 
 

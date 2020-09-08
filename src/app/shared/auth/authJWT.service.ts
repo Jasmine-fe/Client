@@ -4,7 +4,6 @@ export class AuthService {
   constructor() {}
   // ...
   public isAuthenticated(): boolean {
-    console.log("isAuthenticated")
     const token = localStorage.getItem('currentUser');
     // Check whether the token is expired and return
     // true or false
