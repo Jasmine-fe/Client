@@ -53,22 +53,16 @@ export class LoginFormComponent implements OnInit {
       username: this.form.get('username').value,
       password: this.form.get('password').value,
     }
-
-    // const pwd = this.form.get('password').value
-    // bcryptjs.hash(pwd, saltRounds).then((hashText) => {
-    //   payload.password = hashText;
-    //   if (hashText) {
-        this.authenticationService.login(payload)
-          .subscribe((res: any) => {
-            if (res && res.status == 200) {
-              localStorage.setItem('currentUser', JSON.stringify(res.body.data.token));
-              this.gameServerService.setUserInfo(payload);
-              this.router.navigate(['/home'])
-            }
-          })
-    //   }
-    // })
+    this.authenticationService.login(payload)
+      .subscribe((res: any) => {
+        if (res && res.status == 200) {
+          localStorage.setItem('currentUser', JSON.stringify(res.body.data.token));
+          this.gameServerService.setUserInfo(payload);
+          this.router.navigate(['/home'])
+        }
+      })
   }
+  
   userRegister() {
     const payload = {
       username: this.form.get('username').value,

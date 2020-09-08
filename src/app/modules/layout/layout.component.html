@@ -7,6 +7,13 @@
       class="mat-icon-rtl-mirror sideBarIcon" 
       >list</mat-icon>&nbsp;
     Cloud Gaming
+    <div class="rightItem" >
+      <!-- Logout -->
+      <mat-icon
+      (click)="logout()" 
+      class="mat-icon-rtl-mirror sideBarIcon" 
+      >arrow_forward</mat-icon>&nbsp; 
+    </div>
   </mat-toolbar>
   <mat-sidenav-container class="container">
 
@@ -41,7 +48,7 @@
 
     <!-- footer -->
   <mat-toolbar class="footer">
-    <div class="footerText">
+    <div class="rightItem">
       <h3>仁寶電腦 Compal</h3>
     </div>
   </mat-toolbar>

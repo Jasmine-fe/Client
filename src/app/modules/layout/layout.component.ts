@@ -1,5 +1,6 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { mobileWidth } from '../../shared/common'
+import { AuthenticationService } from '../../shared/auth/authentication.service';
 
 interface AndroidInterface {
   setting(): any;
@@ -12,7 +13,7 @@ declare var Android: AndroidInterface;
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
-  constructor() {}
+  constructor(public authenticationService: AuthenticationService) {}
   category = [
     "Shooters",
     "Action",
@@ -42,6 +43,10 @@ export class LayoutComponent implements OnInit {
   setConfig() {
     console.log("click Android")
     Android.setting();
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
   
   
