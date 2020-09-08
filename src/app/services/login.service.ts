@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { GameList } from '../interface/game.interface';
-import { webServerURL } from '../shared/common';
-
-// remove after check auth service
+import { webServerURL, saltRounds } from '../shared/common';
+import { User } from '../interface/user.interface';
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class LoginService {
   constructor(private http: HttpClient) { }
 
-  // aws EC2 instance public DNS
-  loginUrl=`${webServerURL}/login`;
-
-  checkLogin(payload) {
-    return this.http.post(`${this.loginUrl}`, payload, { observe: 'response' });
-  }
+  register(payload: any) {
+    return this.http.post<any>(`${webServerURL}/user/register`, payload, { observe: 'response' })
+}
 }

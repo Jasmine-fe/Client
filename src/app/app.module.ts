@@ -13,6 +13,7 @@ import { ConnectService } from './services/connect.service';
 import { JwtInterceptor } from './shared/auth/jwt.interceptor';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { AuthenticationService } from './shared/auth/authentication.service';
+import { AuthService } from './shared/auth/authJWT.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthenticationService } from './shared/auth/authentication.service';
     GameServerService,
     ConnectService,
     AuthGuard,
+    AuthService,
         AuthenticationService,
         UserService,
         {

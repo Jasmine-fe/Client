@@ -20,13 +20,6 @@
             <input type="text" matInput placeholder="Username" formControlName="username">
           </mat-form-field>
         </p>
-
-        <p *ngIf="mode === 'register'">
-          <mat-form-field>
-            <input type="email" matInput placeholder="Email" formControlName="email">
-          </mat-form-field>
-        </p>
-
         <p>
           <mat-form-field>
             <input type="password" matInput placeholder="Password" formControlName="password">
@@ -52,23 +45,23 @@
             </a>
           </button>
 
-          <button *ngIf="mode === 'register'" mat-stroked-button type="submit">
-            <a routerLink="/home">
+          <button *ngIf="mode === 'register'" mat-stroked-button type="submit"  (click)="userRegister()">
+            <!-- <a routerLink="/home"> -->
               Create
-            </a>
+            <!-- </a> -->
           </button>
         </div>
 
       </form>
     </mat-card-content>
 
-    <!-- <mat-card-footer>
+    <mat-card-footer>
       <div *ngIf="mode !== 'register'" class="link" (click)="changeMode('register')" [ngStyle]="{cursor: 'pointer'}" > 
         Don't have account ? 
       </div> 
       <div *ngIf="mode === 'register'" class="link" (click)="changeMode('userLogin')" [ngStyle]="{cursor: 'pointer'}"> 
         Already have account?
       </div> 
-    </mat-card-footer> -->
+    </mat-card-footer>
   </mat-card>
 </div>

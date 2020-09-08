@@ -1,30 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../../interface/user.interface';
-import { webServerURL } from '../common';
-import 'rxjs/add/operator/map'
+import { webServerURL, saltRounds } from '../common';
+import * as bcryptjs from 'bcryptjs';
 
 @Injectable()
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
-    loginUrl=`${webServerURL}/login`;
+    loginUrl=`${webServerURL}`;
 
-    login(payload: User) {
-        return this.http.post<any>(`${this.loginUrl}`, payload)
-            .map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-
-                return user;
-            });
+    login(payload) {
+        console.log("payload", payload)
+        return this.http.post<any>(`${this.loginUrl}/user/login`, payload, { observe: 'response' })
     }
 
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
     }
+
+    
 }

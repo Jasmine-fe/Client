@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log("intercept")
         // add authorization header with jwt token if available
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
+        if (currentUser) {
             request = request.clone({
                 setHeaders: { 
-                    Authorizationz: `Bearer ${currentUser.token}`
+                    Authorization: `${currentUser}`
                 }
             });
         }
-
+        console.log("request", request)
         return next.handle(request);
     }
 }

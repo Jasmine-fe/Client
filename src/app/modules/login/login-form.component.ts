@@ -1,11 +1,12 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service'
-import { mobileWidth } from '../../shared/common'
+import { mobileWidth, saltRounds } from '../../shared/common'
 import { Router } from '@angular/router';
 import { LoginService } from  '../../services/login.service';
 import { GameServerService } from  '../../services/gameServer.service';
 import { AuthenticationService } from '../../shared/auth/authentication.service';
+import * as bcryptjs from 'bcryptjs';
 
 @Component({
   selector: 'app-login-form',
@@ -19,8 +20,6 @@ export class LoginFormComponent implements OnInit {
     public loginService: LoginService,
     public authenticationService: AuthenticationService,
     public gameServerService: GameServerService) {}
-  
-    // mode = 'userLogin' // state: userLogin, providerLogin, register, 
 
   ngOnInit() {
 
@@ -30,7 +29,6 @@ export class LoginFormComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl(''),
     passwordCheck: new FormControl(''),
-    email: new FormControl('')
   });
 
   submit() {
@@ -53,22 +51,49 @@ export class LoginFormComponent implements OnInit {
     this.setInfo();
     const payload = {
       username: this.form.get('username').value,
-      password: this.form.get('password').value
+      password: this.form.get('password').value,
     }
-    this.authenticationService.login(payload)
-    .subscribe((response: any) => {      
-      if(response && response.status == 200) {
-        this.gameServerService.setUserInfo(payload);
-        this.router.navigate(['/home'])
-      }      
-    })  
-    
-   
+
+    // const pwd = this.form.get('password').value
+    // bcryptjs.hash(pwd, saltRounds).then((hashText) => {
+    //   payload.password = hashText;
+    //   if (hashText) {
+        this.authenticationService.login(payload)
+          .subscribe((res: any) => {
+            if (res && res.status == 200) {
+              localStorage.setItem('currentUser', JSON.stringify(res.body.data.token));
+              this.gameServerService.setUserInfo(payload);
+              this.router.navigate(['/home'])
+            }
+          })
+    //   }
+    // })
   }
+  userRegister() {
+    const payload = {
+      username: this.form.get('username').value,
+      password: ""
+    };
+
+    const pwd = this.form.get('password').value
+    bcryptjs.hash(pwd, saltRounds).then((hashText) => {
+      payload.password = hashText;
+      if (hashText) {
+        this.loginService.register(payload)
+          .subscribe((res: any) => {
+            console.log("")
+            if (res && res.status == 200) {
+              this.mode = "userLogin"
+            }
+          })
+      }
+    })
+  }
+
 
   
   @Input() error: string | null;
-  @Input() mode: string | null;
+  @Input() mode: string | null;  // state: userLogin, providerLogin, register, 
 
   @Output() submitEM = new EventEmitter();
 

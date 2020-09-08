@@ -9,10 +9,10 @@ import { AuthGuard } from './shared/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login',canLoad: [AuthGuard], loadChildren: './modules/login/login.module#LoginModule' },
-  { path: 'home',canLoad: [AuthGuard], loadChildren: './modules/homeApp/homeApp.module#HomeAppModule' },
-  { path: 'provider',canLoad: [AuthGuard], loadChildren: './gameProvider/providerHome/providerHome.module#ProviderHomeModule'},
-  
+  { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
+  { path: 'home', loadChildren: './modules/homeApp/homeApp.module#HomeAppModule' },
+  { path: 'provider',  loadChildren: './gameProvider/providerHome/providerHome.module#ProviderHomeModule' },
+
 ];
 
 @NgModule({
