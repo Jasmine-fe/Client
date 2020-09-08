@@ -25,7 +25,11 @@ export class GameService {
   }
 
   getProcessingGames() {
-    return this.http.get<any>(`${this.gameUrl}/progress`);
+    return this.http.get<any>(`${this.gameUrl}/progress/list`);
+  }
+
+  getProcessingIp(payload) {
+    return this.http.get<any>(`${this.gameUrl}/progress/ip?gameId=${payload.gameId}`);
   }
 
 }

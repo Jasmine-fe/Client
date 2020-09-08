@@ -8,9 +8,15 @@
     
     
     <mat-card-content>
-        <div class="startButton" (click)="connectServer()">
+        <div *ngIf="state == 'start'" class="startButton" (click)="connectServer()">
             <button class="descp" mat-raised-button color="warn"> 
                 開始遊戲
+            </button>
+        </div>
+
+        <div *ngIf="state == 'view'" class="startButton" (click)="viewGame()">
+            <button class="descp" mat-raised-button color="warn"> 
+                觀看遊戲
             </button>
         </div>
 

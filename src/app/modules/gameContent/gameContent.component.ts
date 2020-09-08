@@ -10,6 +10,7 @@ import { User } from '../../interface/user.interface'
 interface AndroidInterface {
   opengame(ip: string): any;
   endGame(ip: string): any;
+  viewGame(ip: string): any;
 }
 declare var Android: AndroidInterface;
 
@@ -28,12 +29,15 @@ export class GameContentComponent implements OnInit {
 
   currentProvider: GameProvider;
   currentGame: GameList;
+  state = '';
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.state = params['state']
       const gameId = params['gameId']
       const providerId = params['providerId']
       const payload = { gameId, providerId }
+      
       this.GameService.getGameContent(payload)
         .subscribe((res: any) => {
           this.currentGame = res.data.game
@@ -57,6 +61,7 @@ export class GameContentComponent implements OnInit {
     let payloadIP = {
       username: userInfo.username,
       gamename: this.currentGame.name,
+      gameId: this.currentGame.gameId,
       ip: "",
       status: "",
       pid: "",
@@ -80,6 +85,17 @@ export class GameContentComponent implements OnInit {
             })
         })
     }
+  }
+
+  viewGame() {
+    const payload = { gameId: this.currentGame.gameId }
+    this.GameService.getProcessingIp(payload)
+      .subscribe((res: any) => {
+        if (res && res.data.processingGame) {
+          const ip: string = res.data.processingGame.serverIp;
+          Android.viewGame(ip);
+        }
+      })
   }
 
   // myWebView.loadUrl("javascript:endGame('192.168.43.196')");

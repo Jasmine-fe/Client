@@ -1,17 +1,35 @@
 <div class="container">
-  <div *ngFor="let game of gameList">
-    <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId}]">
-      <mat-card class="gameCard">
-        <mat-card-header>
-          <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
-        </mat-card-header>          
+
+  <section>
+    <div class="mat-h1 sectionTitle">Online Games</div>
+    <div *ngFor="let game of gameList">
+      <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId, state: 'start'}]">
+        <mat-card class="gameCard">
+          <mat-card-header>
+            <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
+          </mat-card-header>
           <img class="gameCover" [src]="game.imageUrl">
-        <mat-card-content>
-          <!-- <p>
-            {{game.descp}}
-          </p> -->
-        </mat-card-content>
-      </mat-card>
-    </a>
-  </div>
+          <mat-card-content>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="mat-h1 sectionTitle">Stream Games</div>
+    <div *ngFor="let game of progressingGameList">
+      <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId, state: 'view'}]">
+        <mat-card class="gameCard">
+          <mat-card-header>
+            <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
+          </mat-card-header>
+          <img class="gameCover" [src]="game.imageUrl">
+          <mat-card-content>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </section>
+
 </div>
