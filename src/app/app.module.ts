@@ -14,7 +14,7 @@ import { JwtInterceptor } from './shared/auth/jwt.interceptor';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { AuthenticationService } from './shared/auth/authentication.service';
 import { AuthService } from './shared/auth/authJWT.service';
-
+import { HttpErrorInterceptor } from './shared/apiResponse.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +41,11 @@ import { AuthService } from './shared/auth/authJWT.service';
         //     useClass: JwtInterceptor,
         //     multi: true
         // },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpErrorInterceptor,
+          multi: true
+        }
   ],
   bootstrap: [AppComponent],
 })

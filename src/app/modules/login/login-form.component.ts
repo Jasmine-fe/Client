@@ -68,6 +68,8 @@ export class LoginFormComponent implements OnInit {
         else {
           this.matSnackBar.open("帳號或密碼錯誤", 'fail', this.options);
         }
+      },(err: any) => {
+        console.log("err",err)
       })
   }
   
