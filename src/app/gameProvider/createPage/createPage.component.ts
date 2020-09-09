@@ -86,6 +86,8 @@ export class CreatePageComponent implements OnInit {
 
       var fd = new FormData();
       fd.append('image', file, 'test.png');
+      console.log("typeof file", typeof file);
+      console.log("file", file);
       this.providerService.uploadFile(fd)
         .subscribe((res) => {
           console.log("successful uplaod File ")
