@@ -6,6 +6,8 @@ import { ConnectService } from '../../services/connect.service';
 import { GameServerService } from '../../services/gameServer.service';
 import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
 import { User } from '../../interface/user.interface'
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { notificationSetting } from '../../shared/common';
 
 interface AndroidInterface {
   opengame(ip: string): any;
@@ -25,11 +27,13 @@ export class GameContentComponent implements OnInit {
     private GameService: GameService,
     private userService: UserService,
     private connectService: ConnectService,
-    private gameServerService: GameServerService) { }
+    private gameServerService: GameServerService,
+    private matSnackBar: MatSnackBar) { }
 
   currentProvider: GameProvider;
   currentGame: GameList;
   state = '';
+  options: any = notificationSetting;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -40,8 +44,14 @@ export class GameContentComponent implements OnInit {
       
       this.GameService.getGameContent(payload)
         .subscribe((res: any) => {
-          this.currentGame = res.data.game
-          this.currentProvider = res.data.provider
+          if(res && res.data && res.data.game ) {
+            this.currentGame = res.data.game
+            this.currentProvider = res.data.provider
+          }
+          else {
+            this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);      
+          }
+          
         })
     })
   }
@@ -67,20 +77,24 @@ export class GameContentComponent implements OnInit {
 
     if (serverInfo && serverInfo.gameIP) {
       Android.opengame(serverInfo.gameIP);
-    } 
+    }
     else {
       payload.action = "start";
-      console.log(" connectServer payload", payload)
       this.GameService.connectToGameServer(payload)
         .subscribe((res: any) => {
-          payloadIP.ip = res.gameIP;
-          payloadIP.status = res.gamestatus;
-          payloadIP.pid = res.PID || '';
-          this.gameServerService.setServerInfo(res)
-          this.connectService.recordGameServerIp(payloadIP)
-            .subscribe((res: any) => {
-              Android.opengame(payloadIP.ip);
-            })
+          if (res && res.gameIP) {
+            payloadIP.ip = res.gameIP;
+            payloadIP.status = res.gamestatus;
+            payloadIP.pid = res.PID || '';
+            this.gameServerService.setServerInfo(res)
+            this.connectService.recordGameServerIp(payloadIP)
+              .subscribe((res: any) => {
+                Android.opengame(payloadIP.ip);
+              })
+          }
+          else {
+            this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
+          }
         })
     }
   }
@@ -89,9 +103,15 @@ export class GameContentComponent implements OnInit {
     const payload = { gameId: this.currentGame.gameId }
     this.GameService.getProcessingGameIp(payload)
       .subscribe((res: any) => {
-        if (res && res.data.processingGame) {
+        if (res && res.data && res.data.processingGame && res.data.processingGame.serverIp) {
           const ip: string = res.data.processingGame.serverIp;
           Android.viewGame(ip);
+        } 
+        else if (res && res.data) {
+          this.matSnackBar.open("目前無進行中的遊戲可觀看", 'empty', this.options);  
+        }
+        else {
+          this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);      
         }
       })
   }
@@ -104,9 +124,14 @@ export class GameContentComponent implements OnInit {
       filename: ""
     }
     this.connectService.endGame(payload)
-    .subscribe(res => {
-      console.log("endGame", res);
-    })
+      .subscribe(res => {
+        if (res && res.status) {
+          this.matSnackBar.open("成功結束遊戲", 'success', this.options);
+        }
+        else {
+          this.matSnackBar.open("結束遊戲失敗", 'fail', this.options);
+        }
+      })
   }
 
 }

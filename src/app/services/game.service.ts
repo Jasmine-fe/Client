@@ -12,7 +12,7 @@ export class GameService {
   ;
 
   getGameList() {
-    return this.http.get<any>(`${this.gameUrl}/list`);
+    return this.http.get<any>(`${this.gameUrl}/list`,  { observe: 'response' });
   }
 
   getGameContent(payload) {

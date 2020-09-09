@@ -1,11 +1,13 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../services/user.service'
 import { mobileWidth, saltRounds } from '../../shared/common'
 import { Router } from '@angular/router';
 import { LoginService } from  '../../services/login.service';
 import { GameServerService } from  '../../services/gameServer.service';
 import { AuthenticationService } from '../../shared/auth/authentication.service';
+import { notificationSetting } from '../../shared/common';
 import * as bcryptjs from 'bcryptjs';
 
 @Component({
@@ -19,7 +21,9 @@ export class LoginFormComponent implements OnInit {
     public userService: UserService,
     public loginService: LoginService,
     public authenticationService: AuthenticationService,
-    public gameServerService: GameServerService) {}
+    public gameServerService: GameServerService,
+    private matSnackBar: MatSnackBar) {}
+    options: any = notificationSetting;
 
   ngOnInit() {
 
@@ -55,10 +59,14 @@ export class LoginFormComponent implements OnInit {
     }
     this.authenticationService.login(payload)
       .subscribe((res: any) => {
+        console.log(" this.authenticationService.login", res)
         if (res && res.status == 200) {
           localStorage.setItem('currentUser', JSON.stringify(res.body.data.token));
           this.gameServerService.setUserInfo(payload);
           this.router.navigate(['/home'])
+        }
+        else {
+          this.matSnackBar.open("帳號或密碼錯誤", 'fail', this.options);
         }
       })
   }
@@ -75,9 +83,11 @@ export class LoginFormComponent implements OnInit {
       if (hashText) {
         this.loginService.register(payload)
           .subscribe((res: any) => {
-            console.log("")
             if (res && res.status == 200) {
               this.mode = "userLogin"
+            }
+            else {
+              this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options); 
             }
           })
       }

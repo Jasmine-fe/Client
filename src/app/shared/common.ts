@@ -1,3 +1,5 @@
+import { Interface } from 'readline';
+
 export const mobileWidth= 600
 
 export const webServerURL = "http://localhost:3000"
@@ -11,7 +13,12 @@ export const parseJwt = function (jwtToken) {
     var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
-
-    console.log("jsonPayload",jsonPayload)
     return JSON.parse(jsonPayload);
+}
+
+
+export const notificationSetting = {
+    duration: 2000,
+    horizontalPosition: "start",
+    verticalPosition: "bottom"
 }

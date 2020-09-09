@@ -32,15 +32,15 @@ import { AuthService } from './shared/auth/authJWT.service';
     UserService,
     GameServerService,
     ConnectService,
-    AuthGuard,
-    AuthService,
+    // AuthGuard,
+    // AuthService,
         AuthenticationService,
-        UserService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: JwtInterceptor,
-            multi: true
-        },
+        // UserService,
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: JwtInterceptor,
+        //     multi: true
+        // },
   ],
   bootstrap: [AppComponent],
 })
