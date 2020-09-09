@@ -1,5 +1,5 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../services/user.service'
 import { mobileWidth, saltRounds } from '../../shared/common'
@@ -24,20 +24,34 @@ export class LoginFormComponent implements OnInit {
     public gameServerService: GameServerService,
     private matSnackBar: MatSnackBar) {}
     options: any = notificationSetting;
+    errorMsg=""
+    disableSubmitBtn = true
 
   ngOnInit() {
 
   }
 
+  // valid form
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
     passwordCheck: new FormControl(''),
   });
 
-  submit() {
+  submit(mode) {
     if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
+      if(mode == 'userLogin') {
+        this.login();
+      }
+      else if(mode == 'providerLogin') {
+        this.login();
+      }
+      else if(mode == 'register') {
+        this.userRegister();
+      }
+    }
+    else  {
+      this.matSnackBar.open("請填入帳號密碼", 'warning', this.options);
     }
   }
   
@@ -65,11 +79,6 @@ export class LoginFormComponent implements OnInit {
           this.gameServerService.setUserInfo(payload);
           this.router.navigate(['/home'])
         }
-        else {
-          this.matSnackBar.open("帳號或密碼錯誤", 'fail', this.options);
-        }
-      },(err: any) => {
-        console.log("err",err)
       })
   }
   

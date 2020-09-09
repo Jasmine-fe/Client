@@ -22,7 +22,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           }
           else {
             console.log('this is server side error');
-            this.matSnackBar.open("this is server side error", 'fail', this.options);
+            this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }
           console.log(errorMsg);

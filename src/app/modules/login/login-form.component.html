@@ -13,26 +13,26 @@
     <mat-card-title *ngIf="mode === 'providerLogin'">Provider Login</mat-card-title>
     <mat-card-title *ngIf="mode === 'register'">Register</mat-card-title>
     <mat-card-content><br />
-      <form [formGroup]="form" (ngSubmit)="submit()">
+      <form [formGroup]="form" (ngSubmit)="submit(mode)">
         <br />
         <p>
           <mat-form-field>
-            <input type="text" matInput placeholder="Username" formControlName="username">
+            <input type="text" matInput placeholder="Username" formControlName="username" required>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field>
-            <input type="password" matInput placeholder="Password" formControlName="password">
+            <input type="password" matInput placeholder="Password" formControlName="password" required>
           </mat-form-field>
         </p>
 
         <p *ngIf="mode === 'register'">
           <mat-form-field>
-            <input type="password" matInput placeholder="Double click Password" formControlName="passwordCheck">
+            <input type="password" matInput placeholder="Double click Password" formControlName="passwordCheck" required>
           </mat-form-field>
         </p>
         <div class="button">
-          <button *ngIf="mode === 'userLogin'" mat-stroked-button type="submit" (click)="login()">
+          <button *ngIf="mode === 'userLogin'" mat-stroked-button type="submit" >
             <!-- <a id="loginButton" routerLink="/home"> -->
                login
             <!-- </a> -->
@@ -45,7 +45,7 @@
             </a>
           </button>
 
-          <button *ngIf="mode === 'register'" mat-stroked-button type="submit"  (click)="userRegister()">
+          <button *ngIf="mode === 'register'" mat-stroked-button type="submit">
             <!-- <a routerLink="/home"> -->
               Create
             <!-- </a> -->
