@@ -15,8 +15,7 @@ export class CreatePageComponent implements OnInit {
 
   gameForm: FormGroup = new FormGroup({
     name: new FormControl(''),
-    description: new FormControl(''),
-
+    descp: new FormControl(''),
   });
 
   configForm: FormGroup = new FormGroup({
@@ -25,15 +24,25 @@ export class CreatePageComponent implements OnInit {
   });
 
   mode = "create"; // create, setting
-  
+  showImg: any;
+
   ngOnInit() {
-    
-  }
 
-
-  submit() {
-    console.log("gameForm ", this.gameForm.value)
-    console.log("configForm ", this.configForm.value)
+    // // getImgFile and display image
+    // const payload = {
+    //   filename: "c31dd6b209951274d198296df878e1d3"
+    // }
+    // this.providerService.getImgFile(payload)
+    // .subscribe((res: any) => {
+    //   const blobImg = atob(res.data);
+    //   var array = new Uint8Array(blobImg.length)
+    //   for( var i = 0; i < blobImg.length; i++ ) { array[i] = blobImg.charCodeAt(i) }
+    //   const img = new Blob([array]);
+    //   let imgDOM = document.getElementById('upload-img');
+    //   this.displayImage(imgDOM, img).then(img => {
+    //     console.log("display image successful")
+    //   });
+    // })
   }
 
   uploadFileToServer(event) {
@@ -41,9 +50,13 @@ export class CreatePageComponent implements OnInit {
     if (fileList.length > 0) {
       let file: File = fileList[0];
       let formData: FormData = new FormData();
-      formData.append('uploadFile', file, 'gameZipFile');
+      formData.append('uploadImg', file, 'gameZipFile');
       formData.append('fileType', 'zip');
-      this.providerService.uploadFile(formData)
+      const payload = {
+        formData,
+        gameName: "apple" 
+      }
+      this.providerService.uploadImg(payload)
       .subscribe((res) => {
         console.log("successful uplaod File ")
       })
@@ -88,13 +101,20 @@ export class CreatePageComponent implements OnInit {
       fd.append('image', file, 'test.png');
       console.log("typeof file", typeof file);
       console.log("file", file);
-      this.providerService.uploadFile(fd)
+      this.providerService.uploadImg(fd)
         .subscribe((res) => {
           console.log("successful uplaod File ")
         })
-
-
     }
+  }
+
+  createNewGame(){
+    console.log("gameForm ", this.gameForm.value)
+    const payload = this.gameForm.value;
+    this.providerService.createNewGame(payload)
+    .subscribe((res) => {
+      console.log("successful uplaod File ")
+    })
   }
 
 }

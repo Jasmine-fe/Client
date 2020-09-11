@@ -1,6 +1,6 @@
 <div>
     <mat-card class="configCard">
-        <form *ngIf="mode == 'create'" [formGroup]="gameForm" (ngSubmit)="submit()"><br />
+        <form *ngIf="mode == 'create'" [formGroup]="gameForm"><br />
             <mat-card-header>
                 <mat-card-title> Create New Game </mat-card-title>
             </mat-card-header>
@@ -9,7 +9,7 @@
                 <div>
                     <mat-label>Name：</mat-label>
                     <mat-form-field>
-                        <input type="text" matInput formControlName="gameName">
+                        <input type="text" matInput formControlName="name">
                     </mat-form-field>
                 </div>
 <!-- 
@@ -33,15 +33,13 @@
                 <div>
                     <mat-label>Description：</mat-label>
                     <mat-form-field>
-                        <input type="text" matInput formControlName="description">
+                        <input type="text" matInput formControlName="descp">
                     </mat-form-field>
                 </div>
 
                 <div>
                     <mat-label>game (zip format)：</mat-label>
-                    <!-- <mat-form-field> -->
                         <input  type="file" accept=".zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" (change)="uploadFileToServer($event)" >
-                    <!-- </mat-form-field> -->
                 </div>
             </mat-card-content>
             <mat-card-actions>
@@ -54,7 +52,7 @@
             </mat-card-actions>
         </form>
 
-        <form *ngIf="mode == 'setting'" [formGroup]="configForm" (ngSubmit)="submit()"><br />
+        <form *ngIf="mode == 'setting'" [formGroup]="configForm"><br />
             <mat-card-header>
                 <mat-card-title> Game Configuration </mat-card-title>
             </mat-card-header>
@@ -79,7 +77,7 @@
                     <button mat-stroked-button type="cancel" class="button">Cancel</button>
                 </a>
 
-                <button mat-stroked-button type="submit" class="button">Submit</button>
+                <button mat-stroked-button type="submit" class="button" (click)="createNewGame()">Submit</button>
             </mat-card-actions>
         </form>
         
