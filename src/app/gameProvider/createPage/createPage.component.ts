@@ -25,6 +25,7 @@ export class CreatePageComponent implements OnInit {
 
   mode = "create"; // create, setting
   showImg: any;
+  fd = new FormData();
 
   ngOnInit() {
 
@@ -43,24 +44,6 @@ export class CreatePageComponent implements OnInit {
     //     console.log("display image successful")
     //   });
     // })
-  }
-
-  uploadFileToServer(event) {
-    let fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
-      let file: File = fileList[0];
-      let formData: FormData = new FormData();
-      formData.append('uploadImg', file, 'gameZipFile');
-      formData.append('fileType', 'zip');
-      const payload = {
-        formData,
-        gameName: "apple" 
-      }
-      this.providerService.uploadImg(payload)
-      .subscribe((res) => {
-        console.log("successful uplaod File ")
-      })
-    }
   }
 
   goNextStep() {
@@ -95,16 +78,9 @@ export class CreatePageComponent implements OnInit {
       this.displayImage(imgDOM, file).then(img => {
         console.log("display image successful")
       });
+      this.fd.append('image', file, 'test.png');
 
-
-      var fd = new FormData();
-      fd.append('image', file, 'test.png');
-      console.log("typeof file", typeof file);
-      console.log("file", file);
-      this.providerService.uploadImg(fd)
-        .subscribe((res) => {
-          console.log("successful uplaod File ")
-        })
+      
     }
   }
 
@@ -114,6 +90,15 @@ export class CreatePageComponent implements OnInit {
     this.providerService.createNewGame(payload)
     .subscribe((res) => {
       console.log("successful uplaod File ")
+
+      const payload = {
+        formData: this.fd,
+        gameName: this.gameForm.value.name 
+      }
+      this.providerService.uploadImg(payload)
+        .subscribe((res) => {
+          console.log("successful uplaod File ")
+        })
     })
   }
 
