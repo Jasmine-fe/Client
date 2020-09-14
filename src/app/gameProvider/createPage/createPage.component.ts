@@ -29,7 +29,7 @@ export class CreatePageComponent implements OnInit {
 
   ngOnInit() {
 
-    // // getImgFile and display image
+    // getImgFile and display image
     // const payload = {
     //   filename: "c31dd6b209951274d198296df878e1d3"
     // }
@@ -60,37 +60,20 @@ export class CreatePageComponent implements OnInit {
     });
   }
 
-  getFileBase64Encode(blob) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-
   uploadImage(event) {
     let imgDOM = document.getElementById('upload-img');
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       let file: File = fileList[0];
-
-      this.displayImage(imgDOM, file).then(img => {
-        console.log("display image successful")
-      });
+      this.displayImage(imgDOM, file)
       this.fd.append('image', file, 'test.png');
-
-      
     }
   }
 
   createNewGame(){
-    console.log("gameForm ", this.gameForm.value)
     const payload = this.gameForm.value;
     this.providerService.createNewGame(payload)
     .subscribe((res) => {
-      console.log("successful uplaod File ")
-
       const payload = {
         formData: this.fd,
         gameName: this.gameForm.value.name 

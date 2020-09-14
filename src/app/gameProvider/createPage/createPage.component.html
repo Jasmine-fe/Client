@@ -12,19 +12,10 @@
                         <input type="text" matInput formControlName="name">
                     </mat-form-field>
                 </div>
-<!-- 
-                <div>
-                    <mat-label>Image：</mat-label>
-                    <div class="img">
-                        <img id="upload-img" [src]=""/>
-                    </div>
-                </div> -->
 
                 <div>
                     <mat-label>Image：</mat-label>
-                    <!-- <mat-form-field> -->
                         <input type="file" accept="image/*" (change)="uploadImage($event)" >
-                    <!-- </mat-form-field> -->
                     <div class="img">
                         <img id="upload-img" />
                     </div>
