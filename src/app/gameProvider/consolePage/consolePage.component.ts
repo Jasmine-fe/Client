@@ -72,7 +72,6 @@ export class ConsolePageComponent implements OnInit {
         const { progressingInfo, gameInfo } = res.data;
         this.data.current.progressingInfo = progressingInfo;
         this.data.current.gameInfo = gameInfo;
-
         this.endPayload = {
           ip: progressingInfo.serverIp,
           pid: progressingInfo.pid,
@@ -82,21 +81,27 @@ export class ConsolePageComponent implements OnInit {
         this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
       }
     })
-    
+
   }
 
   endGame() {
-    const payload = this.endPayload;
-    this.connectService.endGame(payload)
-    .subscribe(res => {
-      if(res && res.status) {
-          this.matSnackBar.open("成功結束遊戲", 'success', this.options);
-      }
-      else {
-        this.matSnackBar.open("結束遊戲失敗", 'fail', this.options);
-      }
-      
-    })
+    this.connectService.endGame(this.endPayload)
+      .subscribe(res => {
+        if (res && res.status) {
+          const { serverIp, pid } = this.data.current.progressingInfo;
+          const payload = {
+            ip: serverIp,
+            pid: pid,
+            status: 'FALSE'
+          }
+          this.connectService.updateConnectStatus(payload)
+            .subscribe(res => {
+              this.matSnackBar.open("成功結束遊戲", 'success', this.options);
+            })
+        }
+        else {
+          this.matSnackBar.open("結束遊戲失敗", 'fail', this.options);
+        }
+      })
   }
-
 }

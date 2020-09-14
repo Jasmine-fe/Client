@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div>
-                        <button *ngIf="endPayload.ip" mat-flat-button color="warn" (click)="endGame()">遊戲強制關閉</button>
+                        <button mat-flat-button color="warn" (click)="endGame()">遊戲強制關閉</button>
                     </div>
                 </mat-tab>
 
@@ -33,7 +33,6 @@
                     <ng-template mat-tab-label>
                         <div class="tabWord">Player</div>
                     </ng-template>
-
                     <div class="contentRow">
                         <mat-label>日前在線人數：</mat-label>
                         {{ data.player.currentPlayer }}
@@ -54,10 +53,7 @@
                         {{ data.player.monthlyPlayer }}
                     </div>
                 </mat-tab>
-
-
             </mat-tab-group>
-
         </mat-card-content>
         <mat-card-actions>
             <a routerLink="/provider">
