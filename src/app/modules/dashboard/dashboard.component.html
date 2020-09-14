@@ -6,9 +6,12 @@
       <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId, state: 'start'}]">
         <mat-card class="gameCard">
           <mat-card-header>
-            <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
+            <mat-card-title>{{game.gameId}}. {{game.name}}</mat-card-title>
           </mat-card-header>
-          <img class="gameCover" [src]="game.imageUrl">
+          <!-- <img class="gameCover" [src]="game.imageUrl"> -->
+          <div class="img">
+            <img id="display-img1" />
+          </div>
           <mat-card-content>
           </mat-card-content>
         </mat-card>
@@ -22,7 +25,7 @@
       <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId, state: 'view'}]">
         <mat-card class="gameCard">
           <mat-card-header>
-            <mat-card-title>{{game.id}}. {{game.name}}</mat-card-title>
+            <mat-card-title>{{game.gameId}}. {{game.name}}</mat-card-title>
           </mat-card-header>
           <img class="gameCover" [src]="game.imageUrl">
           <mat-card-content>

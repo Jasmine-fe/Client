@@ -24,14 +24,12 @@ export class DashboardComponent implements OnInit {
     .subscribe((res) => {
       if(res && res.status == 200) {
         this.gameList = res.body.data
+        this.displayImg()
       }
       else {
-        console.log(" get list error")
         this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);      
       }
-      
     })
-
     this.gameService.getProcessingGames()
       .subscribe((res) => {
         if (res && res.data && res.data.processingGames.length) {
@@ -46,11 +44,27 @@ export class DashboardComponent implements OnInit {
       })
   }
 
-  
-  openSnackBar(message: string, action: string) {
-    this.matSnackBar.open(message, action, {
-      duration: 2000,
+  displayImg() {
+    this.gameList.forEach((game, index) => {
+      const blobImg = atob(game.imgData.data);
+      var array = new Uint8Array(blobImg.length)
+      for (var i = 0; i < blobImg.length; i++) { array[i] = blobImg.charCodeAt(i) }
+      const img = new Blob([array]);
+      let imgDOM = document.getElementById(`display-img${index}`);
+      this.displayImage(imgDOM, img).then(img => {
+        console.log("display image successful")
+      });
+    })
+  }
+
+  displayImage(img, file) {
+    return new Promise((resolve, rejfect) => {
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);
+        resolve(img);
+      };
     });
   }
-  
+
 }
