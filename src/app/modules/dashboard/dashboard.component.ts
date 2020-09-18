@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
+import { ProviderService } from '../../services/provider.service';
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { notificationSetting } from '../../shared/common';
@@ -13,7 +14,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private gameService: GameService,
     private router: Router,
-    private matSnackBar: MatSnackBar) { }
+    private matSnackBar: MatSnackBar,
+    public providerService: ProviderService) { }
 
   gameList = []
   progressingGameList = [];
@@ -24,7 +26,7 @@ export class DashboardComponent implements OnInit {
     .subscribe((res) => {
       if(res && res.status == 200) {
         this.gameList = res.body.data
-        this.displayImg()
+        this.getImage(this.gameList)
       }
       else {
         this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);      
@@ -44,19 +46,23 @@ export class DashboardComponent implements OnInit {
       })
   }
 
-  displayImg() {
-    this.gameList.forEach((game, index) => {
-      const blobImg = atob(game.imgData.data);
-      var array = new Uint8Array(blobImg.length)
-      for (var i = 0; i < blobImg.length; i++) { array[i] = blobImg.charCodeAt(i) }
-      const img = new Blob([array]);
-      let imgDOM = document.getElementById(`display-img${index}`);
-      this.displayImage(imgDOM, img).then(img => {
-        console.log("display image successful")
-      });
-    })
+  async getImage(gameList) {
+    for await (let game of gameList) {
+      const payload = { gameName: game.name };
+      this.providerService.getImgFile(payload)
+        .subscribe(res => {
+          const blobImg = atob(res.data);
+          var array = new Uint8Array(blobImg.length)
+          for (var j = 0; j < blobImg.length; j++) { array[j] = blobImg.charCodeAt(j) }
+          const img = new Blob([array]);
+          const id = `game${game.gameId}`
+          let imgDOM = document.getElementById(id);
+          this.displayImage(imgDOM, img).then(img => {
+            console.log("display image successful")
+          });
+        })
+    } 
   }
-
   displayImage(img, file) {
     return new Promise((resolve, rejfect) => {
       img.src = URL.createObjectURL(file);

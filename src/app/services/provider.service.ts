@@ -22,7 +22,7 @@ export class ProviderService {
   }
 
   getImgFile(payload){
-    return this.http.get<any>(`${this.providerUrl}/image?filename=${payload.filename}`)
+    return this.http.get<any>(`${this.providerUrl}/image?gameName=${payload.gameName}`)
   }
 
 }

@@ -28,22 +28,6 @@ export class CreatePageComponent implements OnInit {
   fd = new FormData();
 
   ngOnInit() {
-
-    // getImgFile and display image
-    // const payload = {
-    //   filename: "c31dd6b209951274d198296df878e1d3"
-    // }
-    // this.providerService.getImgFile(payload)
-    // .subscribe((res: any) => {
-    //   const blobImg = atob(res.data);
-    //   var array = new Uint8Array(blobImg.length)
-    //   for( var i = 0; i < blobImg.length; i++ ) { array[i] = blobImg.charCodeAt(i) }
-    //   const img = new Blob([array]);
-    //   let imgDOM = document.getElementById('upload-img');
-    //   this.displayImage(imgDOM, img).then(img => {
-    //     console.log("display image successful")
-    //   });
-    // })
   }
 
   goNextStep() {

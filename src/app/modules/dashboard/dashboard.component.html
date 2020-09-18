@@ -1,17 +1,13 @@
 <div class="container">
-
   <section>
     <div class="mat-h1 sectionTitle">Online Games</div>
-    <div *ngFor="let game of gameList">
+    <div *ngFor="let game of gameList; let i = index">
       <a [routerLink]="['/home/content',{gameId: game.gameId, providerId: game.providerId, state: 'start'}]">
         <mat-card class="gameCard">
           <mat-card-header>
             <mat-card-title>{{game.gameId}}. {{game.name}}</mat-card-title>
           </mat-card-header>
-          <!-- <img class="gameCover" [src]="game.imageUrl"> -->
-          <div class="img">
-            <img id="display-img1" />
-          </div>
+          <img class="gameCover" id="{{ 'game' + (i+1) }}" />
           <mat-card-content>
           </mat-card-content>
         </mat-card>
