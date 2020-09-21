@@ -17,6 +17,11 @@ export class ProviderService {
     return this.http.post<any>(`${this.providerUrl}/game`, payload);
   }
 
+  // modify endpoint
+  uploadZip(payload) {
+    return this.http.post<any>(`${this.providerUrl}/zip`, payload);
+  }
+
   uploadImg(payload) {
     return this.http.post<any>(`${this.providerUrl}/image?gameName=${payload.gameName}`, payload.formData);
   }

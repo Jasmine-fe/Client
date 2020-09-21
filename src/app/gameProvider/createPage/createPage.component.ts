@@ -2,6 +2,7 @@ import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-page',
@@ -50,7 +51,24 @@ export class CreatePageComponent implements OnInit {
     if (fileList.length > 0) {
       let file: File = fileList[0];
       this.displayImage(imgDOM, file)
-      this.fd.append('image', file, 'test.png');
+      this.fd.append('image', file, file.name);
+    }
+  }
+
+  uploadZip(event) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      
+      let formData: FormData = new FormData();
+      formData.append('zip', file, file.name);
+      formData.append('fileType', 'zip');
+      console.log("formData", formData)
+      const payload = formData;
+      this.providerService.uploadZip(payload)
+      .subscribe((res) => {
+        console.log("upload game successfully")
+      })
     }
   }
 
@@ -64,7 +82,6 @@ export class CreatePageComponent implements OnInit {
       }
       this.providerService.uploadImg(payload)
         .subscribe((res) => {
-          console.log("successful uplaod File ")
         })
     })
   }
