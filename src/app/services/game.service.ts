@@ -33,7 +33,7 @@ export class GameService {
   }
 
   getProcessingGameInfo(payload) {
-    return this.http.get<any>(`${this.gameUrl}/end?username=${payload.username}`);
+    return this.http.get<any>(`${this.gameUrl}/progress/info?username=${payload.username}`);
   }
 
 }
