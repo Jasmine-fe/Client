@@ -52,48 +52,34 @@ export class ConsolePageComponent implements OnInit {
     }
   };
 
-  endPayload = {
-    ip: "",
-    excuteMode: "",
-    pid: "" 
-  }
   options: any = notificationSetting;
-
+  progressingGameList: any[];
 
   ngOnInit() {
     // get username from jwtToken
-    const jwtToken = localStorage.getItem('currentUser')
-    const parseInfo =  parseJwt(jwtToken);
-
-    const payload = { username: parseInfo.username };
-    this.gameService.getProcessingGameInfo(payload)
-    .subscribe((res) => {
-      if(res && res.data && res.data) {
-        const { progressingInfo, gameInfo } = res.data;
-        this.data.current.progressingInfo = progressingInfo;
-        this.data.current.gameInfo = gameInfo;
-        this.endPayload = {
-          ip: progressingInfo.serverIp,
-          pid: progressingInfo.pid,
-          excuteMode: gameInfo.excuteMode,
+    // const jwtToken = localStorage.getItem('currentUser')
+    // const parseInfo =  parseJwt(jwtToken);
+    this.gameService.getProcessingGames()
+      .subscribe((res) => {
+        if (res && res.data && res.data.processingGames.length) {
+          this.progressingGameList = res.data.processingGames;
         }
-      } else {
-        this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
-      }
-    })
+        else if(res && res.data && res.data.processingGames.length == 0){
+          this.matSnackBar.open("目前無進行中的遊戲可觀看", 'empty', this.options);
+        }
+        else {
+          this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
+        }
+      })
 
   }
 
-  endGame() {
-    this.connectService.endGame(this.endPayload)
+  endGame(game) {
+    const { serverIp, excuteMode, pid } = game;
+    const payload = { excuteMode, pid, ip: serverIp }
+    this.connectService.endGame(payload)
       .subscribe(res => {
         if (res && res.status) {
-          const { serverIp, pid } = this.data.current.progressingInfo;
-          const payload = {
-            ip: serverIp,
-            pid: pid,
-            status: 'FALSE'
-          }
           this.connectService.updateConnectStatus(payload)
             .subscribe(res => {
               this.matSnackBar.open("成功結束遊戲", 'success', this.options);

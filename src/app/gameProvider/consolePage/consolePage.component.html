@@ -12,20 +12,15 @@
                     <ng-template mat-tab-label>
                         <div class="tabWord">Current：</div>
                     </ng-template>
-
-                    <div class="contentRow">
-                        <mat-label>Name：</mat-label>
-                        {{ data.current.gameInfo.name }}
-                    </div>
-                    <div class="contentRow">
-                        <mat-label>Image：</mat-label>
-                        <div class="img" class="contentRow">
-                            <img id="upload-img" [src]="data.current.gameInfo.imageUrl" />
-                        </div>
-                    </div>
-                    <div>
-                        <button mat-flat-button color="warn" (click)="endGame()">遊戲強制關閉</button>
-                    </div>
+                    <mat-card class="gameCard">
+                        <mat-card-content>
+                            <mat-list role="list" *ngFor="let game of progressingGameList; let i = index">
+                                <mat-list-item role="listitem" class="listItem">{{game.name}}&nbsp;&nbsp;
+                                    <button mat-flat-button color="warn" (click)="endGame(game)">遊戲強制關閉</button>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-card-content>
+                        </mat-card>
                 </mat-tab>
 
                 <!-- player tab -->
