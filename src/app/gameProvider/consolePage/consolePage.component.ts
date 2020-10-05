@@ -7,6 +7,7 @@ import { ConnectService } from '../../services/connect.service';
 import { GameService } from '../../services/game.service';
 import { notificationSetting } from '../../shared/common';
 import { parseJwt } from '../../shared/common'
+import * as dateFormat from 'dateformat';
 
 @Component({
   selector: 'app-console-page',
@@ -90,4 +91,10 @@ export class ConsolePageComponent implements OnInit {
         }
       })
   }
+
+  formatTime(time) {
+    const formatTime = dateFormat(time, "yyyy-mm-dd hh:mm");
+    return formatTime;
+  }
+
 }
