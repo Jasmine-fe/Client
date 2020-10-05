@@ -10,6 +10,7 @@ import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
 import { GameServerService } from './services/gameServer.service';
 import { ConnectService } from './services/connect.service';
+import { ConfigService } from './services/config.service';
 import { JwtInterceptor } from './shared/auth/jwt.interceptor';
 import { AuthGuard } from './shared/auth/auth.guard';
 import { AuthenticationService } from './shared/auth/authentication.service';
@@ -32,6 +33,7 @@ import { HttpErrorInterceptor } from './shared/apiResponse.interceptor';
     UserService,
     GameServerService,
     ConnectService,
+    ConfigService,
     // AuthGuard,
     // AuthService,
         AuthenticationService,

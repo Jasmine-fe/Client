@@ -1,7 +1,8 @@
 import { Input, Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
+import { ConfigService } from '../../services/config.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -12,23 +13,69 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CreatePageComponent implements OnInit {
 
   constructor(public fb: FormBuilder,
-    public providerService: ProviderService) {}
+    public providerService: ProviderService,
+    public configService: ConfigService) { }
 
   gameForm: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    descp: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    descp: new FormControl('', Validators.required),
   });
 
   configForm: FormGroup = new FormGroup({
-    core: new FormControl(''),
-    resolution: new FormControl('')
+    core: new FormControl('', Validators.required),
+    coreControl: new FormControl('', Validators.required),
+    video: new FormControl('', Validators.required),
+    audio: new FormControl('', Validators.required),
+    filter: new FormControl('', Validators.required),
+    gaServerEventDriven: new FormControl('', Validators.required),
+    gaClient: new FormControl(''),
   });
+
+  coreOptions = []
+  videoOptions = []
+  audioOptions = []
+  filterOptions = []
+  gaServerEventDrivenOptions = []
+  gaClientOptions = []
 
   mode = "create"; // create, setting
   showImg: any;
   fd = new FormData();
 
   ngOnInit() {
+
+    this.configService.getConfigTemplate()
+      .subscribe((res: any) => {
+        if (res.data) {
+          res.data.forEach((dic, index) => {
+            const key = Object.keys(dic)[0];
+
+            switch (key) {
+              case "[core]":
+                this.coreOptions = dic[key]
+                break;
+              case "[video]":
+                this.videoOptions = dic[key]
+                break;
+              case "[audio]":
+                this.audioOptions = dic[key]
+                break;
+              case "[filter]":
+                this.filterOptions = dic[key]
+                break;
+              case "[ga-server-event-driven]":
+                this.gaServerEventDrivenOptions = dic[key]
+                break;
+              case "[ga-client]":
+                this.gaClientOptions = dic[key]
+                break;
+              default:
+                break; 
+            }
+          });
+        }
+      })
+
   }
 
   goNextStep() {
