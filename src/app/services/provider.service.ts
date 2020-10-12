@@ -30,4 +30,8 @@ export class ProviderService {
     return this.http.get<any>(`${this.providerUrl}/image?gameName=${payload.gameName}`)
   }
 
+  gameServerConfig(payload) {
+    return this.http.post<any>(`http://192.168.43.196:5000/Conf`, payload);
+  }
+
 }

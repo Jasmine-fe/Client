@@ -194,15 +194,29 @@ export class CreatePageComponent implements OnInit {
   createNewGame() {
     const gamePayload = this.gameForm.value;
     const modifyValue = this.modifyConfig;
-    const payload = { game: gamePayload, config: modifyValue };
+    
+    // DB gameList
     this.providerService.createNewGame(gamePayload)
       .subscribe((res) => {
-        const payload = {
+        const imgPayload = {
           formData: this.fd,
           gameName: this.gameForm.value.name
         }
-        this.providerService.uploadImg(payload)
+        this.providerService.uploadImg(imgPayload)
         .subscribe((res) => {
+          console.log("upload image successfully")
+        })
+
+
+        // gameServer config
+        const payload = { 
+          gamename: this.gameForm.value.name, 
+          config: modifyValue 
+        };
+        console.log("config payload", payload);
+        this.providerService.gameServerConfig(payload) 
+        .subscribe((res) => {
+          console.log("gameServerConfig successfully")
         })
     })
   }
