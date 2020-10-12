@@ -211,13 +211,20 @@ export class CreatePageComponent implements OnInit {
         // gameServer config
         const payload = { 
           gamename: this.gameForm.value.name, 
-          config: modifyValue 
+          config: modifyValue
         };
         console.log("config payload", payload);
-        this.providerService.gameServerConfig(payload) 
-        .subscribe((res) => {
-          console.log("gameServerConfig successfully")
-        })
+
+        this.providerService.createServerConfig(payload)
+          .subscribe((res) => {
+            console.log("createServerConfig successfully")
+            this.providerService.gameServerModifyConfig(payload)
+              .subscribe((res) => {
+                console.log("gameServerModifyConfig successfully")
+              })
+          })
+
+
     })
   }
 
