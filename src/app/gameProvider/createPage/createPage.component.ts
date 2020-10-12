@@ -21,61 +21,131 @@ export class CreatePageComponent implements OnInit {
     descp: new FormControl('', Validators.required),
   });
 
-  configForm: FormGroup = new FormGroup({
-    core: new FormControl('', Validators.required),
-    coreControl: new FormControl('', Validators.required),
-    video: new FormControl('', Validators.required),
-    audio: new FormControl('', Validators.required),
-    filter: new FormControl('', Validators.required),
-    gaServerEventDriven: new FormControl('', Validators.required),
-    gaClient: new FormControl(''),
+  coreForm: FormGroup = new FormGroup({
+    coreServer: new FormControl(true, Validators.required),
+    coreController: new FormControl(true, Validators.required),
+    coreVideo: new FormControl(true, Validators.required),
+    coreVideoParm: new FormControl(true, Validators.required),
+    coreAudioLame: new FormControl(true, Validators.required),
+    coreAudioOpus: new FormControl(true, Validators.required),
+    coreProto: new FormControl('', Validators.required),
   });
+  coreFormControlName = ['coreServer', 'coreController', 'coreVideo', 'coreVideoParm', 'coreAudioLame', 'coreAudioOpus', 'coreProto']
 
-  coreOptions = []
-  videoOptions = []
-  audioOptions = []
-  filterOptions = []
-  gaServerEventDrivenOptions = []
-  gaClientOptions = []
+
+  videoForm: FormGroup = new FormGroup({
+    videoFps: new FormControl(''),
+    videoSpecificB: new FormControl(''),
+    videoSpecificG: new FormControl(''),
+  })
+  videoFormControlName= ['videoFps', 'videoSpecificB', 'videoSpecificG']
+
+
+  audioForm: FormGroup = new FormGroup({
+    audioDelay: new FormControl('', Validators.required),
+  })
+  audioFormControlName= ['audioDelay'];
+
+
+  filterForm: FormGroup = new FormGroup({
+    filterSP: new FormControl('', Validators.required),
+  })
+  filterFormControlName= ['filterSP'];
+
+  gaServerForm: FormGroup = new FormGroup({
+    gaServerDir: new FormControl('', Validators.required),
+    gaServerExe: new FormControl('', Validators.required),
+    gaServerType: new FormControl('', Validators.required),
+    gaServerToken: new FormControl('', Validators.required),
+    gaServerReso: new FormControl('', Validators.required),
+    gaServerOutReso: new FormControl('', Validators.required),
+    gaServerHookAudio: new FormControl('', Validators.required),
+    gaServerHookExp: new FormControl('', Validators.required),
+    gaServerEnable: new FormControl(true, Validators.required),
+    gaServerMaxrate: new FormControl('', Validators.required),
+    gaServerBufsize: new FormControl('', Validators.required),
+    gaServerEnableSRC: new FormControl('', Validators.required),
+    gaServerNTTF: new FormControl('', Validators.required),
+    gaServerMT: new FormControl('', Validators.required),
+    gaServerFWC: new FormControl('', Validators.required),
+  })
+  gaServerFormControlName= ['gaServerDir', 'gaServerExe', 'gaServerType', 'gaServerToken', 'gaServerReso', 'gaServerOutReso', 
+  'gaServerHookAudio', 'gaServerHookExp', 'gaServerEnable', 'gaServerMaxrate', 'gaServerBufsize', 
+  'gaServerEnableSRC', 'gaServerNTTF', 'gaServerMT', 'gaServerFWC'];
+
+
+  gaClientForm: FormGroup = new FormGroup({
+    gaClientCRMM: new FormControl('', Validators.required),
+    gaClientVS: new FormControl('', Validators.required),
+    gaClientMTVD: new FormControl('', Validators.required),
+  })
+  gaClientFormControlName= ['gaClientCRMM', 'gaClientVS', 'gaClientMTVD'];
+
 
   mode = "create"; // create, setting
   showImg: any;
   fd = new FormData();
+  coreOptions: any;
+  videoOptions: any
+  audioOptions : any
+  filterOptions: any
+  gaServerEventDrivenOptions: any
+  gaClientOptions : any
+
+
 
   ngOnInit() {
-
     this.configService.getConfigTemplate()
       .subscribe((res: any) => {
         if (res.data) {
           res.data.forEach((dic, index) => {
             const key = Object.keys(dic)[0];
-
             switch (key) {
-              case "[core]":
-                this.coreOptions = dic[key]
+              case "[core]": {
+                this.coreOptions = Object.values(dic)[0];
+                this.handleDefaultValue(this.coreForm, this.coreOptions, this.coreFormControlName);
                 break;
-              case "[video]":
-                this.videoOptions = dic[key]
+              }
+              case "[video]":{
+                this.videoOptions = Object.values(dic)[0];
+                this.handleDefaultValue(this.videoForm, this.videoOptions, this.videoFormControlName);
                 break;
-              case "[audio]":
-                this.audioOptions = dic[key]
+              }
+              case "[audio]":{
+                this.audioOptions = Object.values(dic)[0]
+                this.handleDefaultValue(this.audioForm, this.audioOptions, this.audioFormControlName);
                 break;
-              case "[filter]":
-                this.filterOptions = dic[key]
+              }
+              case "[filter]":{
+                this.filterOptions = Object.values(dic)[0]
+                this.handleDefaultValue(this.filterForm, this.filterOptions, this.filterFormControlName);
                 break;
-              case "[ga-server-event-driven]":
-                this.gaServerEventDrivenOptions = dic[key]
+              }
+              case "[ga-server-event-driven]":{
+                this.gaServerEventDrivenOptions = Object.values(dic)[0]
+                this.handleDefaultValue(this.gaServerForm, this.gaServerEventDrivenOptions, this.gaServerFormControlName);
                 break;
-              case "[ga-client]":
-                this.gaClientOptions = dic[key]
+              }
+              case "[ga-client]":{
+                this.gaClientOptions = Object.values(dic)[0]
+                this.handleDefaultValue(this.gaClientForm, this.gaClientOptions, this.gaClientFormControlName);
                 break;
+              }
               default:
                 break; 
             }
           });
         }
       })
+  }
 
+  handleDefaultValue(form, options, formControlName) {
+    options.forEach((element, index) => {
+      if (element.default_value !== 'True' && element.default_value !== 'true') {
+        const i = formControlName[index];
+        form.get(i).setValue(element.default_value);
+      }
+    });
   }
 
   goNextStep() {
@@ -120,17 +190,26 @@ export class CreatePageComponent implements OnInit {
   }
 
   createNewGame(){
-    const payload = this.gameForm.value;
-    this.providerService.createNewGame(payload)
-    .subscribe((res) => {
-      const payload = {
-        formData: this.fd,
-        gameName: this.gameForm.value.name 
-      }
-      this.providerService.uploadImg(payload)
-        .subscribe((res) => {
-        })
-    })
+    const gamePayload = this.gameForm.value;
+    const corePayload = this.coreForm.value;
+    console.log("corePayload", corePayload)
+    // const 
+
+    // this.providerService.createNewGame(payload)
+    // .subscribe((res) => {
+    //   const payload = {
+    //     formData: this.fd,
+    //     gameName: this.gameForm.value.name 
+    //   }
+    //   this.providerService.uploadImg(payload)
+    //     .subscribe((res) => {
+    //     })
+    // })
+  }
+
+  changeCheckBox(name, checked) {
+    this.coreForm[name] = checked;
   }
 
 }
+
