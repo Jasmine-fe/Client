@@ -85,12 +85,14 @@ export class CreatePageComponent implements OnInit {
   mode = "create"; // create, setting
   showImg: any;
   fd = new FormData();
+  modifyConfig: Array<any> = [];
   coreOptions: any;
   videoOptions: any
   audioOptions : any
   filterOptions: any
   gaServerEventDrivenOptions: any
   gaClientOptions : any
+
 
 
 
@@ -189,26 +191,30 @@ export class CreatePageComponent implements OnInit {
     }
   }
 
-  createNewGame(){
+  createNewGame() {
     const gamePayload = this.gameForm.value;
-    const corePayload = this.coreForm.value;
-    console.log("corePayload", corePayload)
-    // const 
-
-    // this.providerService.createNewGame(payload)
-    // .subscribe((res) => {
-    //   const payload = {
-    //     formData: this.fd,
-    //     gameName: this.gameForm.value.name 
-    //   }
-    //   this.providerService.uploadImg(payload)
-    //     .subscribe((res) => {
-    //     })
-    // })
+    const modifyValue = this.modifyConfig;
+    const payload = { game: gamePayload, config: modifyValue };
+    this.providerService.createNewGame(gamePayload)
+      .subscribe((res) => {
+        const payload = {
+          formData: this.fd,
+          gameName: this.gameForm.value.name
+        }
+        this.providerService.uploadImg(payload)
+        .subscribe((res) => {
+        })
+    })
   }
 
-  changeCheckBox(name, checked) {
-    this.coreForm[name] = checked;
+  changeCheckBox(form ,name, checked) {
+    form[name] = checked;
+    this.changeInput(name, checked);
+  }
+
+  changeInput(GAcolumn, value) {
+    this.modifyConfig.push({ GAcolumn: GAcolumn, value: value });
+    console.log("this.modifyConfig", this.modifyConfig)
   }
 
 }
