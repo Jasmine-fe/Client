@@ -1,25 +1,35 @@
 <div>
     <mat-card class="configCard">
-        <form [formGroup]="form" (ngSubmit)="submit()"><br />
-            <mat-card-header>
-                <mat-card-title> Configuration </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div *ngFor="let column of dataKeys">
-                    <div>
-                        <mat-label>{{ column }}：</mat-label>
+        <mat-card-header>
+            <mat-card-title> Configuration </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h4>Select a Game</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>Game Name</mat-label>
+                <mat-select (selectionChange)="selectedGame($event.value)">
+                    <mat-option *ngFor="let game of gameList" [value]="game">
+                        {{game}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div *ngIf="mode == 'changed'">
+                <form [formGroup]="form" (ngSubmit)="submit()"><br />
+                    <div *ngFor="let column of current.config">
+                        <mat-label>{{ column.gAcolumn }}：</mat-label>
                         <mat-form-field>
-                            <input type="text" matInput [formControlName]="column">
+                            <input type="text" matInput [formControlName]="column.gAcolumn">
                         </mat-form-field>
                     </div>
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <a routerLink="/provider">
-                    <button mat-stroked-button type="cancel" class="button">Cancel</button>
-                </a>
-                <button mat-stroked-button type="submit" class="button">Submit</button>
-            </mat-card-actions>
-        </form>
+                </form>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions> <a routerLink="/provider">
+                <button mat-stroked-button type="cancel" class="button">Cancel</button>
+            </a>
+            <button mat-stroked-button type="submit" class="button">Search</button>
+        </mat-card-actions>
     </mat-card>
 </div>

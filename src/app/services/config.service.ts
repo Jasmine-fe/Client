@@ -18,5 +18,9 @@ export class ConfigService {
     return this.http.post (`${this.connectUrl}/configData`, payload);
   }
 
+  getConfigData() {
+    return this.http.get (`${this.connectUrl}/data`);
+  }
+
 
 }

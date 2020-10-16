@@ -6,11 +6,11 @@
 
   mat-card {
     padding: 3em;
-    background-color:#24323d;
+    background-color: lightgray;
   }
 
   mat-label{
-    color: #dff1f5;
+    color: black;
   }
 
   mat-card-actions {
@@ -36,7 +36,7 @@
   }
 
   .configCard{
-    color: #dff1f5;
+    color: black;
     width: 800px;
   }
 

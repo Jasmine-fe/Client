@@ -93,9 +93,6 @@ export class CreatePageComponent implements OnInit {
   gaServerEventDrivenOptions: any
   gaClientOptions : any
 
-
-
-
   ngOnInit() {
     this.configService.getConfigTemplate()
       .subscribe((res: any) => {
@@ -222,9 +219,6 @@ export class CreatePageComponent implements OnInit {
               console.log("upload image successfully")
             })
         }
-
-
-
         
         console.log("config payload", payload);
 
