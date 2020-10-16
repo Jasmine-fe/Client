@@ -13,7 +13,10 @@ export class ConfigService {
   getConfigTemplate() {
     return this.http.get(`${this.connectUrl}/template`)
   }
-  
+
+  recordDataConfig(payload) {
+    return this.http.post (`${this.connectUrl}/configData`, payload);
+  }
 
 
 }
