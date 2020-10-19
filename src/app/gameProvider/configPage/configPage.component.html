@@ -15,21 +15,22 @@
             </mat-form-field>
 
             <div *ngIf="mode == 'changed'">
-                <form [formGroup]="form" (ngSubmit)="submit()"><br />
+                <form [formGroup]="form" ><br />
                     <div *ngFor="let column of current.config">
                         <mat-label>{{ column.gAcolumn }}：</mat-label>
                         <mat-form-field>
-                            <input type="text" matInput [formControlName]="column.gAcolumn">
+                            <input type="text" matInput [formControlName]="column.gAcolumn" (change)="changeInput(column, $event.target.value)">
                         </mat-form-field>
                     </div>
                 </form>
             </div>
 
         </mat-card-content>
-        <mat-card-actions> <a routerLink="/provider">
+        <mat-card-actions> 
+            <a routerLink="/provider">
                 <button mat-stroked-button type="cancel" class="button">Cancel</button>
             </a>
-            <button mat-stroked-button type="submit" class="button">Search</button>
+            <button  *ngIf="mode == 'changed'" mat-stroked-button type="submit" class="button" (click)="modifyConfigGame()">Change</button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -14,12 +14,16 @@ export class ConfigService {
     return this.http.get(`${this.connectUrl}/template`)
   }
 
-  recordDataConfig(payload) {
-    return this.http.post (`${this.connectUrl}/configData`, payload);
-  }
-
   getConfigData() {
     return this.http.get (`${this.connectUrl}/data`);
+  }
+
+  recordDataConfig(payload) {
+    return this.http.post (`${this.connectUrl}/data/new`, payload);
+  }
+
+  setDataConfig(payload) {
+    return this.http.post (`${this.connectUrl}/data/modify`, payload);
   }
 
 

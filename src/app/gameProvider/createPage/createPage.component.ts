@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ProviderService } from '../../services/provider.service';
 import { ConfigService } from '../../services/config.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { notificationSetting } from '../../shared/common';
 
 @Component({
   selector: 'app-create-page',
@@ -14,7 +15,9 @@ export class CreatePageComponent implements OnInit {
 
   constructor(public fb: FormBuilder,
     public providerService: ProviderService,
-    public configService: ConfigService) { }
+    public configService: ConfigService,
+    public router: Router,
+    private matSnackBar: MatSnackBar) { }
 
   gameForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -81,7 +84,7 @@ export class CreatePageComponent implements OnInit {
   })
   gaClientFormControlName= ['gaClientCRMM', 'gaClientVS', 'gaClientMTVD'];
 
-
+  options: any = notificationSetting;
   mode = "create"; // create, setting
   showImg: any;
   fd = new FormData();
@@ -207,20 +210,20 @@ export class CreatePageComponent implements OnInit {
         };
 
         this.configService.recordDataConfig(payload)
-          .subscribe((res) => {
+          .subscribe((res: any) => {
             console.log("record DataConfig successfully")
+            if (res && res.success) {
+              this.matSnackBar.open("新增遊戲成功", 'success', this.options);
+              this.router.navigate(['/provider']);
+            }
+            else {
+              this.matSnackBar.open("新增遊戲失敗", 'fail', this.options);
+            }
           })
-
-
-
-        if (imgPayload.formData) {
-          this.providerService.uploadImg(imgPayload)
-            .subscribe((res) => {
-              console.log("upload image successfully")
-            })
-        }
-        
-        console.log("config payload", payload);
+        this.providerService.uploadImg(imgPayload)
+          .subscribe((res) => {
+            console.log("upload image successfully")
+          })
 
         this.providerService.createServerConfig(payload)
           .subscribe((res) => {
