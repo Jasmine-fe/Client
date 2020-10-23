@@ -173,7 +173,7 @@ export class ConfigPageComponent implements OnInit {
   async selectedGame(gameName) {
     this.mode = 'changed';
     this.current.gameName = gameName;
-
+    await this.resetModifyValue();
     await this.configList.forEach(element => {
       if (element.gamename == gameName) {
         this.current.config = element.config;
@@ -182,10 +182,7 @@ export class ConfigPageComponent implements OnInit {
     await this.setModifyValue(this.current.config);
   }
 
-
-
   setModifyValue(config) {
-    console.log("setModifyValue"); 
     config.forEach((data, index) => {
       switch (data.dictionary) {
         case "[core]": {
@@ -225,8 +222,43 @@ export class ConfigPageComponent implements OnInit {
   }
 
   resetModifyValue() {
-  // haandle form reset function
-
+    console.log("current: ", this.current.config)
+    this.current.config.forEach((data, index) => {
+      switch (data.dictionary) {
+        case "[core]": {
+          const controlName = this.coreFormControlName[data.columnId - this.columnIdCount[0]]
+          this.coreForm.get(controlName).setValue(data.defaultValue);
+          break;
+        }
+        case "[video]": {
+          const controlName = this.videoFormControlName[data.columnId - this.columnIdCount[1]]
+          this.videoForm.get(controlName).setValue(data.newValue);
+          break;
+        }
+        case "[audio]": {
+          const controlName = this.audioFormControlName[data.columnId - this.columnIdCount[2]]
+          this.audioForm.get(controlName).setValue(data.newValue);
+          break;
+        }
+        case "[filter]": {
+          const controlName = this.filterFormControlName[data.columnId - this.columnIdCount[3]]
+          this.filterForm.get(controlName).setValue(data.newValue);
+          break;
+        }
+        case "[ga-server-event-driven]": {
+          const controlName = this.gaServerFormControlName[data.columnId - this.columnIdCount[4]]
+          this.gaServerForm.get(controlName).setValue(data.newValue);
+          break;
+        }
+        case "[ga-client]": {
+          const controlName = this.gaClientFormControlName[data.columnId - this.columnIdCount[5]]
+          this.gaClientForm.get(controlName).setValue(data.newValue);
+          break;
+        }
+        default:
+          break;
+      }
+    });
   }
 
   modifyConfigGame() {
@@ -246,14 +278,19 @@ export class ConfigPageComponent implements OnInit {
       })
   }
 
-  changeCheckBox(form, dictionary, gAcolumn, checked) {
-    form[gAcolumn] = checked;
-    this.changeInput(dictionary, gAcolumn, !checked, checked);
+  changeCheckBox(form, dictionary, GAcolumn, checked, id) {
+    form[GAcolumn] = checked;
+    const data = {
+      GAcolumn,
+      id,
+      default_value: !checked,
+    }
+    this.changeInput(dictionary, checked, data);
   }
 
-  changeInput(dictionary, gAcolumn, defaultValue, newValue) {
-    this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue });
-    console.log("this.modifyConfig", this.modifyConfig)
+  changeInput(dictionary, newValue, option) {
+    const { GAcolumn: gAcolumn, default_value: defaultValue, id: columnId } = option;
+    this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue, columnId });
   }
 
 }
