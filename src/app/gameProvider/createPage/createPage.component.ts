@@ -224,29 +224,30 @@ export class CreatePageComponent implements OnInit {
           .subscribe((res) => {
             console.log("upload image successfully")
           })
-
-        this.providerService.createServerConfig(payload)
+        this.providerService.gameServerModifyConfig(payload)
           .subscribe((res) => {
-            console.log("createServerConfig successfully")
-            this.providerService.gameServerModifyConfig(payload)
-              .subscribe((res) => {
-                console.log("gameServerModifyConfig successfully")
-              })
+            console.log("gameServerModifyConfig successfully")
           })
 
-
-    })
+      })
   }
 
-  changeCheckBox(form ,name, checked) {
-    form[name] = checked;
-    this.changeInput(name, checked);
+  changeCheckBox(form, dictionary, GAcolumn, checked, id) {
+    form[GAcolumn] = checked;
+    const data = {
+      GAcolumn,
+      id,
+      default_value: !checked,
+    }
+    this.changeInput(dictionary, checked, data);
   }
 
-  changeInput(GAcolumn, value) {
-    this.modifyConfig.push({ GAcolumn: GAcolumn, value: value });
-    console.log("this.modifyConfig", this.modifyConfig)
+  changeInput(dictionary, newValue, option) {
+    const { GAcolumn: gAcolumn, default_value: defaultValue, id: columnId } = option;
+    this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue, columnId });
   }
 
 }
+
+
 

@@ -19,7 +19,7 @@ export class ProviderService {
 
   // modify endpoint
   uploadZip(payload) {
-    return this.http.post<any>(`${this.providerUrl}/zip`, payload);
+    return this.http.post<any>(`http://192.168.43.196:5000/Add`, payload);
   }
 
   uploadImg(payload) {
@@ -28,10 +28,6 @@ export class ProviderService {
 
   getImgFile(payload){
     return this.http.get<any>(`${this.providerUrl}/image?gameName=${payload.gameName}`)
-  }
-
-  createServerConfig(payload) {
-    return this.http.get(`http://192.168.43.196:5000/Add?gamename=${payload.gamename}&excuteMode='periodic'`);
   }
 
   gameServerModifyConfig(payload) {

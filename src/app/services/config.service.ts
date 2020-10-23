@@ -8,7 +8,7 @@ import { webServerURL } from '../shared/common';
 export class ConfigService {
   constructor(private http: HttpClient) { }
 
-  connectUrl=`${webServerURL}/config`;
+  connectUrl = `${webServerURL}/config`;
 
   getConfigTemplate() {
     return this.http.get(`${this.connectUrl}/template`)

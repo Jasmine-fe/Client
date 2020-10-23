@@ -46,6 +46,7 @@
             </mat-card-actions>
         </form>
 
+        
         <mat-card-header *ngIf="mode == 'setting'">
             <mat-card-title> Game Configuration </mat-card-title>
         </mat-card-header>
@@ -58,13 +59,13 @@
                             <li>
                                 <mat-checkbox class="example-margin"
                                     *ngIf="coreOption.default_value == 'True'; else elseTmp"
-                                    (change)="changeCheckBox(coreForm, coreFormControlName[i], $event.checked)"
+                                    (change)="changeCheckBox('[core]', coreForm, coreFormControlName[i], $event.checked, coreOption.id)"
                                     [formControlName]="coreFormControlName[i]"> {{coreOption.GAcolumn}}
-                                </mat-checkbox>
-                                <ng-template #elseTmp>
+                                </mat-checkbox><ng-template #elseTmp>
                                     <mat-label>{{coreOption.GAcolumn}}: </mat-label>
                                     <mat-form-field>
-                                        <input type="text" matInput [formControlName]="coreFormControlName[i]" (change)="changeInput(coreOption.GAcolumn, $event.target.value)">
+                                        <input type="text" matInput [formControlName]="coreFormControlName[i]"
+                                            (change)="changeInput('[core]', $event.target.value, coreOption)">
                                     </mat-form-field>
                                 </ng-template>
                             </li>
@@ -82,7 +83,7 @@
                             <li>
                                 <mat-label>{{videoOption.GAcolumn}}: </mat-label>
                                 <mat-form-field>
-                                    <input type="text" matInput [formControlName]="videoFormControlName[i]" (change)="changeInput(videoOption.GAcolumn, $event.target.value)">
+                                    <input type="text" matInput [formControlName]="videoFormControlName[i]" (change)="changeInput('[video]', $event.target.value, videoOption)">
                                 </mat-form-field>
                             </li>
                         </div>
@@ -98,7 +99,7 @@
                             <li>
                                 <mat-label>{{audioOption.GAcolumn}}: </mat-label>
                                 <mat-form-field>
-                                    <input type="text" matInput formControlName="audioDelay" (change)="changeInput(audioOption.GAcolumn, $event.target.value)">
+                                    <input type="text" matInput formControlName="audioDelay" (change)="changeInput('[audio]', $event.target.value, audioOption)">
                                 </mat-form-field>
                             </li>
                         </div>
@@ -114,7 +115,7 @@
                             <li>
                                 <mat-label>{{filterOption.GAcolumn}}: </mat-label>
                                 <mat-form-field>
-                                    <input type="text" matInput formControlName="filterSP" (change)="changeInput(filterOption.GAcolumn, $event.target.value)">
+                                    <input type="text" matInput formControlName="filterSP" (change)="changeInput('[filter]', $event.target.value, filterOption)">
                                 </mat-form-field>
                             </li>
                         </div>
@@ -130,7 +131,7 @@
                             <li>
                                 <mat-checkbox class="example-margin"
                                     *ngIf="gaServerEventDrivenOption.default_value == 'true'; else elseTmp"  
-                                    (change)="changeCheckBox(gaServerForm, gaServerFormControlName[i], $event.checked)"
+                                    (change)="changeCheckBox(gaServerForm, '[ga-server-event-driven]', gaServerFormControlName[i], $event.checked, gaServerEventDrivenOption.id)"
                                     [formControlName]="gaServerFormControlName[i]">
                                     {{gaServerEventDrivenOption.GAcolumn}}
                                 </mat-checkbox>
@@ -138,7 +139,7 @@
                                     <mat-label>{{gaServerEventDrivenOption.GAcolumn}}: </mat-label>
                                     <mat-form-field>
                                         <input type="text" matInput [formControlName]="gaServerFormControlName[i]"
-                                        (change)="changeInput(gaServerEventDrivenOption.GAcolumn, $event.target.value)">
+                                        (change)="changeInput('[ga-server-event-driven]', $event.target.value, gaServerEventDrivenOption)">
                                     </mat-form-field>
                                 </ng-template>
                             </li>
@@ -156,7 +157,7 @@
                                 <mat-label>{{gaClientOption.GAcolumn}}:</mat-label>
                                 <mat-form-field>
                                     <input type="text" matInput [formControlName]="gaClientFormControlName[i]"
-                                    (change)="changeInput(gaClientOption.GAcolumn, $event.target.value)">
+                                    (change)="changeInput('[ga-client]', $event.target.value, gaClientOption)">
                                 </mat-form-field>
                             </li>
                         </div>
