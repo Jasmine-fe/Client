@@ -41,19 +41,19 @@ export class CreatePageComponent implements OnInit {
     videoSpecificB: new FormControl(''),
     videoSpecificG: new FormControl(''),
   })
-  videoFormControlName= ['videoFps', 'videoSpecificB', 'videoSpecificG']
+  videoFormControlName = ['videoFps', 'videoSpecificB', 'videoSpecificG']
 
 
   audioForm: FormGroup = new FormGroup({
     audioDelay: new FormControl('', Validators.required),
   })
-  audioFormControlName= ['audioDelay'];
+  audioFormControlName = ['audioDelay'];
 
 
   filterForm: FormGroup = new FormGroup({
     filterSP: new FormControl('', Validators.required),
   })
-  filterFormControlName= ['filterSP'];
+  filterFormControlName = ['filterSP'];
 
   gaServerForm: FormGroup = new FormGroup({
     gaServerDir: new FormControl('', Validators.required),
@@ -72,9 +72,9 @@ export class CreatePageComponent implements OnInit {
     gaServerMT: new FormControl('', Validators.required),
     gaServerFWC: new FormControl('', Validators.required),
   })
-  gaServerFormControlName= ['gaServerDir', 'gaServerExe', 'gaServerType', 'gaServerToken', 'gaServerReso', 'gaServerOutReso', 
-  'gaServerHookAudio', 'gaServerHookExp', 'gaServerEnable', 'gaServerMaxrate', 'gaServerBufsize', 
-  'gaServerEnableSRC', 'gaServerNTTF', 'gaServerMT', 'gaServerFWC'];
+  gaServerFormControlName = ['gaServerDir', 'gaServerExe', 'gaServerType', 'gaServerToken', 'gaServerReso', 'gaServerOutReso',
+    'gaServerHookAudio', 'gaServerHookExp', 'gaServerEnable', 'gaServerMaxrate', 'gaServerBufsize',
+    'gaServerEnableSRC', 'gaServerNTTF', 'gaServerMT', 'gaServerFWC'];
 
 
   gaClientForm: FormGroup = new FormGroup({
@@ -82,7 +82,7 @@ export class CreatePageComponent implements OnInit {
     gaClientVS: new FormControl('', Validators.required),
     gaClientMTVD: new FormControl('', Validators.required),
   })
-  gaClientFormControlName= ['gaClientCRMM', 'gaClientVS', 'gaClientMTVD'];
+  gaClientFormControlName = ['gaClientCRMM', 'gaClientVS', 'gaClientMTVD'];
 
   options: any = notificationSetting;
   mode = "create"; // create, setting
@@ -91,12 +91,24 @@ export class CreatePageComponent implements OnInit {
   modifyConfig: Array<any> = [];
   coreOptions: any;
   videoOptions: any
-  audioOptions : any
+  audioOptions: any
   filterOptions: any
   gaServerEventDrivenOptions: any
-  gaClientOptions : any
+  gaClientOptions: any
+  optionsData: any
+  optionsGaColumn: any = [];
+  optionsValue: any = [];
+  count = 0;
 
   ngOnInit() {
+    this.configService.getOptions()
+      .subscribe((res:any) => {
+        if(res.data) {
+          this.optionsData = res.data;
+          this.handleOptionData(this.optionsData);
+        }
+      })
+
     this.configService.getConfigTemplate()
       .subscribe((res: any) => {
         if (res.data) {
@@ -108,37 +120,47 @@ export class CreatePageComponent implements OnInit {
                 this.handleDefaultValue(this.coreForm, this.coreOptions, this.coreFormControlName);
                 break;
               }
-              case "[video]":{
+              case "[video]": {
                 this.videoOptions = Object.values(dic)[0];
                 this.handleDefaultValue(this.videoForm, this.videoOptions, this.videoFormControlName);
                 break;
               }
-              case "[audio]":{
+              case "[audio]": {
                 this.audioOptions = Object.values(dic)[0]
                 this.handleDefaultValue(this.audioForm, this.audioOptions, this.audioFormControlName);
                 break;
               }
-              case "[filter]":{
+              case "[filter]": {
                 this.filterOptions = Object.values(dic)[0]
                 this.handleDefaultValue(this.filterForm, this.filterOptions, this.filterFormControlName);
                 break;
               }
-              case "[ga-server-event-driven]":{
+              case "[ga-server-event-driven]": {
                 this.gaServerEventDrivenOptions = Object.values(dic)[0]
                 this.handleDefaultValue(this.gaServerForm, this.gaServerEventDrivenOptions, this.gaServerFormControlName);
                 break;
               }
-              case "[ga-client]":{
+              case "[ga-client]": {
                 this.gaClientOptions = Object.values(dic)[0]
                 this.handleDefaultValue(this.gaClientForm, this.gaClientOptions, this.gaClientFormControlName);
                 break;
               }
               default:
-                break; 
+                break;
             }
           });
         }
       })
+  }
+
+  handleOptionData(data) {
+    data.forEach(element => {
+      if (this.optionsGaColumn.includes(element.gAcolumn)) {
+      } else {
+        this.optionsGaColumn.push(element.gAcolumn)
+        this.optionsValue.push(element.value);
+      }
+    });
   }
 
   handleDefaultValue(form, options, formControlName) {
@@ -178,23 +200,23 @@ export class CreatePageComponent implements OnInit {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       let file: File = fileList[0];
-      
+      const gameName = this.gameForm.value.name;
       let formData: FormData = new FormData();
       formData.append('zip', file, file.name);
       formData.append('fileType', 'zip');
       console.log("formData", formData)
       const payload = formData;
-      this.providerService.uploadZip(payload)
-      .subscribe((res) => {
-        console.log("upload game successfully")
-      })
+      this.providerService.uploadZip(payload, gameName)
+        .subscribe((res) => {
+          console.log("upload game successfully")
+        })
     }
   }
 
   createNewGame() {
     const gamePayload = this.gameForm.value;
     const modifyValue = this.modifyConfig;
-    
+
     // create info in gameList table
     this.providerService.createNewGame(gamePayload)
       .subscribe((res) => {
@@ -204,8 +226,8 @@ export class CreatePageComponent implements OnInit {
         }
 
         // gameServer config
-        const payload = { 
-          gamename: this.gameForm.value.name, 
+        const payload = {
+          gamename: this.gameForm.value.name,
           config: modifyValue
         };
 
@@ -245,6 +267,24 @@ export class CreatePageComponent implements OnInit {
   changeInput(dictionary, newValue, option) {
     const { GAcolumn: gAcolumn, default_value: defaultValue, id: columnId } = option;
     this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue, columnId });
+  }
+
+  async isSelectionOption(gAcolumn) {
+    
+    const res = this.optionsGaColumn.includes(gAcolumn);
+    console.log("gAcolumn", gAcolumn)
+    console.log("res", res)
+    return res
+  }
+
+  async getOption(gAcolumn) {
+    await this.optionsData.forEach(element => {
+      if (element.gAcolumn === gAcolumn) {
+        console.log("element.value", element.value)
+        return element.value
+      }
+    });
+    return []
   }
 
 }

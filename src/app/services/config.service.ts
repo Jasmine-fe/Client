@@ -18,6 +18,10 @@ export class ConfigService {
     return this.http.get (`${this.connectUrl}/data`);
   }
 
+  getOptions() {
+    return this.http.get(`${this.connectUrl}/options`);
+  }
+
   recordDataConfig(payload) {
     return this.http.post (`${this.connectUrl}/data/new`, payload);
   }

@@ -93,7 +93,7 @@ export class ConsolePageComponent implements OnInit {
   }
 
   formatTime(time) {
-    const formatTime = dateFormat(time, "yyyy-mm-dd hh:mm");
+    const formatTime = dateFormat(time, "yyyy-mm-dd hh:mm:ss");
     return formatTime;
   }
 

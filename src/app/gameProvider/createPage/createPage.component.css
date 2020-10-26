@@ -46,7 +46,7 @@
   }
 
   mat-select {
-    width: 600px;
+    /* width: 600px; */
     display: inline-block;
   }
   mat-checkbox {

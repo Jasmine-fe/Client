@@ -18,8 +18,9 @@ export class ProviderService {
   }
 
   // modify endpoint
-  uploadZip(payload) {
-    return this.http.post<any>(`http://192.168.43.196:5000/Add`, payload);
+  uploadZip(payload, gameName) {
+    console.log("gameName", gameName);
+    return this.http.post<any>(`http://192.168.43.196:5000/Add?gamename=${gameName}`, payload);
   }
 
   uploadImg(payload) {
