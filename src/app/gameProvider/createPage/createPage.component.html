@@ -62,29 +62,21 @@
                                     (change)="changeCheckBox('[core]', coreForm, coreFormControlName[i], $event.checked, coreOption.id)"
                                     [formControlName]="coreFormControlName[i]"> {{coreOption.GAcolumn}}
                                 </mat-checkbox>
-
                                 <ng-template #elseTmp>
                                     <mat-label>{{coreOption.GAcolumn}}: </mat-label>
-
-                                    <div *ngIf="isSelectionOption(coreOption.GAcolumn)">
-                                        <mat-form-field appearance="fill">
-                                            <mat-select [formControlName]="coreFormControlName[i]">
-                                                <mat-option *ngFor="let option of this.optionsValue[0]"
-                                                    [value]="option">
-                                                    {{option}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <mat-form-field *ngIf="!isSelectionOption(coreOption.GAcolumn)">
+                                    <mat-form-field appearance="fill" *ngIf="coreOption.option == 1">
+                                        <mat-select [formControlName]="coreFormControlName[i]"
+                                            (selectionChange)="changeInput('[core]', $event.value, coreOption)">
+                                            <mat-option *ngFor="let option of optionsMenu[coreOption.GAcolumn]"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field *ngIf="coreOption.option == 0">
                                         <input type="text" matInput [formControlName]="coreFormControlName[i]"
                                             (change)="changeInput('[core]', $event.target.value, coreOption)">
                                     </mat-form-field>
-
-
-
-
                                 </ng-template>
                             </li>
                         </div>
@@ -98,7 +90,16 @@
                         <div *ngFor="let videoOption of videoOptions; let i = index">
                             <li>
                                 <mat-label>{{videoOption.GAcolumn}}: </mat-label>
-                                <mat-form-field>
+                                <mat-form-field appearance="fill" *ngIf="videoOption.option == 1">
+                                    <mat-select [formControlName]="videoFormControlName[i]"
+                                        (selectionChange)="changeInput('[video]', $event.value, videoOption)">
+                                        <mat-option *ngFor="let option of optionsMenu[videoOption.GAcolumn]"
+                                            [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field *ngIf="videoOption.option == 0">
                                     <input type="text" matInput [formControlName]="videoFormControlName[i]"
                                         (change)="changeInput('[video]', $event.target.value, videoOption)">
                                 </mat-form-field>
@@ -132,9 +133,14 @@
                         <div *ngFor="let filterOption of filterOptions">
                             <li>
                                 <mat-label>{{filterOption.GAcolumn}}: </mat-label>
-                                <mat-form-field>
-                                    <input type="text" matInput formControlName="filterSP"
-                                        (change)="changeInput('[filter]', $event.target.value, filterOption)">
+                                <mat-form-field appearance="fill" *ngIf="filterOption.option == 1">
+                                    <mat-select formControlName="filterSP"
+                                        (selectionChange)="changeInput('[filter]', $event.value, filterOption)">
+                                        <mat-option *ngFor="let option of optionsMenu[filterOption.GAcolumn]"
+                                            [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </li>
                         </div>
@@ -156,7 +162,17 @@
                                 </mat-checkbox>
                                 <ng-template #elseTmp>
                                     <mat-label>{{gaServerEventDrivenOption.GAcolumn}}: </mat-label>
-                                    <mat-form-field>
+                                    <mat-form-field appearance="fill" *ngIf="gaServerEventDrivenOption.option == 1">
+                                        <mat-select [formControlName]="gaServerFormControlName[i]"
+                                            (selectionChange)="changeInput('[ga-server-event-driven]', $event.value, gaServerEventDrivenOption)">
+                                            <mat-option
+                                                *ngFor="let option of optionsMenu[gaServerEventDrivenOption.GAcolumn]"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field *ngIf="gaServerEventDrivenOption.option != 1">
                                         <input type="text" matInput [formControlName]="gaServerFormControlName[i]"
                                             (change)="changeInput('[ga-server-event-driven]', $event.target.value, gaServerEventDrivenOption)">
                                     </mat-form-field>

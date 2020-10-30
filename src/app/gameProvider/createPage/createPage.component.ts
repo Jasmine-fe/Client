@@ -96,10 +96,8 @@ export class CreatePageComponent implements OnInit {
   gaServerEventDrivenOptions: any
   gaClientOptions: any
   optionsData: any
-  optionsGaColumn: any = [];
-  optionsValue: any = [];
   count = 0;
-
+  optionsMenu = {}
   ngOnInit() {
     this.configService.getOptions()
       .subscribe((res:any) => {
@@ -153,14 +151,12 @@ export class CreatePageComponent implements OnInit {
       })
   }
 
-  handleOptionData(data) {
-    data.forEach(element => {
-      if (this.optionsGaColumn.includes(element.gAcolumn)) {
-      } else {
-        this.optionsGaColumn.push(element.gAcolumn)
-        this.optionsValue.push(element.value);
-      }
-    });
+  async handleOptionData(data) {
+    
+    await data.forEach(element => {
+      this.optionsMenu[element.gAcolumn] = element.value;
+    })
+
   }
 
   handleDefaultValue(form, options, formControlName) {
@@ -269,23 +265,6 @@ export class CreatePageComponent implements OnInit {
     this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue, columnId });
   }
 
-  async isSelectionOption(gAcolumn) {
-    
-    const res = this.optionsGaColumn.includes(gAcolumn);
-    console.log("gAcolumn", gAcolumn)
-    console.log("res", res)
-    return res
-  }
-
-  async getOption(gAcolumn) {
-    await this.optionsData.forEach(element => {
-      if (element.gAcolumn === gAcolumn) {
-        console.log("element.value", element.value)
-        return element.value
-      }
-    });
-    return []
-  }
 
 }
 

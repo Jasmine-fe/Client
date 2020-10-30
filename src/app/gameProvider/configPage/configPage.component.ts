@@ -96,7 +96,10 @@ export class ConfigPageComponent implements OnInit {
     gaClientMTVD: new FormControl('', Validators.required),
   })
   gaClientFormControlName = ['gaClientCRMM', 'gaClientVS', 'gaClientMTVD'];
-
+  optionsMenu = {}
+  optionsGaColumn: any = [];
+  optionsValue: any = [];
+  optionsData: any = [];
 
   constructor(public fb: FormBuilder,
     public configService: ConfigService,
@@ -104,6 +107,13 @@ export class ConfigPageComponent implements OnInit {
     private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.configService.getOptions()
+      .subscribe((res:any) => {
+        if(res.data) {
+          this.optionsData = res.data;
+          this.handleOptionData(this.optionsData);
+        }
+      })
     this.initalFormData();
     this.getModifyData();
   }
@@ -117,6 +127,14 @@ export class ConfigPageComponent implements OnInit {
   }
 
   initalFormData() {
+    this.configService.getOptions()
+      .subscribe((res:any) => {
+        if(res.data) {
+          this.optionsData = res.data;
+          this.handleOptionData(this.optionsData);
+        }
+      })
+
     this.configService.getConfigTemplate()
       .subscribe((res: any) => {
         if (res.data) {
@@ -168,6 +186,14 @@ export class ConfigPageComponent implements OnInit {
         form.get(i).setValue(element.default_value);
       }
     });
+  }
+
+  async handleOptionData(data) {
+    
+    await data.forEach(element => {
+      this.optionsMenu[element.gAcolumn] = element.value;
+    })
+
   }
 
   async selectedGame(gameName) {

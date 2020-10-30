@@ -15,7 +15,7 @@
             </mat-form-field>
 
             <div *ngIf="mode == 'changed'">
-                <form  [formGroup]="coreForm"><br />
+                <form [formGroup]="coreForm"><br />
                     <section class="example-section">
                         <div>【 Core 】</div><br />
                         <ol>
@@ -28,83 +28,18 @@
                                     </mat-checkbox>
                                     <ng-template #elseTmp>
                                         <mat-label>{{coreOption.GAcolumn}}: </mat-label>
-                                        <mat-form-field>
+                                        <mat-form-field appearance="fill" *ngIf="coreOption.option == 1">
+                                            <mat-select [formControlName]="coreFormControlName[i]"
+                                                (selectionChange)="changeInput('[core]', $event.value, coreOption)">
+                                                <mat-option *ngFor="let option of optionsMenu[coreOption.GAcolumn]"
+                                                    [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field *ngIf="coreOption.option == 0">
                                             <input type="text" matInput [formControlName]="coreFormControlName[i]"
                                                 (change)="changeInput('[core]', $event.target.value, coreOption)">
-                                        </mat-form-field>
-                                        </ng-template>
-                                        </li>
-                            </div>
-                        </ol>
-                    </section>
-                </form>
-    
-    
-                <form  [formGroup]="videoForm">
-                    <section class="example-section">
-                        <div>【 Video 】</div><br />
-                        <ol>
-                            <div *ngFor="let videoOption of videoOptions; let i = index">
-                                <li>
-                                    <mat-label>{{videoOption.GAcolumn}}: </mat-label>
-                                    <mat-form-field>
-                                        <input type="text" matInput [formControlName]="videoFormControlName[i]" (change)="changeInput('[video]', $event.target.value, videoOption)">
-                                    </mat-form-field>
-                                </li>
-                            </div>
-                        </ol>
-                    </section>
-                </form>
-    
-                <form  [formGroup]="audioForm">
-                    <section class="example-section">
-                        <div>【 Audio 】</div><br />
-                        <ol>
-                            <div *ngFor="let audioOption of audioOptions; let i = index">
-                                <li>
-                                    <mat-label>{{audioOption.GAcolumn}}: </mat-label>
-                                    <mat-form-field>
-                                        <input type="text" matInput formControlName="audioDelay" (change)="changeInput('[audio]', $event.target.value, audioOption)">
-                                    </mat-form-field>
-                                </li>
-                            </div>
-                        </ol>
-                    </section>
-                </form>
-    
-                <form   [formGroup]="filterForm">
-                    <section class="example-section">
-                        <div>【 Filter 】</div><br />
-                        <ol>
-                            <div *ngFor="let filterOption of filterOptions">
-                                <li>
-                                    <mat-label>{{filterOption.GAcolumn}}: </mat-label>
-                                    <mat-form-field>
-                                        <input type="text" matInput formControlName="filterSP" (change)="changeInput('[filter]', $event.target.value, filterOption)">
-                                    </mat-form-field>
-                                </li>
-                            </div>
-                        </ol>
-                    </section>
-                </form>
-    
-                <form   [formGroup]="gaServerForm">
-                    <section class="example-section">
-                        <div>【 ga-server-event-driven 】</div><br />
-                        <ol>
-                            <div *ngFor="let gaServerEventDrivenOption of gaServerEventDrivenOptions; let i = index">
-                                <li>
-                                    <mat-checkbox class="example-margin"
-                                        *ngIf="gaServerEventDrivenOption.default_value == 'true'; else elseTmp"  
-                                        (change)="changeCheckBox(gaServerForm, '[ga-server-event-driven]', gaServerFormControlName[i], $event.checked, gaServerEventDrivenOption.id)"
-                                        [formControlName]="gaServerFormControlName[i]">
-                                        {{gaServerEventDrivenOption.GAcolumn}}
-                                    </mat-checkbox>
-                                    <ng-template #elseTmp>
-                                        <mat-label>{{gaServerEventDrivenOption.GAcolumn}}: </mat-label>
-                                        <mat-form-field>
-                                            <input type="text" matInput [formControlName]="gaServerFormControlName[i]"
-                                            (change)="changeInput('[ga-server-event-driven]', $event.target.value, gaServerEventDrivenOption)">
                                         </mat-form-field>
                                     </ng-template>
                                 </li>
@@ -112,27 +47,124 @@
                         </ol>
                     </section>
                 </form>
-    
-                <form   [formGroup]="gaClientForm">
+                <form [formGroup]="videoForm">
                     <section class="example-section">
-                        <div>【 ga-client 】</div><br />
+                        <div>【 Video 】</div><br />
                         <ol>
-                            <div *ngFor="let gaClientOption of gaClientOptions; let i = index">
+                            <div *ngFor="let videoOption of videoOptions; let i = index">
                                 <li>
-                                    <mat-label>{{gaClientOption.GAcolumn}}:</mat-label>
-                                    <mat-form-field>
-                                        <input type="text" matInput [formControlName]="gaClientFormControlName[i]"
-                                        (change)="changeInput('[ga-client]', $event.target.value, gaClientOption)">
+                                    <mat-label>{{videoOption.GAcolumn}}: </mat-label>
+                                    <mat-form-field appearance="fill" *ngIf="videoOption.option == 1">
+                                        <mat-select [formControlName]="videoFormControlName[i]"
+                                            (selectionChange)="changeInput('[video]', $event.value, videoOption)">
+                                            <mat-option *ngFor="let option of optionsMenu[videoOption.GAcolumn]"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field *ngIf="videoOption.option == 0">
+                                        <input type="text" matInput [formControlName]="videoFormControlName[i]"
+                                            (change)="changeInput('[video]', $event.target.value, videoOption)">
                                     </mat-form-field>
                                 </li>
                             </div>
                         </ol>
                     </section>
                 </form>
-            </div>
 
+                <form [formGroup]="audioForm">
+                    <section class="example-section">
+                        <div>【 Audio 】</div><br />
+                        <ol>
+                            <div *ngFor="let audioOption of audioOptions; let i = index">
+                                <li>
+                                    <mat-label>{{audioOption.GAcolumn}}: </mat-label>
+                                    <mat-form-field>
+                                        <input type="text" matInput formControlName="audioDelay"
+                                            (change)="changeInput('[audio]', $event.target.value, audioOption)">
+                                    </mat-form-field>
+                                </li>
+                            </div>
+                        </ol>
+                    </section>
+                </form>
+
+                <form [formGroup]="filterForm">
+                    <section class="example-section">
+                        <div>【 Filter 】</div><br />
+                        <ol>
+                            <div *ngFor="let filterOption of filterOptions">
+                                <li>
+                                    <mat-label>{{filterOption.GAcolumn}}: </mat-label>
+                                    <mat-form-field appearance="fill" *ngIf="filterOption.option == 1">
+                                        <mat-select formControlName="filterSP"
+                                            (selectionChange)="changeInput('[filter]', $event.value, filterOption)">
+                                            <mat-option *ngFor="let option of optionsMenu[filterOption.GAcolumn]"
+                                                [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </li>
+                            </div>
+                        </ol>
+                    </section>
+                </form>
+
+                <form [formGroup]="gaServerForm">
+                    <section class="example-section">
+                        <div>【 ga-server-event-driven 】</div><br />
+                        <ol>
+                            <div *ngFor="let gaServerEventDrivenOption of gaServerEventDrivenOptions; let i = index">
+                                <li>
+                                    <mat-checkbox class="example-margin"
+                                        *ngIf="gaServerEventDrivenOption.default_value == 'true'; else elseTmp"
+                                        (change)="changeCheckBox(gaServerForm, '[ga-server-event-driven]', gaServerFormControlName[i], $event.checked, gaServerEventDrivenOption.id)"
+                                        [formControlName]="gaServerFormControlName[i]">
+                                        {{gaServerEventDrivenOption.GAcolumn}}
+                                    </mat-checkbox>
+                                    <ng-template #elseTmp>
+                                        <mat-label>{{gaServerEventDrivenOption.GAcolumn}}: </mat-label>
+                                        <mat-form-field appearance="fill" *ngIf="gaServerEventDrivenOption.option == 1">
+                                            <mat-select [formControlName]="gaServerFormControlName[i]"
+                                                (selectionChange)="changeInput('[ga-server-event-driven]', $event.value, gaServerEventDrivenOption)">
+                                                <mat-option
+                                                    *ngFor="let option of optionsMenu[gaServerEventDrivenOption.GAcolumn]"
+                                                    [value]="option">
+                                                    {{option}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field *ngIf="gaServerEventDrivenOption.option != 1">
+                                            <input type="text" matInput [formControlName]="gaServerFormControlName[i]"
+                                                (change)="changeInput('[ga-server-event-driven]', $event.target.value, gaServerEventDrivenOption)">
+                                        </mat-form-field>
+                                    </ng-template>
+                                </li>
+                            </div>
+                        </ol>
+                    </section>
+                </form>
+            </div>
+                <!-- <form    [formGroup]="gaClientForm">
+                <section class="example-section">
+                    <div>【 ga-client 】</div><br />
+                    <ol>
+                        <div *ngFor="let gaClientOption of gaClientOptions; let i = index">
+                            <li>
+                                <mat-label>{{gaClientOption.GAcolumn}}:</mat-label>
+                                <mat-form-field>
+                                    <input type="text" matInput [formControlName]="gaClientFormControlName[i]"
+                                    (change)="changeInput('[ga-client]', $event.target.value, gaClientOption)">
+                                </mat-form-field>
+                            </li>
+                        </div>
+                    </ol>
+                </section>
+            </form> -->
         </mat-card-content>
-        <mat-card-actions> 
+        <mat-card-actions>
             <a routerLink="/provider">
                 <button mat-stroked-button type="cancel" class="button">Cancel</button>
             </a>
