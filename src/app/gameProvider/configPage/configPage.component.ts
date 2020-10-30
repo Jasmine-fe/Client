@@ -107,13 +107,6 @@ export class ConfigPageComponent implements OnInit {
     private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.configService.getOptions()
-      .subscribe((res:any) => {
-        if(res.data) {
-          this.optionsData = res.data;
-          this.handleOptionData(this.optionsData);
-        }
-      })
     this.initalFormData();
     this.getModifyData();
   }
@@ -126,19 +119,11 @@ export class ConfigPageComponent implements OnInit {
       })
   }
 
-  initalFormData() {
-    this.configService.getOptions()
-      .subscribe((res:any) => {
-        if(res.data) {
-          this.optionsData = res.data;
-          this.handleOptionData(this.optionsData);
-        }
-      })
-
-    this.configService.getConfigTemplate()
-      .subscribe((res: any) => {
+  async initalFormData() {
+    await this.configService.getConfigTemplate()
+      .subscribe(async(res: any) => {
         if (res.data) {
-          res.data.forEach((dic, index) => {
+          await res.data.forEach((dic, index) => {
             const key = Object.keys(dic)[0];
             switch (key) {
               case "[core]": {
@@ -176,7 +161,17 @@ export class ConfigPageComponent implements OnInit {
             }
           });
         }
+        await this.configService.getOptions()
+          .subscribe((res: any) => {
+            if (res.data) {
+              this.optionsData = res.data;
+              this.handleOptionData(this.optionsData);
+            }
+          })
+
       })
+
+      
   }
 
   handleDefaultValue(form, options, formControlName) {
@@ -189,7 +184,6 @@ export class ConfigPageComponent implements OnInit {
   }
 
   async handleOptionData(data) {
-    
     await data.forEach(element => {
       this.optionsMenu[element.gAcolumn] = element.value;
     })
@@ -292,6 +286,7 @@ export class ConfigPageComponent implements OnInit {
       gamename: this.current.gameName,
       config: this.modifyConfig
     };
+    console.log("this.modifyConfig", this.modifyConfig)
     this.configService.setDataConfig(payload)
       .subscribe((res: any) => {
         if (res && res.success) {
@@ -315,8 +310,8 @@ export class ConfigPageComponent implements OnInit {
   }
 
   changeInput(dictionary, newValue, option) {
-    const { GAcolumn: gAcolumn, default_value: defaultValue, id: columnId } = option;
-    this.modifyConfig.push({ defaultValue, dictionary, gAcolumn, newValue, columnId });
+    const { GAcolumn: gaColumn, default_value: defaultValue, id: columnId } = option;
+    this.modifyConfig.push({ defaultValue, dictionary, gaColumn, newValue, columnId });
   }
 
 }

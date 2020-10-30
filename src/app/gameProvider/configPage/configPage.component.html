@@ -30,7 +30,8 @@
                                         <mat-label>{{coreOption.GAcolumn}}: </mat-label>
                                         <mat-form-field appearance="fill" *ngIf="coreOption.option == 1">
                                             <mat-select [formControlName]="coreFormControlName[i]"
-                                                (selectionChange)="changeInput('[core]', $event.value, coreOption)">
+                                                (selectionChange)="changeInput('[core]', $event.value, coreOption)"
+                                                [(ngModel)]="coreForm.get(coreFormControlName[i]).value">
                                                 <mat-option *ngFor="let option of optionsMenu[coreOption.GAcolumn]"
                                                     [value]="option">
                                                     {{option}}
