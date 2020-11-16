@@ -229,15 +229,16 @@ export class CreatePageComponent implements OnInit {
 
         this.configService.recordDataConfig(payload)
           .subscribe((res: any) => {
-            console.log("record DataConfig successfully")
-            if (res && res.success) {
-              this.configService.serverDataConfig(payload)
-              this.matSnackBar.open("新增遊戲成功", 'success', this.options);
-              this.router.navigate(['/provider']);
-            }
-            else {
-              this.matSnackBar.open("新增遊戲失敗", 'fail', this.options);
-            }
+            this.configService.serverDataConfig(payload)
+              .subscribe((res: any) => {
+                if (res) {
+                  this.matSnackBar.open("新增遊戲成功", 'success', this.options);
+                  this.router.navigate(['/provider']);
+                }
+                else {
+                  this.matSnackBar.open("新增遊戲失敗", 'fail', this.options);
+                }
+              })
           })
         this.providerService.uploadImg(imgPayload)
           .subscribe((res) => {

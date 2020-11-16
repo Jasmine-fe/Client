@@ -287,16 +287,24 @@ export class ConfigPageComponent implements OnInit {
       config: this.modifyConfig
     };
     console.log("this.modifyConfig", this.modifyConfig)
+
+
+
     this.configService.setDataConfig(payload)
       .subscribe((res: any) => {
-        if (res && res.success) {
-          this.configService.serverDataConfig(payload)
-          this.matSnackBar.open("修改遊戲設定檔成功", 'success', this.options);
-          this.router.navigate(['/provider']);
-        }
-        else {
-          this.matSnackBar.open("修改遊戲設定檔失敗", 'fail', this.options);
-        }
+        this.configService.serverDataConfig(payload)
+          .subscribe((res: any) => {
+            // server return successful value
+            if (res) {
+              this.matSnackBar.open("修改遊戲設定檔成功", 'success', this.options);
+              this.router.navigate(['/provider']);
+            }
+            else {
+              this.matSnackBar.open("修改遊戲設定檔失敗", 'fail', this.options);
+            }
+          })
+
+        
       })
   }
 

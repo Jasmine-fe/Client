@@ -31,8 +31,8 @@ export class ConfigService {
   }
 
   serverDataConfig(payload) {
-    return this.http.post (`http://192.168.43.196:5000/Conf`, payload);
+    console.log("serverDataConfig api")
+    return this.http.post<any>(`http://192.168.43.196:5000/Conf`, payload);
   }
-
 
 }
