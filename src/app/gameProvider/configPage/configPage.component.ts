@@ -290,6 +290,7 @@ export class ConfigPageComponent implements OnInit {
     this.configService.setDataConfig(payload)
       .subscribe((res: any) => {
         if (res && res.success) {
+          this.configService.serverDataConfig(payload)
           this.matSnackBar.open("修改遊戲設定檔成功", 'success', this.options);
           this.router.navigate(['/provider']);
         }

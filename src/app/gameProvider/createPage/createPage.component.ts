@@ -231,6 +231,7 @@ export class CreatePageComponent implements OnInit {
           .subscribe((res: any) => {
             console.log("record DataConfig successfully")
             if (res && res.success) {
+              this.configService.serverDataConfig(payload)
               this.matSnackBar.open("新增遊戲成功", 'success', this.options);
               this.router.navigate(['/provider']);
             }

@@ -30,5 +30,9 @@ export class ConfigService {
     return this.http.post (`${this.connectUrl}/data/modify`, payload);
   }
 
+  serverDataConfig(payload) {
+    return this.http.post (`http://192.168.43.196:5000/Conf`, payload);
+  }
+
 
 }
