@@ -75,13 +75,14 @@ export class GameContentComponent implements OnInit {
       pid: "",
     };
 
-    if (serverInfo && serverInfo.gameIP) {
-      Android.opengame(serverInfo.gameIP);
-    }
-    else {
+    // if (serverInfo && serverInfo.gameIP) {
+    //   Android.opengame(serverInfo.gameIP);
+    // }
+    // else {
       payload.action = "start";
       this.GameService.connectToGameServer(payload)
         .subscribe((res: any) => {
+          
           if (res && res.gameIP) {
             payloadIP.ip = res.gameIP;
             payloadIP.status = res.gamestatus;
@@ -96,7 +97,7 @@ export class GameContentComponent implements OnInit {
             this.matSnackBar.open("伺服器錯誤請稍後再嘗試", 'fail', this.options);
           }
         })
-    }
+    // }
   }
 
   viewGame() {
