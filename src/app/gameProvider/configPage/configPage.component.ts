@@ -308,19 +308,24 @@ export class ConfigPageComponent implements OnInit {
       })
   }
 
-  changeCheckBox(form, dictionary, GAcolumn, checked, id) {
-    form[GAcolumn] = checked;
+  changeCheckBox(dictionary, name, checked, option) {
+    const { id, GAcolumn } = option;
     const data = {
       GAcolumn,
       id,
       default_value: !checked,
+      name
     }
-    this.changeInput(dictionary, checked, data);
+    // boolean to string 
+    var newValue = checked ? "True": "False";
+    this.changeInput(dictionary, newValue, data);
   }
 
   changeInput(dictionary, newValue, option) {
-    const { GAcolumn: gaColumn, default_value: defaultValue, id: columnId } = option;
-    this.modifyConfig.push({ defaultValue, dictionary, gaColumn, newValue, columnId });
+    const { name, GAcolumn: gaColumn, default_value: defaultValue, id: columnId } = option;
+    this.modifyConfig.push({ defaultValue, dictionary, gaColumn, newValue, columnId, name });
+    console.log("modifyConfig:", this.modifyConfig);
+
   }
 
 }
