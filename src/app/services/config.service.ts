@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { GameList } from '../interface/game.interface';
-import { webServerURL } from '../shared/common';
+import { webServerURL, brokerServerURL } from '../shared/common';
 
 
 @Injectable()
@@ -31,7 +31,7 @@ export class ConfigService {
   }
 
   serverDataConfig(payload) {
-    return this.http.post<any>(`http://192.168.43.196:5000/Conf`, payload);
+    return this.http.post<any>(`${brokerServerURL}/Conf`, payload);
   }
 
 }

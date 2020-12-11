@@ -244,11 +244,6 @@ export class CreatePageComponent implements OnInit {
           .subscribe((res) => {
             console.log("upload image successfully")
           })
-        this.providerService.gameServerModifyConfig(payload)
-          .subscribe((res) => {
-            console.log("gameServerModifyConfig successfully")
-          })
-
       })
   }
 

@@ -7,7 +7,7 @@ import { GameServerService } from '../../services/gameServer.service';
 import { GameList, GameProvider, GameServer } from '../../interface/game.interface'
 import { User } from '../../interface/user.interface'
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { notificationSetting } from '../../shared/common';
+import { notificationSetting, webServerURL } from '../../shared/common';
 
 interface AndroidInterface {
   opengame(ip: string): any;
@@ -75,6 +75,7 @@ export class GameContentComponent implements OnInit {
       pid: "",
     };
 
+    // 觀看模式, 但是註解掉了
     // if (serverInfo && serverInfo.gameIP) {
     //   Android.opengame(serverInfo.gameIP);
     // }
@@ -82,7 +83,6 @@ export class GameContentComponent implements OnInit {
       payload.action = "start";
       this.GameService.connectToGameServer(payload)
         .subscribe((res: any) => {
-          
           if (res && res.gameIP) {
             payloadIP.ip = res.gameIP;
             payloadIP.status = res.gamestatus;

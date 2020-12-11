@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { GameList } from '../interface/game.interface';
-import { webServerURL } from '../shared/common';
+import { webServerURL, brokerServerURL } from '../shared/common';
 
 @Injectable()
 export class GameService {
@@ -21,7 +21,7 @@ export class GameService {
 
   // send request to broker server
   connectToGameServer(payload) {
-    return this.http.get<any>(`http://192.168.43.196:5000/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}&excuteMode=${payload.excuteMode}`);
+    return this.http.get<any>(`${brokerServerURL}/IP?gameId=${payload.gameId}&providerId=${payload.providerId}&configfile=${payload.configfile}&excuteMode=${payload.excuteMode}`);
   }
 
   getProcessingGames() {
