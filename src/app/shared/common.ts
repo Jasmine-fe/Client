@@ -2,9 +2,11 @@ import { Interface } from 'readline';
 
 export const mobileWidth= 600
 
+// Web test can use localhost, cellphone use IP 
 export const webServerURL = "http://localhost:3000"
 // export const webServerURL = "http://192.168.43.196:3000"
 
+export const brokerServerURL = "http://192.168.43.196:5000"
 export const saltRounds = 10;
 
 export const parseJwt = function (jwtToken) {
