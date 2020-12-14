@@ -34,6 +34,14 @@ export class GameContentComponent implements OnInit {
   currentGame: GameList;
   state = '';
   options: any = notificationSetting;
+  payloadIP = {
+    username: "",
+    gamename: "",
+    gameId: "",
+    ip: "",
+    status: "",
+    pid: "",
+  };
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -66,14 +74,9 @@ export class GameContentComponent implements OnInit {
       action:"start",  //action: start, continue, end,
     };
 
-    let payloadIP = {
-      username: userInfo.username,
-      gamename: this.currentGame.name,
-      gameId: this.currentGame.gameId,
-      ip: "",
-      status: "",
-      pid: "",
-    };
+    this.payloadIP.username = userInfo.username
+    this.payloadIP.gamename = this.currentGame.name
+    this.payloadIP.gameId = this.currentGame.gameId
 
     // 觀看模式, 但是註解掉了
     // if (serverInfo && serverInfo.gameIP) {
@@ -84,13 +87,13 @@ export class GameContentComponent implements OnInit {
       this.GameService.connectToGameServer(payload)
         .subscribe((res: any) => {
           if (res && res.gameIP) {
-            payloadIP.ip = res.gameIP;
-            payloadIP.status = res.gamestatus;
-            payloadIP.pid = res.PID || '';
+            this.payloadIP.ip = res.gameIP;
+            this.payloadIP.status = res.gamestatus;
+            this.payloadIP.pid = res.PID || '';
             this.gameServerService.setServerInfo(res)
-            this.connectService.recordGameServerIp(payloadIP)
+            this.connectService.recordGameServerIp(this.payloadIP)
               .subscribe((res: any) => {
-                Android.opengame(payloadIP.ip);
+                Android.opengame(this.payloadIP.ip);
               })
           }
           else {
@@ -116,14 +119,12 @@ export class GameContentComponent implements OnInit {
         }
       })
   }
-
+  // for andriod to call client function
   // myWebView.loadUrl("javascript:endGame('192.168.43.196')");
   endGame(ip: string) {
-    const payload = {
-      configfile: "server.FPS_Game.config",
-      ip: ip || "192.168.43.196",
-      filename: ""
-    }
+
+    const { excuteMode } = this.currentGame;
+    const payload = { excuteMode, ip, pid : this.payloadIP.pid }
     this.connectService.endGame(payload)
       .subscribe(res => {
         if (res && res.status) {
